@@ -2,6 +2,7 @@ package kg.megacom.megalab.model.entity;
 
 import kg.megacom.megalab.model.enums.MemberType;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_meeting_user")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class MeetingUser {
 
     @Id
@@ -37,7 +39,7 @@ public class MeetingUser {
     User delegate;
 
     @ManyToOne
-    @JoinColumn(name = "label_id", nullable = false)
+    @JoinColumn(name = "label_id")
     Label label;
 
     @Column(name = "is_declined", nullable = false)

@@ -7,18 +7,16 @@ import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreatePositionRequest {
+public class AddPhotoRequest {
 
-    @NotNull
-    @Positive
-    Long departmentId;
+    @NotNull(message = "User id cannot be null")
+    Long userId;
 
-    @NotBlank(message = "Organization name cannot be blank")
-    String positionName;
+    @NotBlank(message = "Photo path cannot be blank")
+    String photoPath;
 
 }

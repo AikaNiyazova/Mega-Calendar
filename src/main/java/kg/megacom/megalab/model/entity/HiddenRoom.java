@@ -1,6 +1,7 @@
 package kg.megacom.megalab.model.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_hidden_room")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class HiddenRoom {
 
     @Id

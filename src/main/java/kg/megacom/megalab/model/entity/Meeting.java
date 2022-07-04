@@ -1,6 +1,7 @@
 package kg.megacom.megalab.model.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_meeting")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Meeting {
 
     @Id
@@ -47,8 +49,11 @@ public class Meeting {
     @Column(name = "is_visible", nullable = false)
     Boolean isVisible;
 
+    @Column(name = "is_repeatable", nullable = false)
+    Boolean isRepeatable;
+
     @OneToOne
-    @JoinColumn(name = "frequency_id", nullable = false, unique = true)
+    @JoinColumn(name = "frequency_id", unique = true)
     MeetingFrequency frequency;
 
     @Column(name = "is_deleted", nullable = false)

@@ -46,6 +46,9 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     Role role;
 
+    @Column(name = "status")
+    String status;
+
     @Column(name = "is_deleted", nullable = false)
     Boolean isDeleted;
 

@@ -19,6 +19,7 @@ public class UserDto {
     String email;
     String password;
     RoleDto role;
+    String status;
     Boolean isDeleted;
 
 }

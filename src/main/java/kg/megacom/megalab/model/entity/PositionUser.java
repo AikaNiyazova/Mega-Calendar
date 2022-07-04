@@ -1,6 +1,7 @@
 package kg.megacom.megalab.model.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_position_user")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class PositionUser {
 
     @Id

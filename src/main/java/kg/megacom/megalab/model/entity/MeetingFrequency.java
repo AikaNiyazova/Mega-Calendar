@@ -1,6 +1,7 @@
 package kg.megacom.megalab.model.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
@@ -14,15 +15,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_meeting_frequency")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class MeetingFrequency {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     Long id;
-
-    @Column(name = "is_repeatable", nullable = false)
-    Boolean isRepeatable;
 
     @ElementCollection
     @CollectionTable(name = "frequency_has_weekdays", joinColumns = @JoinColumn(name = "meeting_frequency_id"))
