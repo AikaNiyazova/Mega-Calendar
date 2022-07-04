@@ -29,7 +29,7 @@ public class Department {
     String departmentName;
 
     @OneToOne
-    @JoinColumn(name = "head_user_id", nullable = false, unique = true)
+    @JoinColumn(name = "head_user_id")
     User head;
 
     @Column(name = "is_deleted", nullable = false)

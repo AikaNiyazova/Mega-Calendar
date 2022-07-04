@@ -12,6 +12,5 @@ public class LabelDto {
 
     Long id;
     String labelName;
-    Boolean isDeleted;
 
 }

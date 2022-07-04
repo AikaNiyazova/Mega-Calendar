@@ -25,7 +25,7 @@ public class Organization {
     String organizationName;
 
     @OneToOne
-    @JoinColumn(name = "admin_user_id", nullable = false, unique = true)
+    @JoinColumn(name = "admin_user_id")
     User admin;
 
     @Column(name = "is_deleted", nullable = false)

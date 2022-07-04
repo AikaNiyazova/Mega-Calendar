@@ -1,6 +1,7 @@
 package kg.megacom.megalab.model.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_label")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Label {
 
     @Id
@@ -21,8 +23,5 @@ public class Label {
 
     @Column(name = "label_name", nullable = false)
     String labelName;
-
-    @Column(name = "is_deleted", nullable = false)
-    Boolean isDeleted;
 
 }
