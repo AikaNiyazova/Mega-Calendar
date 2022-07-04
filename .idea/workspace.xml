@@ -28,18 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e129dc6e-6919-4168-a01d-c2e4ac0f1206" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_7_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_core_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_crypto_5_7_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_7_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Megalab-App.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Megalab-App.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/RoomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/RoomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/RoomService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/RoomServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/RoomServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +54,7 @@
   </component>
   <component name="ProjectId" id="2AYP8POKwzxIil9NnNeToAF1Nxa" />
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -87,6 +76,13 @@
       <recent name="kg.megacom.megalab.model.mapper" />
       <recent name="kg.megacom.megalab.model.entity" />
       <recent name="kg.megacom.megalab.model.dto" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\Mega-Calendar\src\main\java\kg\megacom\megalab\exception\room" />
+      <recent name="C:\Users\User\Desktop\Mega-Calendar\src\main\java\kg\megacom\megalab" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="kg.megacom.megalab.controller" />
     </key>
   </component>
   <component name="RunManager">
@@ -130,7 +126,7 @@
       <workItem from="1656307455263" duration="18704000" />
       <workItem from="1656835323931" duration="3053000" />
       <workItem from="1656847039129" duration="22419000" />
-      <workItem from="1656947461541" duration="704000" />
+      <workItem from="1656947461541" duration="1306000" />
     </task>
     <servers />
   </component>
@@ -153,75 +149,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="233" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1655751888963">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="233" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1655751888963" />
-    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser" timestamp="1656877840413">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1656877840413" />
-    <state x="424" y="210" width="435" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1656838583879">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="424" y="210" width="435" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1656838583879" />
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1656839344963">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1656839344963" />
-    <state width="1237" height="328" key="GridCell.Tab.0.bottom" timestamp="1656914259752">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1656914259752" />
-    <state width="1237" height="328" key="GridCell.Tab.0.center" timestamp="1656914259751">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1656914259751" />
-    <state width="1237" height="328" key="GridCell.Tab.0.left" timestamp="1656914259751">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1656914259751" />
-    <state width="1237" height="328" key="GridCell.Tab.0.right" timestamp="1656914259752">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1656914259752" />
-    <state width="1237" height="328" key="GridCell.Tab.1.bottom" timestamp="1656914259753">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1656914259753" />
-    <state width="1237" height="328" key="GridCell.Tab.1.center" timestamp="1656914259752">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1656914259752" />
-    <state width="1237" height="328" key="GridCell.Tab.1.left" timestamp="1656914259752">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1656914259752" />
-    <state width="1237" height="328" key="GridCell.Tab.1.right" timestamp="1656914259752">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1656914259752" />
-    <state width="198" height="457" key="HiddenNamespacesPopup" timestamp="1656835387646">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="198" height="457" key="HiddenNamespacesPopup/0.0.1280.680@0.0.1280.680" timestamp="1656835387646" />
-    <state x="171" y="0" key="Maven.ArtifactSearchDialog" timestamp="1655815280441">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="171" y="0" key="Maven.ArtifactSearchDialog/0.0.1280.680@0.0.1280.680" timestamp="1655815280441" />
-    <state x="540" y="201" key="com.intellij.database.actions.DdlActions$CreateObject$1" timestamp="1655742899172">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="540" y="201" key="com.intellij.database.actions.DdlActions$CreateObject$1/0.0.1280.680@0.0.1280.680" timestamp="1655742899172" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1656344673004">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1656344673004" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1656331329797">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1656331329797" />
   </component>
 </project>
