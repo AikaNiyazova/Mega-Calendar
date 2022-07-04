@@ -3,15 +3,20 @@ package kg.megacom.megalab.service;
 import kg.megacom.megalab.model.dto.RoomDto;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface RoomService {
 
-    RoomDto create(RoomDto roomDto);
+    RoomDto save(RoomDto room);
+
+    RoomDto findByName(String name);
 
     RoomDto findById(Long id);
 
-    RoomDto update(RoomDto roomDto);
+    List<RoomDto> findAll();
 
-    RoomDto save(RoomDto roomDto);
+
+    void delete(Long id);
 
 }
