@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import kg.megacom.megalab.model.dto.HiddenRoomDto;
+import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.entity.HiddenRoom;
+import kg.megacom.megalab.model.entity.Room;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-03T15:01:09+0600",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
+    date = "2022-07-08T18:17:06+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class HiddenRoomMapperImpl implements HiddenRoomMapper {
 
@@ -19,9 +21,15 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
             return null;
         }
 
-        HiddenRoomDto hiddenRoomDto = new HiddenRoomDto();
+        HiddenRoomDto.HiddenRoomDtoBuilder hiddenRoomDto = HiddenRoomDto.builder();
 
-        return hiddenRoomDto;
+        hiddenRoomDto.id( entity.getId() );
+        hiddenRoomDto.room( roomToRoomDto( entity.getRoom() ) );
+        hiddenRoomDto.hidingStartDate( entity.getHidingStartDate() );
+        hiddenRoomDto.hidingEndDate( entity.getHidingEndDate() );
+        hiddenRoomDto.reasonForHiding( entity.getReasonForHiding() );
+
+        return hiddenRoomDto.build();
     }
 
     @Override
@@ -30,9 +38,15 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
             return null;
         }
 
-        HiddenRoom hiddenRoom = new HiddenRoom();
+        HiddenRoom.HiddenRoomBuilder hiddenRoom = HiddenRoom.builder();
 
-        return hiddenRoom;
+        hiddenRoom.id( dto.getId() );
+        hiddenRoom.room( roomDtoToRoom( dto.getRoom() ) );
+        hiddenRoom.hidingStartDate( dto.getHidingStartDate() );
+        hiddenRoom.hidingEndDate( dto.getHidingEndDate() );
+        hiddenRoom.reasonForHiding( dto.getReasonForHiding() );
+
+        return hiddenRoom.build();
     }
 
     @Override
@@ -61,5 +75,41 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
         }
 
         return list;
+    }
+
+    protected RoomDto roomToRoomDto(Room room) {
+        if ( room == null ) {
+            return null;
+        }
+
+        RoomDto.RoomDtoBuilder roomDto = RoomDto.builder();
+
+        roomDto.id( room.getId() );
+        roomDto.roomName( room.getRoomName() );
+        roomDto.location( room.getLocation() );
+        roomDto.isDashboardAvailable( room.getIsDashboardAvailable() );
+        roomDto.isProjectorAvailable( room.getIsProjectorAvailable() );
+        roomDto.isAcAvailable( room.getIsAcAvailable() );
+        roomDto.isDeleted( room.getIsDeleted() );
+
+        return roomDto.build();
+    }
+
+    protected Room roomDtoToRoom(RoomDto roomDto) {
+        if ( roomDto == null ) {
+            return null;
+        }
+
+        Room.RoomBuilder room = Room.builder();
+
+        room.id( roomDto.getId() );
+        room.roomName( roomDto.getRoomName() );
+        room.location( roomDto.getLocation() );
+        room.isDashboardAvailable( roomDto.getIsDashboardAvailable() );
+        room.isProjectorAvailable( roomDto.getIsProjectorAvailable() );
+        room.isAcAvailable( roomDto.getIsAcAvailable() );
+        room.isDeleted( roomDto.getIsDeleted() );
+
+        return room.build();
     }
 }

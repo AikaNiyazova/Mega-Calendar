@@ -19,11 +19,11 @@ public interface OrganizationRepository extends JpaRepository<Organization, Long
             "SET is_deleted = true " +
             "WHERE organization_id = ?1 " +
             "RETURNING id" +
-            ")" +
+            ") " +
             "UPDATE tb_position pos " +
             "SET is_deleted = true " +
-//            "FROM dep " +
-            "WHERE dep.id = pos.department_id", nativeQuery = true)
+            "FROM dep " +
+            "WHERE dep.id = pos.department_id", nativeQuery = true) //todo: move to tb_position?
     void deleteOrganizationAndRelatedEntities(Long organizationId);
 
 }

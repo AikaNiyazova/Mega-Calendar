@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.18">
     <root id="1">
       <ServerVersion>14.0</ServerVersion>
-      <StartupTime>1656567676</StartupTime>
+      <StartupTime>1657542317</StartupTime>
     </root>
     <database id="2" parent="1" name="DatabaseName">
       <ObjectId>49152</ObjectId>
@@ -44,7 +44,7 @@
     <database id="11" parent="1" name="megalab_app">
       <ObjectId>294913</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>9066</IntrospectionStateNumber>
+      <IntrospectionStateNumber>9178</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <database id="12" parent="1" name="natv">
@@ -130,7 +130,7 @@
       <Comment>standard public schema</Comment>
       <StateNumber>527</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>9067</IntrospectionStateNumber>
+      <IntrospectionStateNumber>9179</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="33" parent="11" name="heap">
@@ -201,112 +201,112 @@
     <language id="43" parent="11" name="plpgsql"/>
     <language id="44" parent="11" name="sql"/>
     <sequence id="45" parent="32" name="hibernate_sequence">
-      <ObjectId>303206</ObjectId>
-      <StateNumber>9038</StateNumber>
+      <ObjectId>311296</ObjectId>
+      <StateNumber>9116</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>bigint|0s</DataType>
     </sequence>
     <table id="46" parent="32" name="frequency_has_weekdays">
-      <ObjectId>303104</ObjectId>
+      <ObjectId>311297</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9039</StateNumber>
+      <StateNumber>9140</StateNumber>
     </table>
     <table id="47" parent="32" name="role_has_authorities">
-      <ObjectId>303107</ObjectId>
+      <ObjectId>311300</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9040</StateNumber>
+      <StateNumber>9141</StateNumber>
     </table>
     <table id="48" parent="32" name="tb_department">
-      <ObjectId>303110</ObjectId>
+      <ObjectId>311303</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9041</StateNumber>
+      <StateNumber>9142</StateNumber>
     </table>
     <table id="49" parent="32" name="tb_department_user">
-      <ObjectId>303115</ObjectId>
+      <ObjectId>311308</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9043</StateNumber>
+      <StateNumber>9144</StateNumber>
     </table>
     <table id="50" parent="32" name="tb_hidden_room">
-      <ObjectId>303120</ObjectId>
+      <ObjectId>311313</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9045</StateNumber>
+      <StateNumber>9146</StateNumber>
     </table>
     <table id="51" parent="32" name="tb_label">
-      <ObjectId>303125</ObjectId>
+      <ObjectId>311318</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9050</StateNumber>
+      <StateNumber>9151</StateNumber>
     </table>
     <table id="52" parent="32" name="tb_meeting">
-      <ObjectId>303130</ObjectId>
+      <ObjectId>311323</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9063</StateNumber>
+      <StateNumber>9147</StateNumber>
     </table>
     <table id="53" parent="32" name="tb_meeting_frequency">
-      <ObjectId>303137</ObjectId>
+      <ObjectId>311330</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9039</StateNumber>
+      <StateNumber>9140</StateNumber>
     </table>
     <table id="54" parent="32" name="tb_meeting_user">
-      <ObjectId>303142</ObjectId>
+      <ObjectId>311335</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9049</StateNumber>
+      <StateNumber>9150</StateNumber>
     </table>
     <table id="55" parent="32" name="tb_organization">
-      <ObjectId>303149</ObjectId>
+      <ObjectId>311342</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9042</StateNumber>
+      <StateNumber>9143</StateNumber>
     </table>
     <table id="56" parent="32" name="tb_organization_user">
-      <ObjectId>303154</ObjectId>
+      <ObjectId>311347</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9054</StateNumber>
+      <StateNumber>9155</StateNumber>
     </table>
     <table id="57" parent="32" name="tb_position">
-      <ObjectId>303159</ObjectId>
+      <ObjectId>311352</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9056</StateNumber>
+      <StateNumber>9157</StateNumber>
     </table>
     <table id="58" parent="32" name="tb_position_user">
-      <ObjectId>303164</ObjectId>
+      <ObjectId>311357</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9057</StateNumber>
+      <StateNumber>9158</StateNumber>
     </table>
     <table id="59" parent="32" name="tb_role">
-      <ObjectId>303169</ObjectId>
+      <ObjectId>311362</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9040</StateNumber>
+      <StateNumber>9141</StateNumber>
     </table>
     <table id="60" parent="32" name="tb_room">
-      <ObjectId>303174</ObjectId>
+      <ObjectId>311367</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9045</StateNumber>
+      <StateNumber>9146</StateNumber>
     </table>
     <table id="61" parent="32" name="tb_user">
-      <ObjectId>303181</ObjectId>
+      <ObjectId>311374</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>9064</StateNumber>
+      <StateNumber>9142</StateNumber>
     </table>
     <column id="62" parent="46" name="meeting_frequency_id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9004</StateNumber>
+      <StateNumber>9117</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="63" parent="46" name="day_of_week_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9004</StateNumber>
+      <StateNumber>9117</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <foreign-key id="64" parent="46" name="fkll5bj964c41dh14lahb0buji5">
-      <ObjectId>303207</ObjectId>
-      <StateNumber>9039</StateNumber>
+      <ObjectId>311395</ObjectId>
+      <StateNumber>9140</StateNumber>
       <ColNames>meeting_frequency_id</ColNames>
-      <RefTableId>303137</RefTableId>
+      <RefTableId>311330</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_meeting_frequency</RefTableName>
       <RefKeyName>tb_meeting_frequency_pkey</RefKeyName>
@@ -316,21 +316,21 @@
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9005</StateNumber>
+      <StateNumber>9118</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="66" parent="47" name="authority_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9005</StateNumber>
+      <StateNumber>9118</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <foreign-key id="67" parent="47" name="fkg73ut0g1ge4rvpnxi9skugyb6">
-      <ObjectId>303212</ObjectId>
-      <StateNumber>9040</StateNumber>
+      <ObjectId>311400</ObjectId>
+      <StateNumber>9141</StateNumber>
       <ColNames>role_id</ColNames>
-      <RefTableId>303169</RefTableId>
+      <RefTableId>311362</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_role</RefTableName>
       <RefKeyName>tb_role_pkey</RefKeyName>
@@ -340,997 +340,955 @@
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9006</StateNumber>
+      <StateNumber>9119</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="69" parent="48" name="department_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9006</StateNumber>
+      <StateNumber>9119</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="70" parent="48" name="is_deleted">
       <Position>3</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9006</StateNumber>
+      <StateNumber>9119</StateNumber>
       <TypeId>16</TypeId>
     </column>
     <column id="71" parent="48" name="head_user_id">
       <Position>4</Position>
       <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9006</StateNumber>
+      <StateNumber>9119</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <column id="72" parent="48" name="organization_id">
       <Position>5</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9006</StateNumber>
+      <StateNumber>9119</StateNumber>
       <TypeId>20</TypeId>
     </column>
     <index id="73" parent="48" name="tb_department_pkey">
-      <ObjectId>303113</ObjectId>
-      <StateNumber>9006</StateNumber>
+      <ObjectId>311306</ObjectId>
+      <StateNumber>9119</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="74" parent="48" name="uk_iiecrnv1gvj114v3hrwo1jo1a">
-      <ObjectId>303188</ObjectId>
-      <StateNumber>9021</StateNumber>
-      <ColNames>head_user_id</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="75" parent="48" name="tb_department_pkey">
-      <ObjectId>303114</ObjectId>
-      <StateNumber>9006</StateNumber>
+    <key id="74" parent="48" name="tb_department_pkey">
+      <ObjectId>311307</ObjectId>
+      <StateNumber>9119</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_department_pkey</UnderlyingIndexName>
     </key>
-    <key id="76" parent="48" name="uk_iiecrnv1gvj114v3hrwo1jo1a">
-      <ObjectId>303189</ObjectId>
-      <StateNumber>9021</StateNumber>
+    <foreign-key id="75" parent="48" name="fk3c4m2ndm7uamyyjlbs5fc49tt">
+      <ObjectId>311405</ObjectId>
+      <StateNumber>9142</StateNumber>
       <ColNames>head_user_id</ColNames>
-      <UnderlyingIndexName>uk_iiecrnv1gvj114v3hrwo1jo1a</UnderlyingIndexName>
-    </key>
-    <foreign-key id="77" parent="48" name="fk3c4m2ndm7uamyyjlbs5fc49tt">
-      <ObjectId>303217</ObjectId>
-      <StateNumber>9041</StateNumber>
-      <ColNames>head_user_id</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="78" parent="48" name="fkkyh23kwvpf6gceqqnnpy1tefn">
-      <ObjectId>303222</ObjectId>
-      <StateNumber>9042</StateNumber>
+    <foreign-key id="76" parent="48" name="fkkyh23kwvpf6gceqqnnpy1tefn">
+      <ObjectId>311410</ObjectId>
+      <StateNumber>9143</StateNumber>
       <ColNames>organization_id</ColNames>
-      <RefTableId>303149</RefTableId>
+      <RefTableId>311342</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_organization</RefTableName>
       <RefKeyName>tb_organization_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="79" parent="49" name="id">
+    <column id="77" parent="49" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9007</StateNumber>
+      <StateNumber>9120</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="80" parent="49" name="department_id">
+    <column id="78" parent="49" name="department_id">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9007</StateNumber>
+      <StateNumber>9120</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="81" parent="49" name="user_id">
+    <column id="79" parent="49" name="user_id">
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9007</StateNumber>
+      <StateNumber>9120</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="82" parent="49" name="tb_department_user_pkey">
-      <ObjectId>303118</ObjectId>
-      <StateNumber>9007</StateNumber>
+    <index id="80" parent="49" name="tb_department_user_pkey">
+      <ObjectId>311311</ObjectId>
+      <StateNumber>9120</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="83" parent="49" name="tb_department_user_pkey">
-      <ObjectId>303119</ObjectId>
-      <StateNumber>9007</StateNumber>
+    <key id="81" parent="49" name="tb_department_user_pkey">
+      <ObjectId>311312</ObjectId>
+      <StateNumber>9120</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_department_user_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="84" parent="49" name="fkjihig3pv7ptohg8fev8sm2as3">
-      <ObjectId>303227</ObjectId>
-      <StateNumber>9043</StateNumber>
+    <foreign-key id="82" parent="49" name="fkjihig3pv7ptohg8fev8sm2as3">
+      <ObjectId>311415</ObjectId>
+      <StateNumber>9144</StateNumber>
       <ColNames>department_id</ColNames>
-      <RefTableId>303110</RefTableId>
+      <RefTableId>311303</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_department</RefTableName>
       <RefKeyName>tb_department_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="85" parent="49" name="fk48vn8pte30q5pickponlg352g">
-      <ObjectId>303232</ObjectId>
-      <StateNumber>9044</StateNumber>
+    <foreign-key id="83" parent="49" name="fk48vn8pte30q5pickponlg352g">
+      <ObjectId>311420</ObjectId>
+      <StateNumber>9145</StateNumber>
       <ColNames>user_id</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="86" parent="50" name="id">
+    <column id="84" parent="50" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9008</StateNumber>
+      <StateNumber>9121</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="87" parent="50" name="hiding_end_date">
+    <column id="85" parent="50" name="hiding_end_date">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9008</StateNumber>
+      <StateNumber>9121</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="88" parent="50" name="hiding_start_date">
+    <column id="86" parent="50" name="hiding_start_date">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9008</StateNumber>
+      <StateNumber>9121</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="89" parent="50" name="reason_for_hiding">
+    <column id="87" parent="50" name="reason_for_hiding">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9008</StateNumber>
+      <StateNumber>9121</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="90" parent="50" name="room_id">
+    <column id="88" parent="50" name="room_id">
       <Position>5</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9008</StateNumber>
+      <StateNumber>9121</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="91" parent="50" name="tb_hidden_room_pkey">
-      <ObjectId>303123</ObjectId>
-      <StateNumber>9008</StateNumber>
+    <index id="89" parent="50" name="tb_hidden_room_pkey">
+      <ObjectId>311316</ObjectId>
+      <StateNumber>9121</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="92" parent="50" name="tb_hidden_room_pkey">
-      <ObjectId>303124</ObjectId>
-      <StateNumber>9008</StateNumber>
+    <key id="90" parent="50" name="tb_hidden_room_pkey">
+      <ObjectId>311317</ObjectId>
+      <StateNumber>9121</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_hidden_room_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="93" parent="50" name="fko7yvm6ilapimfdu6nfkthq5o9">
-      <ObjectId>303237</ObjectId>
-      <StateNumber>9045</StateNumber>
+    <foreign-key id="91" parent="50" name="fko7yvm6ilapimfdu6nfkthq5o9">
+      <ObjectId>311425</ObjectId>
+      <StateNumber>9146</StateNumber>
       <ColNames>room_id</ColNames>
-      <RefTableId>303174</RefTableId>
+      <RefTableId>311367</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_room</RefTableName>
       <RefKeyName>tb_room_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="94" parent="51" name="id">
+    <column id="92" parent="51" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9009</StateNumber>
+      <StateNumber>9122</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="95" parent="51" name="is_deleted">
+    <column id="93" parent="51" name="label_name">
       <Position>2</Position>
-      <DataType>boolean|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9009</StateNumber>
-      <TypeId>16</TypeId>
-    </column>
-    <column id="96" parent="51" name="label_name">
-      <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9009</StateNumber>
+      <StateNumber>9122</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="97" parent="51" name="tb_label_pkey">
-      <ObjectId>303128</ObjectId>
-      <StateNumber>9009</StateNumber>
+    <index id="94" parent="51" name="tb_label_pkey">
+      <ObjectId>311321</ObjectId>
+      <StateNumber>9122</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="98" parent="51" name="tb_label_pkey">
-      <ObjectId>303129</ObjectId>
-      <StateNumber>9009</StateNumber>
+    <key id="95" parent="51" name="tb_label_pkey">
+      <ObjectId>311322</ObjectId>
+      <StateNumber>9122</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_label_pkey</UnderlyingIndexName>
     </key>
-    <column id="99" parent="52" name="id">
+    <column id="96" parent="52" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="100" parent="52" name="address">
+    <column id="97" parent="52" name="address">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="101" parent="52" name="is_deleted">
+    <column id="98" parent="52" name="is_deleted">
       <Position>3</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="102" parent="52" name="is_visible">
+    <column id="99" parent="52" name="is_repeatable">
       <Position>4</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="103" parent="52" name="meeting_date">
+    <column id="100" parent="52" name="is_visible">
       <Position>5</Position>
+      <DataType>boolean|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>9123</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="101" parent="52" name="meeting_date">
+      <Position>6</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>1082</TypeId>
     </column>
-    <column id="104" parent="52" name="meeting_end_time">
-      <Position>6</Position>
-      <DataType>time|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
-      <TypeId>1083</TypeId>
-    </column>
-    <column id="105" parent="52" name="meeting_start_time">
+    <column id="102" parent="52" name="meeting_end_time">
       <Position>7</Position>
       <DataType>time|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>1083</TypeId>
     </column>
-    <column id="106" parent="52" name="meeting_topic">
+    <column id="103" parent="52" name="meeting_start_time">
       <Position>8</Position>
+      <DataType>time|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>9123</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="104" parent="52" name="meeting_topic">
+      <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="107" parent="52" name="frequency_id">
-      <Position>9</Position>
-      <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
-      <TypeId>20</TypeId>
-    </column>
-    <column id="108" parent="52" name="meeting_author">
+    <column id="105" parent="52" name="frequency_id">
       <Position>10</Position>
       <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="109" parent="52" name="room_id">
+    <column id="106" parent="52" name="meeting_author">
       <Position>11</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9010</StateNumber>
+      <StateNumber>9123</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="110" parent="52" name="is_repeatable">
+    <column id="107" parent="52" name="room_id">
       <Position>12</Position>
-      <DataType>boolean|0s</DataType>
+      <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9063</StateNumber>
-      <TypeId>16</TypeId>
+      <StateNumber>9123</StateNumber>
+      <TypeId>20</TypeId>
     </column>
-    <index id="111" parent="52" name="tb_meeting_pkey">
-      <ObjectId>303135</ObjectId>
-      <StateNumber>9010</StateNumber>
+    <index id="108" parent="52" name="tb_meeting_pkey">
+      <ObjectId>311328</ObjectId>
+      <StateNumber>9123</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="112" parent="52" name="uk_jj8dv1thbqyjxnnpcpmujdiao">
-      <ObjectId>303190</ObjectId>
-      <StateNumber>9023</StateNumber>
+    <index id="109" parent="52" name="uk_jj8dv1thbqyjxnnpcpmujdiao">
+      <ObjectId>311381</ObjectId>
+      <StateNumber>9133</StateNumber>
       <ColNames>frequency_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="113" parent="52" name="tb_meeting_pkey">
-      <ObjectId>303136</ObjectId>
-      <StateNumber>9010</StateNumber>
+    <key id="110" parent="52" name="tb_meeting_pkey">
+      <ObjectId>311329</ObjectId>
+      <StateNumber>9123</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_meeting_pkey</UnderlyingIndexName>
     </key>
-    <key id="114" parent="52" name="uk_jj8dv1thbqyjxnnpcpmujdiao">
-      <ObjectId>303191</ObjectId>
-      <StateNumber>9023</StateNumber>
+    <key id="111" parent="52" name="uk_jj8dv1thbqyjxnnpcpmujdiao">
+      <ObjectId>311382</ObjectId>
+      <StateNumber>9133</StateNumber>
       <ColNames>frequency_id</ColNames>
       <UnderlyingIndexName>uk_jj8dv1thbqyjxnnpcpmujdiao</UnderlyingIndexName>
     </key>
-    <foreign-key id="115" parent="52" name="fkikxljffp28mo38s3jqujjwmn3">
-      <ObjectId>303242</ObjectId>
-      <StateNumber>9046</StateNumber>
+    <foreign-key id="112" parent="52" name="fkikxljffp28mo38s3jqujjwmn3">
+      <ObjectId>311430</ObjectId>
+      <StateNumber>9147</StateNumber>
       <ColNames>frequency_id</ColNames>
-      <RefTableId>303137</RefTableId>
+      <RefTableId>311330</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_meeting_frequency</RefTableName>
       <RefKeyName>tb_meeting_frequency_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="116" parent="52" name="fkjgyugq45tx2kk7m3cmrupnf84">
-      <ObjectId>303247</ObjectId>
-      <StateNumber>9047</StateNumber>
+    <foreign-key id="113" parent="52" name="fkjgyugq45tx2kk7m3cmrupnf84">
+      <ObjectId>311435</ObjectId>
+      <StateNumber>9148</StateNumber>
       <ColNames>meeting_author</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="117" parent="52" name="fk16sm1t4r8t0gt0er54momnvaq">
-      <ObjectId>303252</ObjectId>
-      <StateNumber>9048</StateNumber>
+    <foreign-key id="114" parent="52" name="fk16sm1t4r8t0gt0er54momnvaq">
+      <ObjectId>311440</ObjectId>
+      <StateNumber>9149</StateNumber>
       <ColNames>room_id</ColNames>
-      <RefTableId>303174</RefTableId>
+      <RefTableId>311367</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_room</RefTableName>
       <RefKeyName>tb_room_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="118" parent="53" name="id">
+    <column id="115" parent="53" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9011</StateNumber>
+      <StateNumber>9124</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="119" parent="53" name="is_repeatable">
+    <column id="116" parent="53" name="number_of_weeks">
       <Position>2</Position>
-      <DataType>boolean|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9011</StateNumber>
-      <TypeId>16</TypeId>
-    </column>
-    <column id="120" parent="53" name="number_of_weeks">
-      <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9011</StateNumber>
+      <StateNumber>9124</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="121" parent="53" name="tb_meeting_frequency_pkey">
-      <ObjectId>303140</ObjectId>
-      <StateNumber>9011</StateNumber>
+    <index id="117" parent="53" name="tb_meeting_frequency_pkey">
+      <ObjectId>311333</ObjectId>
+      <StateNumber>9124</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="122" parent="53" name="tb_meeting_frequency_pkey">
-      <ObjectId>303141</ObjectId>
-      <StateNumber>9011</StateNumber>
+    <key id="118" parent="53" name="tb_meeting_frequency_pkey">
+      <ObjectId>311334</ObjectId>
+      <StateNumber>9124</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_meeting_frequency_pkey</UnderlyingIndexName>
     </key>
-    <column id="123" parent="54" name="id">
+    <column id="119" parent="54" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="124" parent="54" name="is_declined">
+    <column id="120" parent="54" name="is_declined">
       <Position>2</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="125" parent="54" name="member_type">
+    <column id="121" parent="54" name="member_type">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="126" parent="54" name="reason_for_declining">
+    <column id="122" parent="54" name="reason_for_declining">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="127" parent="54" name="delegate_user_id">
+    <column id="123" parent="54" name="delegate_user_id">
       <Position>5</Position>
       <DataType>bigint|0s</DataType>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="128" parent="54" name="label_id">
+    <column id="124" parent="54" name="label_id">
       <Position>6</Position>
       <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="129" parent="54" name="meeting_id">
+    <column id="125" parent="54" name="meeting_id">
       <Position>7</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="130" parent="54" name="participant_user_id">
+    <column id="126" parent="54" name="participant_user_id">
       <Position>8</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9012</StateNumber>
+      <StateNumber>9125</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="131" parent="54" name="tb_meeting_user_pkey">
-      <ObjectId>303147</ObjectId>
-      <StateNumber>9012</StateNumber>
+    <index id="127" parent="54" name="tb_meeting_user_pkey">
+      <ObjectId>311340</ObjectId>
+      <StateNumber>9125</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="132" parent="54" name="tb_meeting_user_pkey">
-      <ObjectId>303148</ObjectId>
-      <StateNumber>9012</StateNumber>
+    <key id="128" parent="54" name="tb_meeting_user_pkey">
+      <ObjectId>311341</ObjectId>
+      <StateNumber>9125</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_meeting_user_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="133" parent="54" name="fkbkmt5fnoarxsgtpbcum1q5qln">
-      <ObjectId>303257</ObjectId>
-      <StateNumber>9049</StateNumber>
+    <foreign-key id="129" parent="54" name="fkbkmt5fnoarxsgtpbcum1q5qln">
+      <ObjectId>311445</ObjectId>
+      <StateNumber>9150</StateNumber>
       <ColNames>delegate_user_id</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="134" parent="54" name="fkq6dml0oh5atnspsgxubm1as0o">
-      <ObjectId>303262</ObjectId>
-      <StateNumber>9050</StateNumber>
+    <foreign-key id="130" parent="54" name="fkq6dml0oh5atnspsgxubm1as0o">
+      <ObjectId>311450</ObjectId>
+      <StateNumber>9151</StateNumber>
       <ColNames>label_id</ColNames>
-      <RefTableId>303125</RefTableId>
+      <RefTableId>311318</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_label</RefTableName>
       <RefKeyName>tb_label_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="135" parent="54" name="fkbqx1uncwvwxtwupu3fpuakyjm">
-      <ObjectId>303267</ObjectId>
-      <StateNumber>9051</StateNumber>
+    <foreign-key id="131" parent="54" name="fkbqx1uncwvwxtwupu3fpuakyjm">
+      <ObjectId>311455</ObjectId>
+      <StateNumber>9152</StateNumber>
       <ColNames>meeting_id</ColNames>
-      <RefTableId>303130</RefTableId>
+      <RefTableId>311323</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_meeting</RefTableName>
       <RefKeyName>tb_meeting_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="136" parent="54" name="fkgb5sa0xv45djvmct9if0j6q79">
-      <ObjectId>303272</ObjectId>
-      <StateNumber>9052</StateNumber>
+    <foreign-key id="132" parent="54" name="fkgb5sa0xv45djvmct9if0j6q79">
+      <ObjectId>311460</ObjectId>
+      <StateNumber>9153</StateNumber>
       <ColNames>participant_user_id</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="137" parent="55" name="id">
+    <column id="133" parent="55" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9013</StateNumber>
+      <StateNumber>9126</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="138" parent="55" name="is_deleted">
+    <column id="134" parent="55" name="is_deleted">
       <Position>2</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9013</StateNumber>
+      <StateNumber>9126</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="139" parent="55" name="organization_name">
+    <column id="135" parent="55" name="organization_name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9013</StateNumber>
+      <StateNumber>9126</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="140" parent="55" name="admin_user_id">
+    <column id="136" parent="55" name="admin_user_id">
       <Position>4</Position>
       <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>9013</StateNumber>
+      <StateNumber>9126</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="141" parent="55" name="tb_organization_pkey">
-      <ObjectId>303152</ObjectId>
-      <StateNumber>9013</StateNumber>
+    <index id="137" parent="55" name="tb_organization_pkey">
+      <ObjectId>311345</ObjectId>
+      <StateNumber>9126</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="142" parent="55" name="uk_opo45h3wv8rsxyc25khdk3f8e">
-      <ObjectId>303192</ObjectId>
-      <StateNumber>9025</StateNumber>
+    <index id="138" parent="55" name="uk_opo45h3wv8rsxyc25khdk3f8e">
+      <ObjectId>311383</ObjectId>
+      <StateNumber>9134</StateNumber>
       <ColNames>organization_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="143" parent="55" name="uk_adayktpvr7wa6k6ertt073cwv">
-      <ObjectId>303194</ObjectId>
-      <StateNumber>9027</StateNumber>
-      <ColNames>admin_user_id</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="144" parent="55" name="tb_organization_pkey">
-      <ObjectId>303153</ObjectId>
-      <StateNumber>9013</StateNumber>
+    <key id="139" parent="55" name="tb_organization_pkey">
+      <ObjectId>311346</ObjectId>
+      <StateNumber>9126</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_organization_pkey</UnderlyingIndexName>
     </key>
-    <key id="145" parent="55" name="uk_opo45h3wv8rsxyc25khdk3f8e">
-      <ObjectId>303193</ObjectId>
-      <StateNumber>9025</StateNumber>
+    <key id="140" parent="55" name="uk_opo45h3wv8rsxyc25khdk3f8e">
+      <ObjectId>311384</ObjectId>
+      <StateNumber>9134</StateNumber>
       <ColNames>organization_name</ColNames>
       <UnderlyingIndexName>uk_opo45h3wv8rsxyc25khdk3f8e</UnderlyingIndexName>
     </key>
-    <key id="146" parent="55" name="uk_adayktpvr7wa6k6ertt073cwv">
-      <ObjectId>303195</ObjectId>
-      <StateNumber>9027</StateNumber>
+    <foreign-key id="141" parent="55" name="fkix6oq7scfr1g90um2vlx5e1t6">
+      <ObjectId>311465</ObjectId>
+      <StateNumber>9154</StateNumber>
       <ColNames>admin_user_id</ColNames>
-      <UnderlyingIndexName>uk_adayktpvr7wa6k6ertt073cwv</UnderlyingIndexName>
-    </key>
-    <foreign-key id="147" parent="55" name="fkix6oq7scfr1g90um2vlx5e1t6">
-      <ObjectId>303277</ObjectId>
-      <StateNumber>9053</StateNumber>
-      <ColNames>admin_user_id</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="148" parent="56" name="id">
+    <column id="142" parent="56" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9014</StateNumber>
+      <StateNumber>9127</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="149" parent="56" name="organization_id">
+    <column id="143" parent="56" name="organization_id">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9014</StateNumber>
+      <StateNumber>9127</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="150" parent="56" name="user_id">
+    <column id="144" parent="56" name="user_id">
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9014</StateNumber>
+      <StateNumber>9127</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="151" parent="56" name="tb_organization_user_pkey">
-      <ObjectId>303157</ObjectId>
-      <StateNumber>9014</StateNumber>
+    <index id="145" parent="56" name="tb_organization_user_pkey">
+      <ObjectId>311350</ObjectId>
+      <StateNumber>9127</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="152" parent="56" name="tb_organization_user_pkey">
-      <ObjectId>303158</ObjectId>
-      <StateNumber>9014</StateNumber>
+    <key id="146" parent="56" name="tb_organization_user_pkey">
+      <ObjectId>311351</ObjectId>
+      <StateNumber>9127</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_organization_user_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="153" parent="56" name="fkf1ktlj5caw7b9gnep5duon9iq">
-      <ObjectId>303282</ObjectId>
-      <StateNumber>9054</StateNumber>
+    <foreign-key id="147" parent="56" name="fkf1ktlj5caw7b9gnep5duon9iq">
+      <ObjectId>311470</ObjectId>
+      <StateNumber>9155</StateNumber>
       <ColNames>organization_id</ColNames>
-      <RefTableId>303149</RefTableId>
+      <RefTableId>311342</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_organization</RefTableName>
       <RefKeyName>tb_organization_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="154" parent="56" name="fkdlv6dxdd2gu72he3yxthsf2m2">
-      <ObjectId>303287</ObjectId>
-      <StateNumber>9055</StateNumber>
+    <foreign-key id="148" parent="56" name="fkdlv6dxdd2gu72he3yxthsf2m2">
+      <ObjectId>311475</ObjectId>
+      <StateNumber>9156</StateNumber>
       <ColNames>user_id</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="155" parent="57" name="id">
+    <column id="149" parent="57" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9015</StateNumber>
+      <StateNumber>9128</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="156" parent="57" name="is_deleted">
+    <column id="150" parent="57" name="is_deleted">
       <Position>2</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9015</StateNumber>
+      <StateNumber>9128</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="157" parent="57" name="position_name">
+    <column id="151" parent="57" name="position_name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9015</StateNumber>
+      <StateNumber>9128</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="158" parent="57" name="department_id">
+    <column id="152" parent="57" name="department_id">
       <Position>4</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9015</StateNumber>
+      <StateNumber>9128</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="159" parent="57" name="tb_position_pkey">
-      <ObjectId>303162</ObjectId>
-      <StateNumber>9015</StateNumber>
+    <index id="153" parent="57" name="tb_position_pkey">
+      <ObjectId>311355</ObjectId>
+      <StateNumber>9128</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="160" parent="57" name="tb_position_pkey">
-      <ObjectId>303163</ObjectId>
-      <StateNumber>9015</StateNumber>
+    <key id="154" parent="57" name="tb_position_pkey">
+      <ObjectId>311356</ObjectId>
+      <StateNumber>9128</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_position_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="161" parent="57" name="fk66xsd6oxl5au16g8og7ypvf5">
-      <ObjectId>303292</ObjectId>
-      <StateNumber>9056</StateNumber>
+    <foreign-key id="155" parent="57" name="fk66xsd6oxl5au16g8og7ypvf5">
+      <ObjectId>311480</ObjectId>
+      <StateNumber>9157</StateNumber>
       <ColNames>department_id</ColNames>
-      <RefTableId>303110</RefTableId>
+      <RefTableId>311303</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_department</RefTableName>
       <RefKeyName>tb_department_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="162" parent="58" name="id">
+    <column id="156" parent="58" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9016</StateNumber>
+      <StateNumber>9129</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="163" parent="58" name="position_id">
+    <column id="157" parent="58" name="position_id">
       <Position>2</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9016</StateNumber>
+      <StateNumber>9129</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="164" parent="58" name="user_id">
+    <column id="158" parent="58" name="user_id">
       <Position>3</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9016</StateNumber>
+      <StateNumber>9129</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <index id="165" parent="58" name="tb_position_user_pkey">
-      <ObjectId>303167</ObjectId>
-      <StateNumber>9016</StateNumber>
+    <index id="159" parent="58" name="tb_position_user_pkey">
+      <ObjectId>311360</ObjectId>
+      <StateNumber>9129</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="166" parent="58" name="tb_position_user_pkey">
-      <ObjectId>303168</ObjectId>
-      <StateNumber>9016</StateNumber>
+    <key id="160" parent="58" name="tb_position_user_pkey">
+      <ObjectId>311361</ObjectId>
+      <StateNumber>9129</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_position_user_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="167" parent="58" name="fklx7h3ycbylicjqh3slet9iigv">
-      <ObjectId>303297</ObjectId>
-      <StateNumber>9057</StateNumber>
+    <foreign-key id="161" parent="58" name="fklx7h3ycbylicjqh3slet9iigv">
+      <ObjectId>311485</ObjectId>
+      <StateNumber>9158</StateNumber>
       <ColNames>position_id</ColNames>
-      <RefTableId>303159</RefTableId>
+      <RefTableId>311352</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_position</RefTableName>
       <RefKeyName>tb_position_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="168" parent="58" name="fk438q0ulthpspmh6m4n4gqto2o">
-      <ObjectId>303302</ObjectId>
-      <StateNumber>9058</StateNumber>
+    <foreign-key id="162" parent="58" name="fk438q0ulthpspmh6m4n4gqto2o">
+      <ObjectId>311490</ObjectId>
+      <StateNumber>9159</StateNumber>
       <ColNames>user_id</ColNames>
-      <RefTableId>303181</RefTableId>
+      <RefTableId>311374</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_user</RefTableName>
       <RefKeyName>tb_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="169" parent="59" name="id">
+    <column id="163" parent="59" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9017</StateNumber>
+      <StateNumber>9130</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="170" parent="59" name="role_name">
+    <column id="164" parent="59" name="role_name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9017</StateNumber>
+      <StateNumber>9130</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="171" parent="59" name="tb_role_pkey">
-      <ObjectId>303172</ObjectId>
-      <StateNumber>9017</StateNumber>
+    <index id="165" parent="59" name="tb_role_pkey">
+      <ObjectId>311365</ObjectId>
+      <StateNumber>9130</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="172" parent="59" name="uk_c9lijtmr0x68iu1vxftbu2u33">
-      <ObjectId>303196</ObjectId>
-      <StateNumber>9029</StateNumber>
+    <index id="166" parent="59" name="uk_c9lijtmr0x68iu1vxftbu2u33">
+      <ObjectId>311385</ObjectId>
+      <StateNumber>9135</StateNumber>
       <ColNames>role_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="173" parent="59" name="tb_role_pkey">
-      <ObjectId>303173</ObjectId>
-      <StateNumber>9017</StateNumber>
+    <key id="167" parent="59" name="tb_role_pkey">
+      <ObjectId>311366</ObjectId>
+      <StateNumber>9130</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_role_pkey</UnderlyingIndexName>
     </key>
-    <key id="174" parent="59" name="uk_c9lijtmr0x68iu1vxftbu2u33">
-      <ObjectId>303197</ObjectId>
-      <StateNumber>9029</StateNumber>
+    <key id="168" parent="59" name="uk_c9lijtmr0x68iu1vxftbu2u33">
+      <ObjectId>311386</ObjectId>
+      <StateNumber>9135</StateNumber>
       <ColNames>role_name</ColNames>
       <UnderlyingIndexName>uk_c9lijtmr0x68iu1vxftbu2u33</UnderlyingIndexName>
     </key>
-    <column id="175" parent="60" name="id">
+    <column id="169" parent="60" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9018</StateNumber>
+      <StateNumber>9131</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="176" parent="60" name="is_ac_available">
+    <column id="170" parent="60" name="is_ac_available">
       <Position>2</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9018</StateNumber>
+      <StateNumber>9131</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="177" parent="60" name="is_dashboard_available">
+    <column id="171" parent="60" name="is_dashboard_available">
       <Position>3</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9018</StateNumber>
+      <StateNumber>9131</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="178" parent="60" name="is_deleted">
+    <column id="172" parent="60" name="is_deleted">
       <Position>4</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9018</StateNumber>
+      <StateNumber>9131</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="179" parent="60" name="is_projector_available">
+    <column id="173" parent="60" name="is_projector_available">
       <Position>5</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9018</StateNumber>
+      <StateNumber>9131</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="180" parent="60" name="location">
+    <column id="174" parent="60" name="location">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9018</StateNumber>
+      <StateNumber>9131</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="181" parent="60" name="room_name">
+    <column id="175" parent="60" name="room_name">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9018</StateNumber>
+      <StateNumber>9131</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="182" parent="60" name="tb_room_pkey">
-      <ObjectId>303179</ObjectId>
-      <StateNumber>9018</StateNumber>
+    <index id="176" parent="60" name="tb_room_pkey">
+      <ObjectId>311372</ObjectId>
+      <StateNumber>9131</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="183" parent="60" name="uk_1bgyltivh0v54rcw28v6xhj6f">
-      <ObjectId>303198</ObjectId>
-      <StateNumber>9031</StateNumber>
+    <index id="177" parent="60" name="uk_1bgyltivh0v54rcw28v6xhj6f">
+      <ObjectId>311387</ObjectId>
+      <StateNumber>9136</StateNumber>
       <ColNames>room_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="184" parent="60" name="tb_room_pkey">
-      <ObjectId>303180</ObjectId>
-      <StateNumber>9018</StateNumber>
+    <key id="178" parent="60" name="tb_room_pkey">
+      <ObjectId>311373</ObjectId>
+      <StateNumber>9131</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_room_pkey</UnderlyingIndexName>
     </key>
-    <key id="185" parent="60" name="uk_1bgyltivh0v54rcw28v6xhj6f">
-      <ObjectId>303199</ObjectId>
-      <StateNumber>9031</StateNumber>
+    <key id="179" parent="60" name="uk_1bgyltivh0v54rcw28v6xhj6f">
+      <ObjectId>311388</ObjectId>
+      <StateNumber>9136</StateNumber>
       <ColNames>room_name</ColNames>
       <UnderlyingIndexName>uk_1bgyltivh0v54rcw28v6xhj6f</UnderlyingIndexName>
     </key>
-    <column id="186" parent="61" name="id">
+    <column id="180" parent="61" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="187" parent="61" name="email">
+    <column id="181" parent="61" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="188" parent="61" name="first_name">
+    <column id="182" parent="61" name="first_name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="189" parent="61" name="is_deleted">
+    <column id="183" parent="61" name="is_deleted">
       <Position>4</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="190" parent="61" name="last_name">
+    <column id="184" parent="61" name="last_name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="191" parent="61" name="msisdn">
+    <column id="185" parent="61" name="msisdn">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="192" parent="61" name="password">
+    <column id="186" parent="61" name="password">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="193" parent="61" name="patronymic">
+    <column id="187" parent="61" name="patronymic">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="194" parent="61" name="photo_path">
+    <column id="188" parent="61" name="photo_path">
       <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="195" parent="61" name="role_id">
+    <column id="189" parent="61" name="status">
       <Position>10</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <StateNumber>9132</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="190" parent="61" name="role_id">
+      <Position>11</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>9019</StateNumber>
+      <StateNumber>9132</StateNumber>
       <TypeId>20</TypeId>
     </column>
-    <column id="196" parent="61" name="status">
-      <Position>11</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <StateNumber>9064</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="197" parent="61" name="tb_user_pkey">
-      <ObjectId>303186</ObjectId>
-      <StateNumber>9019</StateNumber>
+    <index id="191" parent="61" name="tb_user_pkey">
+      <ObjectId>311379</ObjectId>
+      <StateNumber>9132</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="198" parent="61" name="uk_4vih17mube9j7cqyjlfbcrk4m">
-      <ObjectId>303200</ObjectId>
-      <StateNumber>9033</StateNumber>
+    <index id="192" parent="61" name="uk_4vih17mube9j7cqyjlfbcrk4m">
+      <ObjectId>311389</ObjectId>
+      <StateNumber>9137</StateNumber>
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="199" parent="61" name="uk_mp4yptk75k0y3m2dw5tj1ppkr">
-      <ObjectId>303202</ObjectId>
-      <StateNumber>9035</StateNumber>
+    <index id="193" parent="61" name="uk_mp4yptk75k0y3m2dw5tj1ppkr">
+      <ObjectId>311391</ObjectId>
+      <StateNumber>9138</StateNumber>
       <ColNames>msisdn</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="200" parent="61" name="uk_s6eq54hf4aem7kwjt2w78nxil">
-      <ObjectId>303204</ObjectId>
-      <StateNumber>9037</StateNumber>
+    <index id="194" parent="61" name="uk_s6eq54hf4aem7kwjt2w78nxil">
+      <ObjectId>311393</ObjectId>
+      <StateNumber>9139</StateNumber>
       <ColNames>photo_path</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="201" parent="61" name="tb_user_pkey">
-      <ObjectId>303187</ObjectId>
-      <StateNumber>9019</StateNumber>
+    <key id="195" parent="61" name="tb_user_pkey">
+      <ObjectId>311380</ObjectId>
+      <StateNumber>9132</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>tb_user_pkey</UnderlyingIndexName>
     </key>
-    <key id="202" parent="61" name="uk_4vih17mube9j7cqyjlfbcrk4m">
-      <ObjectId>303201</ObjectId>
-      <StateNumber>9033</StateNumber>
+    <key id="196" parent="61" name="uk_4vih17mube9j7cqyjlfbcrk4m">
+      <ObjectId>311390</ObjectId>
+      <StateNumber>9137</StateNumber>
       <ColNames>email</ColNames>
       <UnderlyingIndexName>uk_4vih17mube9j7cqyjlfbcrk4m</UnderlyingIndexName>
     </key>
-    <key id="203" parent="61" name="uk_mp4yptk75k0y3m2dw5tj1ppkr">
-      <ObjectId>303203</ObjectId>
-      <StateNumber>9035</StateNumber>
+    <key id="197" parent="61" name="uk_mp4yptk75k0y3m2dw5tj1ppkr">
+      <ObjectId>311392</ObjectId>
+      <StateNumber>9138</StateNumber>
       <ColNames>msisdn</ColNames>
       <UnderlyingIndexName>uk_mp4yptk75k0y3m2dw5tj1ppkr</UnderlyingIndexName>
     </key>
-    <key id="204" parent="61" name="uk_s6eq54hf4aem7kwjt2w78nxil">
-      <ObjectId>303205</ObjectId>
-      <StateNumber>9037</StateNumber>
+    <key id="198" parent="61" name="uk_s6eq54hf4aem7kwjt2w78nxil">
+      <ObjectId>311394</ObjectId>
+      <StateNumber>9139</StateNumber>
       <ColNames>photo_path</ColNames>
       <UnderlyingIndexName>uk_s6eq54hf4aem7kwjt2w78nxil</UnderlyingIndexName>
     </key>
-    <foreign-key id="205" parent="61" name="fkrfmat6i7yc88kv6aqusrqiv6e">
-      <ObjectId>303307</ObjectId>
-      <StateNumber>9059</StateNumber>
+    <foreign-key id="199" parent="61" name="fkrfmat6i7yc88kv6aqusrqiv6e">
+      <ObjectId>311495</ObjectId>
+      <StateNumber>9160</StateNumber>
       <ColNames>role_id</ColNames>
-      <RefTableId>303169</RefTableId>
+      <RefTableId>311362</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>tb_role</RefTableName>
       <RefKeyName>tb_role_pkey</RefKeyName>
