@@ -6,6 +6,7 @@ import kg.megacom.megalab.model.entity.Position;
 import kg.megacom.megalab.model.mapper.DepartmentMapper;
 import kg.megacom.megalab.model.mapper.PositionMapper;
 import kg.megacom.megalab.model.request.CreatePositionRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.PositionRepository;
 import kg.megacom.megalab.service.DepartmentService;
 import kg.megacom.megalab.service.PositionService;
@@ -61,14 +62,15 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public void delete(Long id) {
+    public MessageResponse delete(Long id) {
         positionRepository.findByIdAndIsDeletedFalse(id)
                 .map(position -> {
                     position.setIsDeleted(true);
                     return positionRepository.save(position);
                 }).orElseThrow(() -> new EntityNotFoundException
                         ("Position with id=" + id + " not found"));
-        // if position.isDeleted = true { sout("no position") }
+        return MessageResponse.of("Position with id=" + id + " is deleted");
+        //todo: if position.isDeleted = true { sout("no position") }
     }
 
     @Override
@@ -78,7 +80,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public void deletePositionsByDepartmentId(Long departmentId) {
-        positionRepository.deleteUsersAndPositions(departmentId);
+        positionRepository.deletePositionsByDepartmentId(departmentId);
     }
 
     @Override

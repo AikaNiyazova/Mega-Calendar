@@ -8,8 +8,8 @@ import kg.megacom.megalab.model.entity.Label;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-03T15:01:09+0600",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
+    date = "2022-07-08T18:17:06+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class LabelMapperImpl implements LabelMapper {
 
@@ -19,9 +19,12 @@ public class LabelMapperImpl implements LabelMapper {
             return null;
         }
 
-        LabelDto labelDto = new LabelDto();
+        LabelDto.LabelDtoBuilder labelDto = LabelDto.builder();
 
-        return labelDto;
+        labelDto.id( entity.getId() );
+        labelDto.labelName( entity.getLabelName() );
+
+        return labelDto.build();
     }
 
     @Override
@@ -30,9 +33,12 @@ public class LabelMapperImpl implements LabelMapper {
             return null;
         }
 
-        Label label = new Label();
+        Label.LabelBuilder label = Label.builder();
 
-        return label;
+        label.id( dto.getId() );
+        label.labelName( dto.getLabelName() );
+
+        return label.build();
     }
 
     @Override

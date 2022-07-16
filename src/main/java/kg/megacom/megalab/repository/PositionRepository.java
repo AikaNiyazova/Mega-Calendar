@@ -23,6 +23,6 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
     @Query(value = "UPDATE tb_position " +
             "SET is_deleted = true " +
             "WHERE department_id = ?1", nativeQuery = true)
-    void deleteUsersAndPositions(Long departmentId);
+    void deletePositionsByDepartmentId(Long departmentId);
 
 }
