@@ -1,10 +1,10 @@
-package kg.megacom.megalab.exception.room;
+package kg.megacom.megalab.exception;
 
-public class RoomIncorrectData {
+public class IncorrectData {
 
     private String info;
 
-    public RoomIncorrectData() {
+    public IncorrectData() {
     }
 
     public String getInfo() {

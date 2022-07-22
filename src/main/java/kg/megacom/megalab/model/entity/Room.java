@@ -37,4 +37,6 @@ public class Room {
     @Column(name = "is_deleted", nullable = false)
     Boolean isDeleted;
 
+
+
 }

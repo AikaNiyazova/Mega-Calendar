@@ -1,5 +1,6 @@
 package kg.megacom.megalab.model.mapper;
 
+
 import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.entity.Room;
 import org.mapstruct.Mapper;

@@ -8,15 +8,20 @@ import lombok.experimental.FieldDefaults;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AddPhotoRequest {
+public class UpdateProfileRequest {
 
-    @NotNull(message = "User id cannot be null")
+    @NotNull(message = "User ID is cannot be null")
     Long userId;
 
-    @NotBlank(message = "Photo path cannot be blank")
+    String status;
+
     String photoPath;
 
+    String newPassword;
+
+    String curPassword;
 }

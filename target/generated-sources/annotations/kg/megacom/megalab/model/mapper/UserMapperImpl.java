@@ -3,13 +3,16 @@ package kg.megacom.megalab.model.mapper;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import kg.megacom.megalab.model.dto.RoleDto;
 import kg.megacom.megalab.model.dto.UserDto;
+import kg.megacom.megalab.model.entity.Role;
 import kg.megacom.megalab.model.entity.User;
+import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-03T15:01:09+0600",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
+    date = "2022-07-21T21:58:22+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_332 (Amazon.com Inc.)"
 )
 public class UserMapperImpl implements UserMapper {
 
@@ -19,9 +22,21 @@ public class UserMapperImpl implements UserMapper {
             return null;
         }
 
-        UserDto userDto = new UserDto();
+        UserDto.UserDtoBuilder userDto = UserDto.builder();
 
-        return userDto;
+        userDto.id( entity.getId() );
+        userDto.photoPath( entity.getPhotoPath() );
+        userDto.firstName( entity.getFirstName() );
+        userDto.lastName( entity.getLastName() );
+        userDto.patronymic( entity.getPatronymic() );
+        userDto.msisdn( entity.getMsisdn() );
+        userDto.email( entity.getEmail() );
+        userDto.password( entity.getPassword() );
+        userDto.role( roleToRoleDto( entity.getRole() ) );
+        userDto.status( entity.getStatus() );
+        userDto.isDeleted( entity.getIsDeleted() );
+
+        return userDto.build();
     }
 
     @Override
@@ -30,9 +45,21 @@ public class UserMapperImpl implements UserMapper {
             return null;
         }
 
-        User user = new User();
+        User.UserBuilder user = User.builder();
 
-        return user;
+        user.id( dto.getId() );
+        user.photoPath( dto.getPhotoPath() );
+        user.firstName( dto.getFirstName() );
+        user.lastName( dto.getLastName() );
+        user.patronymic( dto.getPatronymic() );
+        user.msisdn( dto.getMsisdn() );
+        user.email( dto.getEmail() );
+        user.password( dto.getPassword() );
+        user.role( roleDtoToRole( dto.getRole() ) );
+        user.status( dto.getStatus() );
+        user.isDeleted( dto.getIsDeleted() );
+
+        return user.build();
     }
 
     @Override
@@ -61,5 +88,39 @@ public class UserMapperImpl implements UserMapper {
         }
 
         return list;
+    }
+
+    protected RoleDto roleToRoleDto(Role role) {
+        if ( role == null ) {
+            return null;
+        }
+
+        RoleDto.RoleDtoBuilder roleDto = RoleDto.builder();
+
+        roleDto.id( role.getId() );
+        roleDto.roleName( role.getRoleName() );
+        List<Authority> list = role.getAuthorities();
+        if ( list != null ) {
+            roleDto.authorities( new ArrayList<Authority>( list ) );
+        }
+
+        return roleDto.build();
+    }
+
+    protected Role roleDtoToRole(RoleDto roleDto) {
+        if ( roleDto == null ) {
+            return null;
+        }
+
+        Role.RoleBuilder role = Role.builder();
+
+        role.id( roleDto.getId() );
+        role.roleName( roleDto.getRoleName() );
+        List<Authority> list = roleDto.getAuthorities();
+        if ( list != null ) {
+            role.authorities( new ArrayList<Authority>( list ) );
+        }
+
+        return role.build();
     }
 }

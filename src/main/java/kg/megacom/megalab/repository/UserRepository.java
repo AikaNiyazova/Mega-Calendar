@@ -1,5 +1,6 @@
 package kg.megacom.megalab.repository;
 
+import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.User;
 import kg.megacom.megalab.model.response.ReadUserProfileResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,5 +40,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "ON u.id = du.user_id " +
             "WHERE du.department_id = ?1", nativeQuery = true)
     void deleteUsersAndPositions(Long departmentId);
+
+//    @Modifying
+//    @Query("UPDATE User u SET u.status = :status WHERE u.id= :id")
+//    void updateStatus(Long id,String status);
 
 }

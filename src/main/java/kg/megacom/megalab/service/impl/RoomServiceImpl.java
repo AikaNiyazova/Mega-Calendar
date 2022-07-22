@@ -1,8 +1,12 @@
 package kg.megacom.megalab.service.impl;
 
 import kg.megacom.megalab.exception.room.RoomNotFoundException;
+import kg.megacom.megalab.model.dto.HiddenRoomDto;
 import kg.megacom.megalab.model.dto.RoomDto;
+import kg.megacom.megalab.model.entity.Room;
+import kg.megacom.megalab.model.mapper.HiddenRoomMapper;
 import kg.megacom.megalab.model.mapper.RoomMapper;
+import kg.megacom.megalab.repository.HiddenRoomRepository;
 import kg.megacom.megalab.repository.RoomRepository;
 import kg.megacom.megalab.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
+
+    @Autowired
+    private HiddenRoomRepository hiddenRoomRepository;
 
     @Override
     public RoomDto save(RoomDto room) {
@@ -38,11 +45,18 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<RoomDto> findAll() {
-        return RoomMapper.INSTANCE.toDtoList(roomRepository.findAll());
+        return RoomMapper.INSTANCE
+                .toDtoList(roomRepository.findAll());
+    }
+
+    @Override
+    public HiddenRoomDto hideRoom(HiddenRoomDto hiddenRoom) {
+        return HiddenRoomMapper.INSTANCE
+                .toDto(hiddenRoomRepository.save(HiddenRoomMapper.INSTANCE.toEntity(hiddenRoom)));
     }
 
     @Override
     public void delete(Long id) {
-        roomRepository.deleteById(id);
+        roomRepository.deleteRoomById(id );
     }
 }

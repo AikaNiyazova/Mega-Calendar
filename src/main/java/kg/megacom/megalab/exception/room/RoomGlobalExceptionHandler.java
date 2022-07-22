@@ -1,6 +1,7 @@
 package kg.megacom.megalab.exception.room;
 
 
+import kg.megacom.megalab.exception.IncorrectData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,17 +11,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RoomGlobalExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<RoomIncorrectData> notFound(
+    public ResponseEntity<IncorrectData> notFound(
             RoomNotFoundException exception){
-        RoomIncorrectData data = new RoomIncorrectData();
+        IncorrectData data = new IncorrectData();
         data.setInfo(exception.getMessage());
         return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    public ResponseEntity<RoomIncorrectData> isExists(
+    public ResponseEntity<IncorrectData> isExists(
             RoomIsExistsException exception){
-        RoomIncorrectData data = new RoomIncorrectData();
+        IncorrectData data = new IncorrectData();
         data.setInfo(exception.getMessage());
         return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);
     }

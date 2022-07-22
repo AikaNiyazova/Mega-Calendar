@@ -8,8 +8,8 @@ import kg.megacom.megalab.model.entity.MeetingUser;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-03T15:01:09+0600",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
+    date = "2022-07-08T23:26:44+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_332 (Amazon.com Inc.)"
 )
 public class MeetingUserMapperImpl implements MeetingUserMapper {
 
