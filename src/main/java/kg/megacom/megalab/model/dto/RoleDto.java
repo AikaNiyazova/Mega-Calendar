@@ -16,5 +16,6 @@ public class RoleDto {
     Long id;
     String roleName;
     List<Authority> authorities;
+    Boolean isDeleted;
 
 }

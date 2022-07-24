@@ -5,11 +5,12 @@ import java.util.List;
 import javax.annotation.Generated;
 import kg.megacom.megalab.model.dto.RoleDto;
 import kg.megacom.megalab.model.entity.Role;
+import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-03T15:01:08+0600",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
+    date = "2022-07-12T14:53:04+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
 )
 public class RoleMapperImpl implements RoleMapper {
 
@@ -19,9 +20,17 @@ public class RoleMapperImpl implements RoleMapper {
             return null;
         }
 
-        RoleDto roleDto = new RoleDto();
+        RoleDto.RoleDtoBuilder roleDto = RoleDto.builder();
 
-        return roleDto;
+        roleDto.id( entity.getId() );
+        roleDto.roleName( entity.getRoleName() );
+        List<Authority> list = entity.getAuthorities();
+        if ( list != null ) {
+            roleDto.authorities( new ArrayList<Authority>( list ) );
+        }
+        roleDto.isDeleted( entity.getIsDeleted() );
+
+        return roleDto.build();
     }
 
     @Override
@@ -30,9 +39,17 @@ public class RoleMapperImpl implements RoleMapper {
             return null;
         }
 
-        Role role = new Role();
+        Role.RoleBuilder role = Role.builder();
 
-        return role;
+        role.id( dto.getId() );
+        role.roleName( dto.getRoleName() );
+        List<Authority> list = dto.getAuthorities();
+        if ( list != null ) {
+            role.authorities( new ArrayList<Authority>( list ) );
+        }
+        role.isDeleted( dto.getIsDeleted() );
+
+        return role.build();
     }
 
     @Override

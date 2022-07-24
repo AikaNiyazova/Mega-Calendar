@@ -11,6 +11,7 @@ import kg.megacom.megalab.service.OrganizationService;
 import kg.megacom.megalab.service.OrganizationUserService;
 import kg.megacom.megalab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -24,7 +25,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     private final UserService userService;
 
     @Autowired
-    public OrganizationServiceImpl(OrganizationRepository organizationRepository, OrganizationUserService organizationUserService, UserService userService) {
+    public OrganizationServiceImpl(OrganizationRepository organizationRepository,
+                                  @Lazy OrganizationUserService organizationUserService,
+                                   @Lazy UserService userService) {
         this.organizationRepository = organizationRepository;
         this.organizationUserService = organizationUserService;
         this.userService = userService;

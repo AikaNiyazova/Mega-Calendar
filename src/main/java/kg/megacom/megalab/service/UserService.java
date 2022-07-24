@@ -1,8 +1,11 @@
 package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.UserDto;
-import kg.megacom.megalab.model.request.AddPhotoRequest;
 import kg.megacom.megalab.model.request.CreateUserRequest;
+import kg.megacom.megalab.model.request.RegistrationRequest;
+import kg.megacom.megalab.model.request.UpdateUserPersonalInfoRequest;
+import kg.megacom.megalab.model.request.UpdateUserProfessionalInfoRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.model.response.ReadUserProfileResponse;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +13,8 @@ import org.springframework.stereotype.Service;
 public interface UserService {
 
     UserDto create(CreateUserRequest request);
+
+    UserDto registration(RegistrationRequest request);
 
     UserDto findById(Long id);
 
@@ -21,9 +26,11 @@ public interface UserService {
     //setPassword;
     //changePassword;
 
-    UserDto update(UserDto userDto);
+    UserDto updatePersonalInfo(UpdateUserPersonalInfoRequest request);
 
-    void delete(Long id);
+    MessageResponse updateProfessionalInfo(UpdateUserProfessionalInfoRequest request);
+
+    MessageResponse delete(Long id);
 
     void deleteUsersAndPositions(Long departmentId);
 

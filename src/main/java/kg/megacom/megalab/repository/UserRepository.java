@@ -21,8 +21,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "        JOIN tb_position p on pu.position_id = p.id\n" +
             "        JOIN tb_department d on p.department_id = d.id\n" +
             "        JOIN tb_organization o on d.organization_id = o.id\n" +
-            "WHERE u.id = ?1\n" +
-            "AND o.is_deleted = false", nativeQuery = true)
+            "WHERE u.id = ?1\n" /*+
+            "AND o.is_deleted = false"*/, nativeQuery = true)
     Optional<ReadUserProfileResponse> readProfile(Long id);
 
     @Modifying
@@ -39,5 +39,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "ON u.id = du.user_id " +
             "WHERE du.department_id = ?1", nativeQuery = true)
     void deleteUsersAndPositions(Long departmentId);
+
+    Boolean existsByEmail(String email);
+    boolean existsById(Long id);
 
 }

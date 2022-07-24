@@ -1,5 +1,6 @@
 package kg.megacom.megalab.model.mapper;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -8,8 +9,8 @@ import kg.megacom.megalab.model.entity.MeetingFrequency;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-03T15:01:09+0600",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
+    date = "2022-07-12T14:53:06+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
 )
 public class MeetingFrequencyMapperImpl implements MeetingFrequencyMapper {
 
@@ -19,9 +20,16 @@ public class MeetingFrequencyMapperImpl implements MeetingFrequencyMapper {
             return null;
         }
 
-        MeetingFrequencyDto meetingFrequencyDto = new MeetingFrequencyDto();
+        MeetingFrequencyDto.MeetingFrequencyDtoBuilder meetingFrequencyDto = MeetingFrequencyDto.builder();
 
-        return meetingFrequencyDto;
+        meetingFrequencyDto.id( entity.getId() );
+        List<DayOfWeek> list = entity.getDaysOfWeek();
+        if ( list != null ) {
+            meetingFrequencyDto.daysOfWeek( new ArrayList<DayOfWeek>( list ) );
+        }
+        meetingFrequencyDto.numberOfWeeks( entity.getNumberOfWeeks() );
+
+        return meetingFrequencyDto.build();
     }
 
     @Override
@@ -30,9 +38,16 @@ public class MeetingFrequencyMapperImpl implements MeetingFrequencyMapper {
             return null;
         }
 
-        MeetingFrequency meetingFrequency = new MeetingFrequency();
+        MeetingFrequency.MeetingFrequencyBuilder meetingFrequency = MeetingFrequency.builder();
 
-        return meetingFrequency;
+        meetingFrequency.id( dto.getId() );
+        List<DayOfWeek> list = dto.getDaysOfWeek();
+        if ( list != null ) {
+            meetingFrequency.daysOfWeek( new ArrayList<DayOfWeek>( list ) );
+        }
+        meetingFrequency.numberOfWeeks( dto.getNumberOfWeeks() );
+
+        return meetingFrequency.build();
     }
 
     @Override
