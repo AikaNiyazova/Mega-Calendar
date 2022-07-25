@@ -6,12 +6,15 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
 
     Optional<Position> findByIdAndIsDeletedFalse(Long id);
+
+    List<Position> findAllByDepartmentId(Long departmentId);
 
     @Modifying
     @Query(value = "UPDATE tb_position " +

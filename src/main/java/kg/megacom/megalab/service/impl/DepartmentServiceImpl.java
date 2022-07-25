@@ -8,6 +8,8 @@ import kg.megacom.megalab.model.mapper.DepartmentMapper;
 import kg.megacom.megalab.model.mapper.OrganizationMapper;
 import kg.megacom.megalab.model.mapper.UserMapper;
 import kg.megacom.megalab.model.request.CreateDepartmentRequest;
+import kg.megacom.megalab.model.request.SetHeadRequest;
+import kg.megacom.megalab.model.request.UpdateDepartmentRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.DepartmentRepository;
 import kg.megacom.megalab.service.*;
@@ -68,15 +70,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDto setHead(DepartmentDto departmentDto) {
-        UserDto userDto =  userService.findById(departmentDto.getHead().getId());
-        return departmentRepository.findByIdAndIsDeletedFalse(departmentDto.getId())
+    public DepartmentDto setHead(SetHeadRequest request) {
+        UserDto userDto =  userService.findById(request.getHeadId());
+        return departmentRepository.findByIdAndIsDeletedFalse(request.getDepartmentId())
                 .map(department -> {
                     department.setHead(UserMapper.INSTANCE.toEntity(userDto));
                     departmentRepository.save(department);
                     return DepartmentMapper.INSTANCE.toDto(department);
                 }).orElseThrow(() -> new EntityNotFoundException
-                        ("Department with id=" + departmentDto.getId() + " not found"));
+                        ("Department with id=" + request.getDepartmentId() + " not found"));
     }
 
     @Override
@@ -88,17 +90,30 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDto update(DepartmentDto departmentDto) {
-        UserDto userDto = userService.findById(departmentDto.getHead().getId());
-        return departmentRepository.findByIdAndIsDeletedFalse(departmentDto.getId())
+    public List<DepartmentDto> findAll() {
+        return DepartmentMapper.INSTANCE.toDtoList
+                (departmentRepository.findAll());
+    }
+
+    @Override
+    public List<DepartmentDto> findAllByOrganizationId(Long organizationId) {
+        organizationService.findById(organizationId);
+        return DepartmentMapper.INSTANCE.toDtoList
+                (departmentRepository.findAllByOrganizationId(organizationId));
+    }
+
+    @Override
+    public DepartmentDto update(UpdateDepartmentRequest request) {
+        UserDto userDto = userService.findById(request.getHeadId());
+        return departmentRepository.findByIdAndIsDeletedFalse(request.getDepartmentId())
                 .map(department -> {
-                    department.setDepartmentName(departmentDto.getDepartmentName());
+                    department.setDepartmentName(request.getDepartmentName());
                     department.setHead(UserMapper.INSTANCE.toEntity(userDto));
                     departmentRepository.save(department);
 
                 return DepartmentMapper.INSTANCE.toDto(department);
         }).orElseThrow(() -> new EntityNotFoundException
-                        ("Department with id=" + departmentDto.getId() + " not found"));
+                        ("Department with id=" + request.getDepartmentId() + " not found"));
     }
 
     public void delete(Long id) {

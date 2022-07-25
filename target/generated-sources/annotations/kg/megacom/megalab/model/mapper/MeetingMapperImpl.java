@@ -1,16 +1,13 @@
 package kg.megacom.megalab.model.mapper;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import kg.megacom.megalab.model.dto.MeetingDto;
-import kg.megacom.megalab.model.dto.MeetingFrequencyDto;
 import kg.megacom.megalab.model.dto.RoleDto;
 import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.Meeting;
-import kg.megacom.megalab.model.entity.MeetingFrequency;
 import kg.megacom.megalab.model.entity.Role;
 import kg.megacom.megalab.model.entity.Room;
 import kg.megacom.megalab.model.entity.User;
@@ -18,7 +15,7 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-08T18:17:06+0600",
+    date = "2022-07-24T23:14:25+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class MeetingMapperImpl implements MeetingMapper {
@@ -34,14 +31,11 @@ public class MeetingMapperImpl implements MeetingMapper {
         meetingDto.id( entity.getId() );
         meetingDto.meetingAuthor( userToUserDto( entity.getMeetingAuthor() ) );
         meetingDto.meetingTopic( entity.getMeetingTopic() );
-        meetingDto.meetingDate( entity.getMeetingDate() );
         meetingDto.meetingStartTime( entity.getMeetingStartTime() );
         meetingDto.meetingEndTime( entity.getMeetingEndTime() );
         meetingDto.room( roomToRoomDto( entity.getRoom() ) );
         meetingDto.address( entity.getAddress() );
         meetingDto.isVisible( entity.getIsVisible() );
-        meetingDto.frequency( meetingFrequencyToMeetingFrequencyDto( entity.getFrequency() ) );
-        meetingDto.isDeleted( entity.getIsDeleted() );
 
         return meetingDto.build();
     }
@@ -57,14 +51,11 @@ public class MeetingMapperImpl implements MeetingMapper {
         meeting.id( dto.getId() );
         meeting.meetingAuthor( userDtoToUser( dto.getMeetingAuthor() ) );
         meeting.meetingTopic( dto.getMeetingTopic() );
-        meeting.meetingDate( dto.getMeetingDate() );
         meeting.meetingStartTime( dto.getMeetingStartTime() );
         meeting.meetingEndTime( dto.getMeetingEndTime() );
         meeting.room( roomDtoToRoom( dto.getRoom() ) );
         meeting.address( dto.getAddress() );
         meeting.isVisible( dto.getIsVisible() );
-        meeting.frequency( meetingFrequencyDtoToMeetingFrequency( dto.getFrequency() ) );
-        meeting.isDeleted( dto.getIsDeleted() );
 
         return meeting.build();
     }
@@ -145,6 +136,7 @@ public class MeetingMapperImpl implements MeetingMapper {
 
         roomDto.id( room.getId() );
         roomDto.roomName( room.getRoomName() );
+        roomDto.roomCapacity( room.getRoomCapacity() );
         roomDto.location( room.getLocation() );
         roomDto.isDashboardAvailable( room.getIsDashboardAvailable() );
         roomDto.isProjectorAvailable( room.getIsProjectorAvailable() );
@@ -152,23 +144,6 @@ public class MeetingMapperImpl implements MeetingMapper {
         roomDto.isDeleted( room.getIsDeleted() );
 
         return roomDto.build();
-    }
-
-    protected MeetingFrequencyDto meetingFrequencyToMeetingFrequencyDto(MeetingFrequency meetingFrequency) {
-        if ( meetingFrequency == null ) {
-            return null;
-        }
-
-        MeetingFrequencyDto.MeetingFrequencyDtoBuilder meetingFrequencyDto = MeetingFrequencyDto.builder();
-
-        meetingFrequencyDto.id( meetingFrequency.getId() );
-        List<DayOfWeek> list = meetingFrequency.getDaysOfWeek();
-        if ( list != null ) {
-            meetingFrequencyDto.daysOfWeek( new ArrayList<DayOfWeek>( list ) );
-        }
-        meetingFrequencyDto.numberOfWeeks( meetingFrequency.getNumberOfWeeks() );
-
-        return meetingFrequencyDto.build();
     }
 
     protected Role roleDtoToRole(RoleDto roleDto) {
@@ -219,6 +194,7 @@ public class MeetingMapperImpl implements MeetingMapper {
 
         room.id( roomDto.getId() );
         room.roomName( roomDto.getRoomName() );
+        room.roomCapacity( roomDto.getRoomCapacity() );
         room.location( roomDto.getLocation() );
         room.isDashboardAvailable( roomDto.getIsDashboardAvailable() );
         room.isProjectorAvailable( roomDto.getIsProjectorAvailable() );
@@ -226,22 +202,5 @@ public class MeetingMapperImpl implements MeetingMapper {
         room.isDeleted( roomDto.getIsDeleted() );
 
         return room.build();
-    }
-
-    protected MeetingFrequency meetingFrequencyDtoToMeetingFrequency(MeetingFrequencyDto meetingFrequencyDto) {
-        if ( meetingFrequencyDto == null ) {
-            return null;
-        }
-
-        MeetingFrequency.MeetingFrequencyBuilder meetingFrequency = MeetingFrequency.builder();
-
-        meetingFrequency.id( meetingFrequencyDto.getId() );
-        List<DayOfWeek> list = meetingFrequencyDto.getDaysOfWeek();
-        if ( list != null ) {
-            meetingFrequency.daysOfWeek( new ArrayList<DayOfWeek>( list ) );
-        }
-        meetingFrequency.numberOfWeeks( meetingFrequencyDto.getNumberOfWeeks() );
-
-        return meetingFrequency.build();
     }
 }

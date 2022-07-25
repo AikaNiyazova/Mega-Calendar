@@ -2,6 +2,8 @@ package kg.megacom.megalab.controller;
 
 import kg.megacom.megalab.model.dto.DepartmentDto;
 import kg.megacom.megalab.model.request.CreateDepartmentRequest;
+import kg.megacom.megalab.model.request.SetHeadRequest;
+import kg.megacom.megalab.model.request.UpdateDepartmentRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
@@ -44,12 +46,36 @@ public class DepartmentController {
         }
     }
 
-    @PatchMapping("/set-head")
-    public ResponseEntity<?> setHead(@RequestBody DepartmentDto departmentDto) {
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
         try {
-            log.info("Setting head with id=" + departmentDto.getHead().getId() +
-                    " to department with id=" + departmentDto.getId());
-            return ResponseEntity.ok(departmentService.setHead(departmentDto));
+            log.info("Finding all departments");
+            return ResponseEntity.ok(departmentService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all departments failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
+    @GetMapping("/find-all-by-organization-id/{organizationId}")
+    public ResponseEntity<?> findAllByOrganizationId(@PathVariable Long organizationId) {
+        try {
+            log.info("Finding all departments by organization_id=" + organizationId);
+            return ResponseEntity.ok(departmentService.findAllByOrganizationId(organizationId));
+        } catch (RuntimeException ex) {
+            log.error("Finding all departments by organization_id failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
+    @PatchMapping("/set-head")
+    public ResponseEntity<?> setHead(@RequestBody SetHeadRequest request) {
+        try {
+            log.info("Setting head with user_id=" + request.getHeadId() +
+                    " to department with id=" + request.getDepartmentId());
+            return ResponseEntity.ok(departmentService.setHead(request));
         } catch (RuntimeException ex) {
             log.error("Setting head to department failed. " + ex.getMessage());
             ex.printStackTrace();
@@ -58,10 +84,10 @@ public class DepartmentController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<?> update(@RequestBody DepartmentDto departmentDto) {
+    public ResponseEntity<?> update(@RequestBody UpdateDepartmentRequest request) {
         try {
-            log.info("Updating department with id=" + departmentDto.getId());
-            return ResponseEntity.ok(departmentService.update(departmentDto));
+            log.info("Updating department with id=" + request.getDepartmentId());
+            return ResponseEntity.ok(departmentService.update(request));
         } catch (RuntimeException ex) {
             log.error("Updating department failed. " + ex.getMessage());
             ex.printStackTrace();

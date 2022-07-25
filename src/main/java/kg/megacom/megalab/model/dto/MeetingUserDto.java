@@ -13,11 +13,11 @@ public class MeetingUserDto {
 
     Long id;
     MeetingDto meeting;
-    UserDto participant;
+    UserDto user;
     MemberType memberType;
     UserDto delegate;
     LabelDto label;
-    Boolean isDeclined;
-    String reasonForDeclining;
+//    Boolean isDeclined;
+//    String reasonForDeclining;
 
 }

@@ -19,7 +19,7 @@ public class DepartmentUserServiceImpl implements DepartmentUserService {
 
     @Override
     public void changeDepartment(Long oldDepartmentId, Long newDepartmentId) {
-        departmentUserRepository.changeDepartment(oldDepartmentId, newDepartmentId);
+        departmentUserRepository.changeDepartmentToAllUsers(oldDepartmentId, newDepartmentId);
     }
 
     @Override

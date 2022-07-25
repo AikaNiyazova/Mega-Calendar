@@ -25,66 +25,111 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e129dc6e-6919-4168-a01d-c2e4ac0f1206" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/DepartmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/DepartmentUserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/LabelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/OrganizationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/OrganizationUserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/PositionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/PositionUserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/MeetingDates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/CreateMeetingRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/SetAdminRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/SetHeadRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/UpdateDepartmentRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/UpdateMeetingRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/UpdateOrganizationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/UpdateParticipantsRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/UpdatePositionRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/response/MeetingParticipantsResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/response/MeetingResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/MeetingDatesService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/MeetingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/MeetingUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/MeetingDatesServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/MeetingServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/MeetingUserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingDatesMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_4_2_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_5_2_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_processor_1_4_2_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_processor_1_5_2_Final.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Megalab-App.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Megalab-App.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Organization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/response/MessageResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/response/MessageResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/OrganizationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/OrganizationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/DepartmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/DepartmentUserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/LabelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/LabelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/OrganizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/OrganizationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/OrganizationUserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/PositionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/PositionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/PositionUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/MeetingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/MeetingDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/MeetingDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/MeetingFrequencyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/MeetingDatesDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/MeetingUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/MeetingUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/RoomDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/dto/RoomDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Label.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Meeting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Meeting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/MeetingFrequency.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/MeetingUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/MeetingUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/MeetingFrequencyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/MeetingDatesMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/CreateOrganizationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/request/CreateOrganizationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/DepartmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/DepartmentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/DepartmentUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/DepartmentUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/MeetingFrequencyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/MeetingDatesRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/MeetingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/MeetingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/MeetingUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/MeetingUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/PositionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/PositionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/PositionUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/PositionUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/DepartmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/LabelService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/LabelService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/OrganizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/OrganizationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/PositionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/PositionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/DepartmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/DepartmentUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/DepartmentUserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/LabelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/LabelServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/OrganizationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/OrganizationServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/PositionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/PositionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Organization$OrganizationBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Organization$OrganizationBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Organization.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Organization.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/DepartmentMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/DepartmentMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/DepartmentUserMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/DepartmentUserMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/RoomServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/RoomServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/DepartmentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/DepartmentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/DepartmentUserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/OrganizationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/OrganizationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/OrganizationUserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/PositionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/PositionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/PositionUserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingDto$MeetingDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingDto$MeetingDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingFrequencyDto$MeetingFrequencyDtoBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingFrequencyDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingUserDto$MeetingUserDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingUserDto$MeetingUserDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingUserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingUserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/RoomDto$RoomDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/RoomDto$RoomDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/RoomDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/RoomDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Label.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Label.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Meeting$MeetingBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Meeting$MeetingBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Meeting.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Meeting.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingFrequency$MeetingFrequencyBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingFrequency.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingUser$MeetingUserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingUser$MeetingUserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Room$RoomBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Room$RoomBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/Room.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/HiddenRoomMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/HiddenRoomMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/LabelMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/LabelMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingFrequencyMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingFrequencyMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingFrequencyMapper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingFrequencyMapperImpl.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingMapperImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingUserMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingUserMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/OrganizationMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/OrganizationMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/OrganizationUserMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/OrganizationUserMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/PositionMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/PositionMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/PositionUserMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/PositionUserMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoleMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoleMapperImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoomMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoomMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/UserMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/UserMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/response/MessageResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/response/MessageResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/OrganizationRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/OrganizationRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/CreateOrganizationRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/CreateOrganizationRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/DepartmentUserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/DepartmentUserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/MeetingFrequencyRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/MeetingRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/MeetingRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/MeetingUserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/MeetingUserRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/DepartmentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/DepartmentService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/OrganizationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/OrganizationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/PositionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/PositionService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/DepartmentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/DepartmentServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/LabelServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/LabelServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/DepartmentUserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/DepartmentUserServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/OrganizationServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/OrganizationServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/PositionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/PositionServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/RoomServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/RoomServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/DepartmentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/DepartmentMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/DepartmentUserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/DepartmentUserMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/HiddenRoomMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/HiddenRoomMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/LabelMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/LabelMapperImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingFrequencyMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingFrequencyMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingFrequencyMapperImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingUserMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingUserMapperImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/OrganizationMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/OrganizationMapperImpl.java" afterDir="false" />
@@ -131,9 +176,11 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../Mega-Calendar" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="kg.megacom.megalab.model.request" />
       <recent name="kg.megacom.megalab.model.mapper" />
       <recent name="kg.megacom.megalab.model.entity" />
       <recent name="kg.megacom.megalab.model.dto" />
@@ -185,7 +232,23 @@
       <workItem from="1657618147253" duration="2683000" />
       <workItem from="1657705748892" duration="16971000" />
       <workItem from="1657963782375" duration="284000" />
-      <workItem from="1657964293945" duration="7617000" />
+      <workItem from="1657964293945" duration="8068000" />
+      <workItem from="1658123156888" duration="5748000" />
+      <workItem from="1658212479187" duration="6755000" />
+      <workItem from="1658249799707" duration="1646000" />
+      <workItem from="1658251738698" duration="3246000" />
+      <workItem from="1658300316711" duration="596000" />
+      <workItem from="1658328732076" duration="2162000" />
+      <workItem from="1658382876018" duration="7379000" />
+      <workItem from="1658479766064" duration="11495000" />
+      <workItem from="1658562276590" duration="13219000" />
+      <workItem from="1658646104469" duration="10537000" />
+      <workItem from="1658659186362" duration="5851000" />
+      <workItem from="1658666380846" duration="3444000" />
+      <workItem from="1658678110773" duration="358000" />
+      <workItem from="1658679104124" duration="13014000" />
+      <workItem from="1658729720866" duration="6874000" />
+      <workItem from="1658751210998" duration="3638000" />
     </task>
     <servers />
   </component>
@@ -211,81 +274,109 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="540" y="232" key="#Assign_Data_Sources" timestamp="1657110474615">
+    <state x="540" y="232" key="#Assign_Data_Sources" timestamp="1658661833626">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="540" y="232" key="#Assign_Data_Sources/0.0.1280.680@0.0.1280.680" timestamp="1657110474615" />
+    <state x="540" y="232" key="#Assign_Data_Sources/0.0.1280.680@0.0.1280.680" timestamp="1658661833626" />
     <state x="233" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1657613867754">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1657613867754" />
-    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser" timestamp="1657965128232">
+    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser" timestamp="1658737328486">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1657965128232" />
+    <state x="446" y="47" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1658737328486" />
     <state x="424" y="210" width="435" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1656838583879">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="424" y="210" width="435" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1280.680@0.0.1280.680" timestamp="1656838583879" />
+    <state x="236" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1658680052625">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="236" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1658680052625" />
+    <state x="371" y="88" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1658731239280">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="371" y="88" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1280.680@0.0.1280.680" timestamp="1658731239280" />
     <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1656839344963">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1656839344963" />
-    <state width="1237" height="328" key="GridCell.Tab.0.bottom" timestamp="1657974293048">
+    <state width="1237" height="328" key="GridCell.Tab.0.bottom" timestamp="1658756505765">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1657974293048" />
-    <state width="1237" height="328" key="GridCell.Tab.0.center" timestamp="1657974293047">
+    <state width="1237" height="328" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1658756505765" />
+    <state width="1237" height="328" key="GridCell.Tab.0.center" timestamp="1658756505764">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1657974293047" />
-    <state width="1237" height="328" key="GridCell.Tab.0.left" timestamp="1657974293046">
+    <state width="1237" height="328" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1658756505764" />
+    <state width="1237" height="328" key="GridCell.Tab.0.left" timestamp="1658756505764">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1657974293046" />
-    <state width="1237" height="328" key="GridCell.Tab.0.right" timestamp="1657974293047">
+    <state width="1237" height="328" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1658756505764" />
+    <state width="1237" height="328" key="GridCell.Tab.0.right" timestamp="1658756505765">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1657974293047" />
-    <state width="1237" height="328" key="GridCell.Tab.1.bottom" timestamp="1657974293050">
+    <state width="1237" height="328" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1658756505765" />
+    <state width="1237" height="328" key="GridCell.Tab.1.bottom" timestamp="1658756505767">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1657974293050" />
-    <state width="1237" height="328" key="GridCell.Tab.1.center" timestamp="1657974293049">
+    <state width="1237" height="328" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1658756505767" />
+    <state width="1237" height="328" key="GridCell.Tab.1.center" timestamp="1658756505766">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1657974293049" />
-    <state width="1237" height="328" key="GridCell.Tab.1.left" timestamp="1657974293049">
+    <state width="1237" height="328" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1658756505766" />
+    <state width="1237" height="328" key="GridCell.Tab.1.left" timestamp="1658756505766">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1657974293049" />
-    <state width="1237" height="328" key="GridCell.Tab.1.right" timestamp="1657974293050">
+    <state width="1237" height="328" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1658756505766" />
+    <state width="1237" height="328" key="GridCell.Tab.1.right" timestamp="1658756505766">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="328" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1657974293050" />
+    <state width="1237" height="328" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1658756505766" />
     <state width="198" height="457" key="HiddenNamespacesPopup" timestamp="1656835387646">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="198" height="457" key="HiddenNamespacesPopup/0.0.1280.680@0.0.1280.680" timestamp="1656835387646" />
-    <state x="171" y="0" key="Maven.ArtifactSearchDialog" timestamp="1655815280441">
+    <state x="171" y="0" key="Maven.ArtifactSearchDialog" timestamp="1658507945201">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="171" y="0" key="Maven.ArtifactSearchDialog/0.0.1280.680@0.0.1280.680" timestamp="1655815280441" />
+    <state x="171" y="0" key="Maven.ArtifactSearchDialog/0.0.1280.680@0.0.1280.680" timestamp="1658507945201" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1658734383014">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1658734383014" />
     <state x="540" y="201" key="com.intellij.database.actions.DdlActions$CreateObject$1" timestamp="1655742899172">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="540" y="201" key="com.intellij.database.actions.DdlActions$CreateObject$1/0.0.1280.680@0.0.1280.680" timestamp="1655742899172" />
+    <state x="495" y="218" width="312" height="266" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1658755724365">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="495" y="218" width="312" height="266" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1280.680@0.0.1280.680" timestamp="1658755724365" />
+    <state x="459" y="228" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog" timestamp="1658755579070">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="459" y="228" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog/0.0.1280.680@0.0.1280.680" timestamp="1658755579070" />
+    <state x="484" y="114" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1658755839820">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="484" y="114" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1280.680@0.0.1280.680" timestamp="1658755839820" />
+    <state x="320" y="19" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1658648346241">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="320" y="19" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.680@0.0.1280.680" timestamp="1658648346241" />
     <state x="450" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1656948273595">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="450" y="255" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1656948273595" />
-    <state x="297" y="151" key="run.anything.popup" timestamp="1657284610859">
+    <state x="297" y="151" key="run.anything.popup" timestamp="1658692353964">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1657284610859" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1656331329797">
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1658692353964" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1658667807539">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1656331329797" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1658667807539" />
   </component>
 </project>

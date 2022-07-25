@@ -6,6 +6,7 @@ import kg.megacom.megalab.model.entity.Position;
 import kg.megacom.megalab.model.mapper.DepartmentMapper;
 import kg.megacom.megalab.model.mapper.PositionMapper;
 import kg.megacom.megalab.model.request.CreatePositionRequest;
+import kg.megacom.megalab.model.request.UpdatePositionRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.PositionRepository;
 import kg.megacom.megalab.service.DepartmentService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class PositionServiceImpl implements PositionService {
@@ -50,15 +52,28 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public PositionDto update(PositionDto positionDto) {
-        return positionRepository.findByIdAndIsDeletedFalse(positionDto.getId())
+    public List<PositionDto> findAll() {
+        return PositionMapper.INSTANCE.toDtoList
+                (positionRepository.findAll());
+    }
+
+    @Override
+    public List<PositionDto> findAllByDepartmentId(Long departmentId) {
+        departmentService.findById(departmentId);
+        return PositionMapper.INSTANCE.toDtoList
+                (positionRepository.findAllByDepartmentId(departmentId));
+    }
+
+    @Override
+    public PositionDto update(UpdatePositionRequest request) {
+        return positionRepository.findByIdAndIsDeletedFalse(request.getPositionId())
                 .map(position -> {
-                    position.setPositionName(positionDto.getPositionName());
+                    position.setPositionName(request.getPositionName());
                     positionRepository.save(position);
 
                 return PositionMapper.INSTANCE.toDto(position);
         }).orElseThrow(() -> new EntityNotFoundException
-                        ("Position with id=" + positionDto.getId() + " not found"));
+                        ("Position with id=" + request.getPositionId() + " not found"));
     }
 
     @Override
