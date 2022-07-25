@@ -39,7 +39,7 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     String password;
 
     @ManyToOne

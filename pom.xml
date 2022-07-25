@@ -71,11 +71,11 @@
 		</dependency>
 
 		<!-- This is needed when using Lombok 1.18.16 and above -->
-<!--		<dependency>-->
-<!--			<groupId>org.projectlombok</groupId>-->
-<!--			<artifactId>lombok-mapstruct-binding</artifactId>-->
-<!--			<version>0.2.0</version>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok-mapstruct-binding</artifactId>
+			<version>0.2.0</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
 		<dependency>

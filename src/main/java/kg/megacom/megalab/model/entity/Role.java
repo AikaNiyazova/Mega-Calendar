@@ -31,4 +31,7 @@ public class Role {
     @Column(name = "authority_id", nullable = false)
     List<Authority> authorities;
 
+    @Column(name = "is_deleted", columnDefinition = "boolean default false")
+    Boolean isDeleted;
+
 }
