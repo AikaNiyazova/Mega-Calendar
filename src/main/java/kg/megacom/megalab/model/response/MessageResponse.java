@@ -16,5 +16,4 @@ public class MessageResponse {
     public static MessageResponse of(String message) {
         return new MessageResponse(message);
     }
-
 }
