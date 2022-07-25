@@ -16,13 +16,10 @@ import java.util.List;
 public class OrganizationUserServiceImpl implements OrganizationUserService {
 
     private final OrganizationUserRepository organizationUserRepository;
-    private final OrganizationService organizationService;
 
     @Autowired
-    public OrganizationUserServiceImpl(OrganizationUserRepository organizationUserRepository,
-                                      OrganizationService organizationService) {
+    public OrganizationUserServiceImpl(OrganizationUserRepository organizationUserRepository) {
         this.organizationUserRepository = organizationUserRepository;
-        this.organizationService = organizationService;
     }
 
     @Override
