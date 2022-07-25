@@ -3,10 +3,7 @@ package kg.megacom.megalab.service.impl;
 import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.*;
 import kg.megacom.megalab.model.mapper.*;
-import kg.megacom.megalab.model.request.CreateUserRequest;
-import kg.megacom.megalab.model.request.RegistrationRequest;
-import kg.megacom.megalab.model.request.UpdateUserPersonalInfoRequest;
-import kg.megacom.megalab.model.request.UpdateUserProfessionalInfoRequest;
+import kg.megacom.megalab.model.request.*;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.model.response.ReadUserProfileResponse;
 import kg.megacom.megalab.repository.UserRepository;
@@ -16,6 +13,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -51,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(CreateUserRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByEmailAndIsDeletedFalse(request.getEmail())) {
             throw new RuntimeException("Email: " + request.getEmail() + " already in use");
         }
         Role role = RoleMapper.INSTANCE.toEntity(roleService.findById(request.getRoleId()));
@@ -116,10 +114,45 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto login(LoginRequest request) {
+
+        if (!userRepository.existsByEmailAndIsDeletedFalse(request.getEmail())) {
+            throw new RuntimeException("User with email: " + request.getEmail() + " does not exist");
+        } else if (!request.getPassword().equals(
+                userRepository.findByEmailAndIsDeletedFalse(request.getEmail()).getPassword())) {
+            throw new RuntimeException("Password is incorrect! Try again.");
+        }
+        return UserMapper.INSTANCE.toDto(userRepository.findByEmailAndIsDeletedFalse(request.getEmail()));
+    }
+
+    @Override
     public UserDto findById(Long id) {
         return UserMapper.INSTANCE
                 .toDto(userRepository.findByIdAndIsDeletedFalse(id)
                         .orElseThrow(() -> new EntityNotFoundException("User with id=" + id + " not found.")));
+    }
+
+    @Override
+    public List<UserDto> findAll() {
+        return UserMapper.INSTANCE.toDtoList(userRepository.findAll());
+    }
+
+    @Override
+    public List<UserDto> findAllByOrganizationId(Long organizationId) {
+        organizationService.findById(organizationId);
+        return UserMapper.INSTANCE.toDtoList(userRepository.findAllByOrganizationId(organizationId));
+    }
+
+    @Override
+    public List<UserDto> findAllByDepartmentId(Long departmentId) {
+        departmentService.findById(departmentId);
+        return UserMapper.INSTANCE.toDtoList(userRepository.findAllByDepartmentId(departmentId));
+    }
+
+    @Override
+    public List<UserDto> findAllByPositionId(Long positionId) {
+        positionService.findById(positionId);
+        return UserMapper.INSTANCE.toDtoList(userRepository.findAllByPositionId(positionId));
     }
 
     @Override
@@ -139,7 +172,7 @@ public class UserServiceImpl implements UserService {
                     return userRepository.save(user1);
                 }).orElseThrow(() -> new EntityNotFoundException
                           ("User with id= " + request.getUserId() + " not found"));
-//
+
         return UserMapper.INSTANCE.toDto(user);
     }
 
@@ -181,7 +214,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUsersAndPositions(Long departmentId) {
-
         userRepository.deleteUsersAndPositions(departmentId);
     }
 

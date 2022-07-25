@@ -1,13 +1,13 @@
 package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.UserDto;
-import kg.megacom.megalab.model.request.CreateUserRequest;
-import kg.megacom.megalab.model.request.RegistrationRequest;
-import kg.megacom.megalab.model.request.UpdateUserPersonalInfoRequest;
-import kg.megacom.megalab.model.request.UpdateUserProfessionalInfoRequest;
+import kg.megacom.megalab.model.entity.User;
+import kg.megacom.megalab.model.request.*;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.model.response.ReadUserProfileResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface UserService {
@@ -16,15 +16,19 @@ public interface UserService {
 
     UserDto registration(RegistrationRequest request);
 
+    UserDto login(LoginRequest request);
+
     UserDto findById(Long id);
 
+    List<UserDto> findAll();
+
+    List<UserDto> findAllByOrganizationId(Long organizationId);
+
+    List<UserDto> findAllByDepartmentId(Long departmentId);
+
+    List<UserDto> findAllByPositionId(Long positionId);
+
     ReadUserProfileResponse readProfile(Long id);
-
-    //addPhoto;
-//    void addPhoto(AddPhotoRequest request); //todo: ???
-
-    //setPassword;
-    //changePassword;
 
     UserDto updatePersonalInfo(UpdateUserPersonalInfoRequest request);
 

@@ -1,9 +1,6 @@
 package kg.megacom.megalab.controller;
 
-import kg.megacom.megalab.model.request.CreateUserRequest;
-import kg.megacom.megalab.model.request.RegistrationRequest;
-import kg.megacom.megalab.model.request.UpdateUserPersonalInfoRequest;
-import kg.megacom.megalab.model.request.UpdateUserProfessionalInfoRequest;
+import kg.megacom.megalab.model.request.*;
 import kg.megacom.megalab.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +41,42 @@ public class UserController {
             return ResponseEntity.ok(userService.findById(id));
         } catch (RuntimeException ex) {
             log.error("Finding user failed. User with id=" + id + " not found.");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/findAll/{organizationId}")
+    public ResponseEntity<?> findAllByOrganizationId(@PathVariable Long organizationId) {
+        try {
+            log.info("Finding all users with organization id=" + organizationId);
+            return ResponseEntity.ok(userService.findAllByOrganizationId(organizationId));
+        } catch (RuntimeException ex) {
+            log.error("Finding all users failed. Organization with id=" + organizationId + " not found.");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/findAllBy/{departmentId}")
+    public ResponseEntity<?> findAllByDepartmentId(@PathVariable Long departmentId) {
+        try {
+            log.info("Finding all users with department id=" + departmentId);
+            return ResponseEntity.ok(userService.findAllByDepartmentId(departmentId));
+        } catch (RuntimeException ex) {
+            log.error("Finding all users failed. Department with id=" + departmentId + " not found.");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/findUsers/{positionId}")
+    public ResponseEntity<?> findAllByPositionId(@PathVariable Long positionId) {
+        try {
+            log.info("Finding all users with position id=" + positionId);
+            return ResponseEntity.ok(userService.findAllByPositionId(positionId));
+        } catch (RuntimeException ex) {
+            log.error("Finding all users failed. Position with id=" + positionId + " not found.");
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         }
@@ -109,5 +142,15 @@ public class UserController {
         }
     }
 
-
+    @PostMapping("/login")
+    public ResponseEntity<?> login (@RequestBody LoginRequest request) {
+        try {
+            log.info("User login in process");
+            return ResponseEntity.ok(userService.login(request));
+        } catch (RuntimeException ex) {
+            log.error("User login is failed.");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
+    }
 }
