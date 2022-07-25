@@ -4,12 +4,14 @@ import kg.megacom.megalab.model.dto.LabelDto;
 import kg.megacom.megalab.model.entity.Label;
 import kg.megacom.megalab.model.mapper.LabelMapper;
 import kg.megacom.megalab.model.request.CreateLabelRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.LabelRepository;
 import kg.megacom.megalab.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class LabelServiceImpl implements LabelService {
@@ -40,6 +42,11 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
+    public List<LabelDto> findAll() {
+        return LabelMapper.INSTANCE.toDtoList(labelRepository.findAll());
+    }
+
+    @Override
     public LabelDto update(LabelDto labelDto) {
         return labelRepository.findById(labelDto.getId())
                 .map(label -> {
@@ -52,8 +59,9 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public void delete(Long id) {
+    public MessageResponse delete(Long id) {
         labelRepository.deleteById(id);
+        return MessageResponse.of("Label with id=" + id + " is deleted");
     }
 
     @Override

@@ -15,8 +15,8 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-12T14:53:07+0600",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
+    date = "2022-07-24T23:14:25+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class OrganizationUserMapperImpl implements OrganizationUserMapper {
 
@@ -91,7 +91,6 @@ public class OrganizationUserMapperImpl implements OrganizationUserMapper {
         if ( list != null ) {
             roleDto.authorities( new ArrayList<Authority>( list ) );
         }
-        roleDto.isDeleted( role.getIsDeleted() );
 
         return roleDto.build();
     }
@@ -146,7 +145,6 @@ public class OrganizationUserMapperImpl implements OrganizationUserMapper {
         if ( list != null ) {
             role.authorities( new ArrayList<Authority>( list ) );
         }
-        role.isDeleted( roleDto.getIsDeleted() );
 
         return role.build();
     }

@@ -6,13 +6,16 @@ import kg.megacom.megalab.model.entity.Organization;
 import kg.megacom.megalab.model.mapper.OrganizationMapper;
 import kg.megacom.megalab.model.mapper.UserMapper;
 import kg.megacom.megalab.model.request.CreateOrganizationRequest;
+import kg.megacom.megalab.model.request.SetAdminRequest;
+import kg.megacom.megalab.model.request.UpdateOrganizationRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.OrganizationRepository;
 import kg.megacom.megalab.service.OrganizationService;
 import kg.megacom.megalab.service.OrganizationUserService;
 import kg.megacom.megalab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -26,8 +29,8 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Autowired
     public OrganizationServiceImpl(OrganizationRepository organizationRepository,
-                                  @Lazy OrganizationUserService organizationUserService,
-                                   @Lazy UserService userService) {
+                                   OrganizationUserService organizationUserService,
+                                   UserService userService) {
         this.organizationRepository = organizationRepository;
         this.organizationUserService = organizationUserService;
         this.userService = userService;
@@ -35,14 +38,38 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationDto create(CreateOrganizationRequest request) {
-        Organization organization = Organization
-                .builder()
-                .organizationName(request.getOrganizationName())
-//                .admin(request.getAdminUserId())  // setAdmin ?
-                .isDeleted(false)
-                .build();
+        Organization organization;
+
+        if (request.getAdminUserId() == null) {
+            organization = Organization
+                    .builder()
+                    .organizationName(request.getOrganizationName())
+                    .isDeleted(false)
+                    .build();
+        } else {
+            UserDto userDto = userService.findById(request.getAdminUserId());
+            organization = Organization
+                    .builder()
+                    .organizationName(request.getOrganizationName())
+                    .admin(UserMapper.INSTANCE.toEntity(userDto))  // todo: setAdmin ?
+                    .isDeleted(false)
+                    .build();
+        }
+
         return OrganizationMapper.INSTANCE.toDto
                 (organizationRepository.save(organization));
+    }
+
+    @Override
+    public OrganizationDto setAdmin(SetAdminRequest request) {
+        UserDto userDto =  userService.findById(request.getAdminId());
+        return organizationRepository.findByIdAndIsDeletedFalse(request.getOrganizationId())
+                .map(organization -> {
+                    organization.setAdmin(UserMapper.INSTANCE.toEntity(userDto));
+                    organizationRepository.save(organization);
+                return OrganizationMapper.INSTANCE.toDto(organization);
+                }).orElseThrow(() -> new EntityNotFoundException
+                        ("Organization with id=" + request.getOrganizationId() + " not found"));
     }
 
     @Override
@@ -54,21 +81,28 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto update(OrganizationDto organizationDto) {
-        UserDto userDto =  userService.findById(organizationDto.getAdmin().getId());
-        return organizationRepository.findByIdAndIsDeletedFalse(organizationDto.getId())
+    public List<OrganizationDto> findAll() {
+        return OrganizationMapper.INSTANCE.toDtoList
+                (organizationRepository.findAll());
+    }
+
+    @Override
+    public OrganizationDto update(UpdateOrganizationRequest request) {
+        UserDto userDto =  userService.findById(request.getAdminId());
+        return organizationRepository.findByIdAndIsDeletedFalse(request.getOrganizationId())
                 .map(organization -> {
-                    organization.setOrganizationName(organizationDto.getOrganizationName());
+                    organization.setOrganizationName(request.getOrganizationName());
                     organization.setAdmin(UserMapper.INSTANCE.toEntity(userDto));
                     organizationRepository.save(organization);
 
                 return OrganizationMapper.INSTANCE.toDto(organization);
-        }).orElseThrow(() -> new EntityNotFoundException
-                        ("Organization with id=" + organizationDto.getId() + " not found"));
+                }).orElseThrow(() -> new EntityNotFoundException
+                        ("Organization with id=" + request.getOrganizationId() + " not found"));
     }
 
     @Override
-    public void delete(Long id) {
+    @Transactional
+    public MessageResponse delete(Long id) {
         Organization organization = organizationRepository.findByIdAndIsDeletedFalse(id)
                 .map(org -> {
                     org.setIsDeleted(true);
@@ -83,6 +117,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         //deleted Org should not be shown in User's profile
         //delete Deps and Pos related to the Org (JOIN request)
         organizationRepository.deleteOrganizationAndRelatedEntities(id);
+        return MessageResponse.of("Organization with id=" + id + " and its related entities are deleted");
     }
 
     @Override

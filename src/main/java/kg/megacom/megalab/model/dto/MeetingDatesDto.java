@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -11,11 +12,13 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MeetingFrequencyDto {
+public class MeetingDatesDto {
 
     Long id;
-    Boolean isRepeatable;
-    List<DayOfWeek> daysOfWeek;
-    Integer numberOfWeeks;
+    MeetingDto meeting;
+    LocalDate meetingDate;
+
+//    List<DayOfWeek> daysOfWeek;
+//    Integer numberOfWeeks;
 
 }

@@ -6,6 +6,8 @@ import kg.megacom.megalab.model.entity.Position;
 import kg.megacom.megalab.model.mapper.DepartmentMapper;
 import kg.megacom.megalab.model.mapper.PositionMapper;
 import kg.megacom.megalab.model.request.CreatePositionRequest;
+import kg.megacom.megalab.model.request.UpdatePositionRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.PositionRepository;
 import kg.megacom.megalab.service.DepartmentService;
 import kg.megacom.megalab.service.PositionService;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class PositionServiceImpl implements PositionService {
@@ -49,26 +52,40 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public PositionDto update(PositionDto positionDto) {
-        return positionRepository.findByIdAndIsDeletedFalse(positionDto.getId())
+    public List<PositionDto> findAll() {
+        return PositionMapper.INSTANCE.toDtoList
+                (positionRepository.findAll());
+    }
+
+    @Override
+    public List<PositionDto> findAllByDepartmentId(Long departmentId) {
+        departmentService.findById(departmentId);
+        return PositionMapper.INSTANCE.toDtoList
+                (positionRepository.findAllByDepartmentId(departmentId));
+    }
+
+    @Override
+    public PositionDto update(UpdatePositionRequest request) {
+        return positionRepository.findByIdAndIsDeletedFalse(request.getPositionId())
                 .map(position -> {
-                    position.setPositionName(positionDto.getPositionName());
+                    position.setPositionName(request.getPositionName());
                     positionRepository.save(position);
 
                 return PositionMapper.INSTANCE.toDto(position);
         }).orElseThrow(() -> new EntityNotFoundException
-                        ("Position with id=" + positionDto.getId() + " not found"));
+                        ("Position with id=" + request.getPositionId() + " not found"));
     }
 
     @Override
-    public void delete(Long id) {
+    public MessageResponse delete(Long id) {
         positionRepository.findByIdAndIsDeletedFalse(id)
                 .map(position -> {
                     position.setIsDeleted(true);
                     return positionRepository.save(position);
                 }).orElseThrow(() -> new EntityNotFoundException
                         ("Position with id=" + id + " not found"));
-        // if position.isDeleted = true { sout("no position") }
+        return MessageResponse.of("Position with id=" + id + " is deleted");
+        //todo: if position.isDeleted = true { sout("no position") }
     }
 
     @Override
@@ -78,7 +95,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public void deletePositionsByDepartmentId(Long departmentId) {
-        positionRepository.deleteUsersAndPositions(departmentId);
+        positionRepository.deletePositionsByDepartmentId(departmentId);
     }
 
     @Override

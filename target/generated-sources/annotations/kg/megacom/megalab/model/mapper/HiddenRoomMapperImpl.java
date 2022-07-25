@@ -10,8 +10,8 @@ import kg.megacom.megalab.model.entity.Room;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-12T14:53:07+0600",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
+    date = "2022-07-24T23:14:25+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class HiddenRoomMapperImpl implements HiddenRoomMapper {
 
@@ -86,6 +86,7 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
 
         roomDto.id( room.getId() );
         roomDto.roomName( room.getRoomName() );
+        roomDto.roomCapacity( room.getRoomCapacity() );
         roomDto.location( room.getLocation() );
         roomDto.isDashboardAvailable( room.getIsDashboardAvailable() );
         roomDto.isProjectorAvailable( room.getIsProjectorAvailable() );
@@ -104,6 +105,7 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
 
         room.id( roomDto.getId() );
         room.roomName( roomDto.getRoomName() );
+        room.roomCapacity( roomDto.getRoomCapacity() );
         room.location( roomDto.getLocation() );
         room.isDashboardAvailable( roomDto.getIsDashboardAvailable() );
         room.isProjectorAvailable( roomDto.getIsProjectorAvailable() );

@@ -21,6 +21,8 @@ public class Label {
     @Column(name = "id")
     Long id;
 
+//    User user; //todo: think later
+
     @Column(name = "label_name", nullable = false)
     String labelName;
 
