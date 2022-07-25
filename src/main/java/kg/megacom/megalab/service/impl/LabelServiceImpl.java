@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class LabelServiceImpl implements LabelService {
@@ -38,6 +39,11 @@ public class LabelServiceImpl implements LabelService {
                 (labelRepository.findById(id)
                         .orElseThrow(() -> new EntityNotFoundException
                                 ("Label with id=" + id + " not found")));
+    }
+
+    @Override
+    public List<LabelDto> findAll() {
+        return LabelMapper.INSTANCE.toDtoList(labelRepository.findAll());
     }
 
     @Override

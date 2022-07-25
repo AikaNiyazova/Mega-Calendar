@@ -22,6 +22,9 @@ public class Room {
     @Column(name = "room_name", nullable = false, unique = true)
     String roomName;
 
+    @Column(name = "room_capacity", nullable = false)
+    Integer roomCapacity;
+
     @Column(name = "location", nullable = false)
     String location;
 

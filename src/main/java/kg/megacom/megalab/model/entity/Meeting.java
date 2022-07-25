@@ -30,8 +30,8 @@ public class Meeting {
     @Column(name = "meeting_topic", nullable = false)
     String meetingTopic;
 
-    @Column(name = "meeting_date", nullable = false)
-    LocalDate meetingDate;
+//    @Column(name = "meeting_date", nullable = false)
+//    LocalDate meetingDate;
 
     @Column(name = "meeting_start_time", nullable = false)
     LocalTime meetingStartTime;
@@ -49,14 +49,7 @@ public class Meeting {
     @Column(name = "is_visible", nullable = false)
     Boolean isVisible;
 
-    @Column(name = "is_repeatable", nullable = false)
-    Boolean isRepeatable;
-
-    @OneToOne
-    @JoinColumn(name = "frequency_id", unique = true)
-    MeetingFrequency frequency;
-
-    @Column(name = "is_deleted", nullable = false)
-    Boolean isDeleted;
+//    @Column(name = "is_repeatable", nullable = false)
+//    Boolean isRepeatable;
 
 }

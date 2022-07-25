@@ -2,6 +2,8 @@ package kg.megacom.megalab.controller;
 
 import kg.megacom.megalab.model.dto.OrganizationDto;
 import kg.megacom.megalab.model.request.CreateOrganizationRequest;
+import kg.megacom.megalab.model.request.SetAdminRequest;
+import kg.megacom.megalab.model.request.UpdateOrganizationRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
@@ -44,12 +46,24 @@ public class OrganizationController {
         }
     }
 
-    @PatchMapping("/set-admin")
-    public ResponseEntity<?> setAdmin(@RequestBody OrganizationDto organizationDto) {
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
         try {
-            log.info("Setting admin with id=" + organizationDto.getAdmin().getId() +
-                    " to organization with id=" + organizationDto.getId());
-            return ResponseEntity.ok(organizationService.setAdmin(organizationDto));
+            log.info("Finding all organizations");
+            return ResponseEntity.ok(organizationService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all organizations failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
+    @PatchMapping("/set-admin")
+    public ResponseEntity<?> setAdmin(@RequestBody SetAdminRequest request) {
+        try {
+            log.info("Setting admin with user_id=" + request.getAdminId() +
+                    " to organization with id=" + request.getOrganizationId());
+            return ResponseEntity.ok(organizationService.setAdmin(request));
         } catch (RuntimeException ex) {
             log.error("Setting admin to organization failed. " + ex.getMessage());
             ex.printStackTrace();
@@ -58,10 +72,10 @@ public class OrganizationController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<?> update(@RequestBody OrganizationDto organizationDto) {
+    public ResponseEntity<?> update(@RequestBody UpdateOrganizationRequest request) {
         try {
-            log.info("Updating organization with id=" + organizationDto.getId());
-            return ResponseEntity.ok(organizationService.update(organizationDto));
+            log.info("Updating organization with id=" + request.getOrganizationId());
+            return ResponseEntity.ok(organizationService.update(request));
         } catch (RuntimeException ex) {
             log.error("Updating organization failed. " + ex.getMessage());
             ex.printStackTrace();

@@ -44,6 +44,18 @@ public class LabelController {
         }
     }
 
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
+        try {
+            log.info("Finding all labels");
+            return ResponseEntity.ok(labelService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all labels failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
     @PatchMapping("/update")
     public ResponseEntity<?> update(@RequestBody LabelDto labelDto) {
         try {

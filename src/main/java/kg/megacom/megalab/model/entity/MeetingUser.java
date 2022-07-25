@@ -27,8 +27,8 @@ public class MeetingUser {
     Meeting meeting;
 
     @ManyToOne
-    @JoinColumn(name = "participant_user_id", nullable = false)
-    User participant;
+    @JoinColumn(name = "user_id", nullable = false)
+    User user;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "member_type", nullable = false)
@@ -36,16 +36,16 @@ public class MeetingUser {
 
     @ManyToOne
     @JoinColumn(name = "delegate_user_id")
-    User delegate;
+    User delegate; //todo ???
 
     @ManyToOne
     @JoinColumn(name = "label_id")
     Label label;
 
-    @Column(name = "is_declined", nullable = false)
-    Boolean isDeclined;
-
-    @Column(name = "reason_for_declining", nullable = false)
-    String reasonForDeclining;
+//    @Column(name = "is_declined"/*, nullable = false*/) // todo ???
+//    Boolean isDeclined;
+//
+//    @Column(name = "reason_for_declining"/*, nullable = false*/) //todo ???
+//    String reasonForDeclining;
 
 }

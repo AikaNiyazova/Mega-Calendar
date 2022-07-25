@@ -1,7 +1,7 @@
 package kg.megacom.megalab.controller;
 
-import kg.megacom.megalab.model.dto.PositionDto;
 import kg.megacom.megalab.model.request.CreatePositionRequest;
+import kg.megacom.megalab.model.request.UpdatePositionRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.PositionService;
 import lombok.RequiredArgsConstructor;
@@ -44,11 +44,35 @@ public class PositionController {
         }
     }
 
-    @PatchMapping("/update")
-    public ResponseEntity<?> update(@RequestBody PositionDto positionDto) {
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
         try {
-            log.info("Updating position with id=" + positionDto.getId());
-            return ResponseEntity.ok(positionService.update(positionDto));
+            log.info("Finding all positions");
+            return ResponseEntity.ok(positionService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all positions failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
+    @GetMapping("/find-all-by-department-id/{departmentId}")
+    public ResponseEntity<?> findAllByDepartmentId(@PathVariable Long departmentId) {
+        try {
+            log.info("Finding all positions by department_id=" + departmentId);
+            return ResponseEntity.ok(positionService.findAllByDepartmentId(departmentId));
+        } catch (RuntimeException ex) {
+            log.error("Finding all positions by department_id failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<?> update(@RequestBody UpdatePositionRequest request) {
+        try {
+            log.info("Updating position with id=" + request.getPositionId());
+            return ResponseEntity.ok(positionService.update(request));
         } catch (RuntimeException ex) {
             log.error("Updating position failed. " + ex.getMessage());
             ex.printStackTrace();

@@ -6,6 +6,8 @@ import kg.megacom.megalab.model.entity.Organization;
 import kg.megacom.megalab.model.mapper.OrganizationMapper;
 import kg.megacom.megalab.model.mapper.UserMapper;
 import kg.megacom.megalab.model.request.CreateOrganizationRequest;
+import kg.megacom.megalab.model.request.SetAdminRequest;
+import kg.megacom.megalab.model.request.UpdateOrganizationRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.OrganizationRepository;
 import kg.megacom.megalab.service.OrganizationService;
@@ -59,15 +61,15 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto setAdmin(OrganizationDto organizationDto) {
-        UserDto userDto =  userService.findById(organizationDto.getAdmin().getId());
-        return organizationRepository.findByIdAndIsDeletedFalse(organizationDto.getId())
+    public OrganizationDto setAdmin(SetAdminRequest request) {
+        UserDto userDto =  userService.findById(request.getAdminId());
+        return organizationRepository.findByIdAndIsDeletedFalse(request.getOrganizationId())
                 .map(organization -> {
                     organization.setAdmin(UserMapper.INSTANCE.toEntity(userDto));
                     organizationRepository.save(organization);
                 return OrganizationMapper.INSTANCE.toDto(organization);
                 }).orElseThrow(() -> new EntityNotFoundException
-                        ("Organization with id=" + organizationDto.getId() + " not found"));
+                        ("Organization with id=" + request.getOrganizationId() + " not found"));
     }
 
     @Override
@@ -79,17 +81,23 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationDto update(OrganizationDto organizationDto) {
-        UserDto userDto =  userService.findById(organizationDto.getAdmin().getId());
-        return organizationRepository.findByIdAndIsDeletedFalse(organizationDto.getId())
+    public List<OrganizationDto> findAll() {
+        return OrganizationMapper.INSTANCE.toDtoList
+                (organizationRepository.findAll());
+    }
+
+    @Override
+    public OrganizationDto update(UpdateOrganizationRequest request) {
+        UserDto userDto =  userService.findById(request.getAdminId());
+        return organizationRepository.findByIdAndIsDeletedFalse(request.getOrganizationId())
                 .map(organization -> {
-                    organization.setOrganizationName(organizationDto.getOrganizationName());
+                    organization.setOrganizationName(request.getOrganizationName());
                     organization.setAdmin(UserMapper.INSTANCE.toEntity(userDto));
                     organizationRepository.save(organization);
 
                 return OrganizationMapper.INSTANCE.toDto(organization);
                 }).orElseThrow(() -> new EntityNotFoundException
-                        ("Organization with id=" + organizationDto.getId() + " not found"));
+                        ("Organization with id=" + request.getOrganizationId() + " not found"));
     }
 
     @Override
