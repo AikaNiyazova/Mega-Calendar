@@ -8,7 +8,7 @@ import kg.megacom.megalab.model.entity.OrganizationUser;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-08T23:26:44+0600",
+    date = "2022-07-26T22:44:38+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_332 (Amazon.com Inc.)"
 )
 public class OrganizationUserMapperImpl implements OrganizationUserMapper {

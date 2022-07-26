@@ -5,6 +5,7 @@ import kg.megacom.megalab.exception.room.RoomNotFoundException;
 import kg.megacom.megalab.model.dto.HiddenRoomDto;
 import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.entity.HiddenRoom;
+import kg.megacom.megalab.model.request.CreateRoomRequest;
 import kg.megacom.megalab.service.HiddenRoomService;
 import kg.megacom.megalab.service.RoomService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +23,15 @@ import java.util.List;
 @RequestMapping("/api/v1/room")
 public class RoomController {
 
-    @Autowired
-    private RoomService roomService;
+    private final RoomService roomService;
+
+    private final HiddenRoomService hiddenRoomService;
 
     @Autowired
-    private HiddenRoomService hiddenRoomService;
-
+    public RoomController(RoomService roomService, HiddenRoomService hiddenRoomService) {
+        this.roomService = roomService;
+        this.hiddenRoomService = hiddenRoomService;
+    }
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody RoomDto roomDto){
@@ -36,8 +40,19 @@ public class RoomController {
             log.info("Failed to save room");
             throw new RoomIsExistsException("Room with name = '" + roomDto.getRoomName()+"' is exists");
         }
-        log.info("Room added successfully");
+        log.info("Room saved successfully");
         return new ResponseEntity<>(roomService.save(roomDto), HttpStatus.CREATED);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody CreateRoomRequest request){
+        RoomDto roomDto = roomService.findByName(request.getRoomName());
+        if(roomDto!=null){
+            log.info("Failed to create room");
+            throw new RoomIsExistsException("Room with name = '" + roomDto.getRoomName()+"' is exists");
+        }
+        log.info("Room created successfully");
+        return new ResponseEntity<>(roomService.create(request),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

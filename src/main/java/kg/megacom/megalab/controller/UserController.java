@@ -18,29 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-//    @PutMapping("/updateStatus")
-//    public ResponseEntity<?> updateStatus(@RequestBody UpdateUserStatus request){
-//        UserDto user = userService.findById(request.getId());
-//        user.setStatus(request.getStatus());
-//        userService.save(user);
-//
-//        log.info("Status for User with ID '" + request.getId() + "' updated successfully");
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @PutMapping("/updatePhoto")
-//    public ResponseEntity<?> updatePhoto(@RequestBody AddPhotoRequest request){
-//
-//        UserDto user = userService.findById(request.getUserId());
-//        user.setPhotoPath(request.getPhotoPath());
-//        userService.save(user);
-//
-//        log.info("Photo for User with ID '" + request.getUserId() + "' updated successfully");
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PutMapping("/profile")
     public ResponseEntity<?> updateProfile(@RequestBody UpdateProfileRequest request){
@@ -63,23 +46,6 @@ public class UserController {
                 throw new WrongPasswordException("Password is wrong");
             }
         }
-
         return new ResponseEntity<>(userService.save(user),HttpStatus.OK);
     }
-
-//    @PutMapping("/updatePassword")
-//    public ResponseEntity<?> updatePassword(@RequestBody UpdatePasswordRequest request){
-//
-//        UserDto user = userService.findById(request.getUserId());
-//        if(user.getPassword().equals(request.getCurPassword())){
-//            user.setPassword(request.getNewPassword());
-//            userService.save(user);
-//            log.info("Password for User with ID '" + request.getUserId() + "' updated successfully");
-//        }else{
-//            throw new WrongPasswordException("Password is wrong");
-//        }
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
 }

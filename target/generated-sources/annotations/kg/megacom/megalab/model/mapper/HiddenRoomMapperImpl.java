@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
 import kg.megacom.megalab.model.dto.HiddenRoomDto;
-import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.entity.HiddenRoom;
-import kg.megacom.megalab.model.entity.Room;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-16T21:50:33+0600",
+    date = "2022-07-26T22:44:38+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_332 (Amazon.com Inc.)"
 )
 public class HiddenRoomMapperImpl implements HiddenRoomMapper {
@@ -21,15 +19,9 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
             return null;
         }
 
-        HiddenRoomDto.HiddenRoomDtoBuilder hiddenRoomDto = HiddenRoomDto.builder();
+        HiddenRoomDto hiddenRoomDto = new HiddenRoomDto();
 
-        hiddenRoomDto.id( entity.getId() );
-        hiddenRoomDto.room( roomToRoomDto( entity.getRoom() ) );
-        hiddenRoomDto.hidingStartDate( entity.getHidingStartDate() );
-        hiddenRoomDto.hidingEndDate( entity.getHidingEndDate() );
-        hiddenRoomDto.reasonForHiding( entity.getReasonForHiding() );
-
-        return hiddenRoomDto.build();
+        return hiddenRoomDto;
     }
 
     @Override
@@ -38,15 +30,9 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
             return null;
         }
 
-        HiddenRoom.HiddenRoomBuilder hiddenRoom = HiddenRoom.builder();
+        HiddenRoom hiddenRoom = new HiddenRoom();
 
-        hiddenRoom.id( dto.getId() );
-        hiddenRoom.room( roomDtoToRoom( dto.getRoom() ) );
-        hiddenRoom.hidingStartDate( dto.getHidingStartDate() );
-        hiddenRoom.hidingEndDate( dto.getHidingEndDate() );
-        hiddenRoom.reasonForHiding( dto.getReasonForHiding() );
-
-        return hiddenRoom.build();
+        return hiddenRoom;
     }
 
     @Override
@@ -75,41 +61,5 @@ public class HiddenRoomMapperImpl implements HiddenRoomMapper {
         }
 
         return list;
-    }
-
-    protected RoomDto roomToRoomDto(Room room) {
-        if ( room == null ) {
-            return null;
-        }
-
-        RoomDto.RoomDtoBuilder roomDto = RoomDto.builder();
-
-        roomDto.id( room.getId() );
-        roomDto.roomName( room.getRoomName() );
-        roomDto.location( room.getLocation() );
-        roomDto.isDashboardAvailable( room.getIsDashboardAvailable() );
-        roomDto.isProjectorAvailable( room.getIsProjectorAvailable() );
-        roomDto.isAcAvailable( room.getIsAcAvailable() );
-        roomDto.isDeleted( room.getIsDeleted() );
-
-        return roomDto.build();
-    }
-
-    protected Room roomDtoToRoom(RoomDto roomDto) {
-        if ( roomDto == null ) {
-            return null;
-        }
-
-        Room.RoomBuilder room = Room.builder();
-
-        room.id( roomDto.getId() );
-        room.roomName( roomDto.getRoomName() );
-        room.location( roomDto.getLocation() );
-        room.isDashboardAvailable( roomDto.getIsDashboardAvailable() );
-        room.isProjectorAvailable( roomDto.getIsProjectorAvailable() );
-        room.isAcAvailable( roomDto.getIsAcAvailable() );
-        room.isDeleted( roomDto.getIsDeleted() );
-
-        return room.build();
     }
 }

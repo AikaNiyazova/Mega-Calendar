@@ -28,46 +28,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e129dc6e-6919-4168-a01d-c2e4ac0f1206" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_4_2_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_1_5_2_Final.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_processor_1_4_2_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mapstruct_mapstruct_processor_1_5_2_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_jakarta_mail_1_6_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_support_5_3_20.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Megalab-App.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Megalab-App.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/RoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/exception/room/RoomGlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/exception/room/RoomGlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/exception/room/RoomIncorrectData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/BaseMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/HiddenRoomMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/HiddenRoomMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/RoleMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/RoomMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/RoomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/RoomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/controller/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/RoomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/RoomServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/RoomServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/HiddenRoomMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/HiddenRoomMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/RoomController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/HiddenRoomMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/HiddenRoomMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoomMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoomMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoomMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/RoomMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/UserMapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/UserMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/UserMapperImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/RoomRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/RoomRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/AddPhotoRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdatePasswordRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdateUserStatus.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/RoomService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/RoomService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/UserService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/DepartmentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/DepartmentServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/PositionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/PositionServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/RoomServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/RoomServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/UserServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/DepartmentMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/DepartmentMapperImpl.java" afterDir="false" />
@@ -102,6 +82,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -190,7 +178,9 @@
       <workItem from="1657720861853" duration="57000" />
       <workItem from="1657906146967" duration="7056000" />
       <workItem from="1657985918127" duration="3250000" />
-      <workItem from="1658156820012" duration="13526000" />
+      <workItem from="1658156820012" duration="17594000" />
+      <workItem from="1658676080983" duration="1343000" />
+      <workItem from="1658677861703" duration="7394000" />
     </task>
     <servers />
   </component>
