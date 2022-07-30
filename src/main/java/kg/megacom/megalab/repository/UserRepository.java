@@ -1,6 +1,5 @@
 package kg.megacom.megalab.repository;
 
-import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.User;
 import kg.megacom.megalab.model.response.ReadUserProfileResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -22,8 +22,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "        JOIN tb_position p on pu.position_id = p.id\n" +
             "        JOIN tb_department d on p.department_id = d.id\n" +
             "        JOIN tb_organization o on d.organization_id = o.id\n" +
-            "WHERE u.id = ?1\n" +
-            "AND o.is_deleted = false", nativeQuery = true)
+            "WHERE u.id = ?1\n" /*+
+            "AND o.is_deleted = false"*/, nativeQuery = true)
     Optional<ReadUserProfileResponse> readProfile(Long id);
 
     @Modifying
@@ -31,18 +31,39 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "UPDATE tb_position " +
             "SET is_deleted = true " +
             "WHERE department_id = ?1 " +
-//            "RETURNING department_id" +
+            "RETURNING department_id" +
             ") " +
             "UPDATE tb_user u " +
             "SET is_deleted = true " +
-            "FROM u " +
+            "FROM pos, u " +
             "JOIN tb_department_user du " +
             "ON u.id = du.user_id " +
-            "WHERE du.department_id = ?1", nativeQuery = true)
+            "WHERE du.department_id = pos.department_id",
+            nativeQuery = true)
     void deleteUsersAndPositions(Long departmentId);
 
-//    @Modifying
-//    @Query("UPDATE User u SET u.status = :status WHERE u.id= :id")
-//    void updateStatus(Long id,String status);
+    Boolean existsByEmailAndIsDeletedFalse(String email);
+    User findByEmailAndIsDeletedFalse(String email);
+
+    @Query(value = "SELECT * " +
+    "FROM tb_user u " +
+    "JOIN tb_organization_user ou " +
+    "ON u.id = ou.user_id " +
+    "WHERE ou.organization_id = ?1 ", nativeQuery = true)
+    List<User> findAllByOrganizationId(Long organizationId);
+
+    @Query(value = "SELECT * " +
+            "FROM tb_user u " +
+            "JOIN tb_department_user du " +
+            "ON u.id = du.user_id " +
+            "WHERE du.department_id = ?1 ", nativeQuery = true)
+    List<User> findAllByDepartmentId(Long departmentId);
+
+    @Query(value = "SELECT * " +
+            "FROM tb_user u " +
+            "JOIN tb_position_user pu " +
+            "ON u.id = pu.user_id " +
+            "WHERE pu.position_id = ?1 ", nativeQuery = true)
+    List<User> findAllByPositionId(Long positionId);
 
 }

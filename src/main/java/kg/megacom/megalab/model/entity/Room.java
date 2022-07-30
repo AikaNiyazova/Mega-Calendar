@@ -1,6 +1,8 @@
 package kg.megacom.megalab.model.entity;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 
@@ -15,12 +17,24 @@ import javax.persistence.*;
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "room_sequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
     @Column(name = "id")
     Long id;
 
     @Column(name = "room_name", nullable = false, unique = true)
     String roomName;
+
+    @Column(name = "room_capacity", nullable = false)
+    Integer roomCapacity;
 
     @Column(name = "location", nullable = false)
     String location;
@@ -33,10 +47,5 @@ public class Room {
 
     @Column(name = "is_ac_available", nullable = false)
     Boolean isAcAvailable;
-
-    @Column(name = "is_deleted", nullable = false)
-    Boolean isDeleted;
-
-
 
 }

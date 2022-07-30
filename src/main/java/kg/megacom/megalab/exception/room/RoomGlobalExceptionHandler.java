@@ -1,6 +1,5 @@
 package kg.megacom.megalab.exception.room;
 
-
 import kg.megacom.megalab.exception.IncorrectData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,4 +24,5 @@ public class RoomGlobalExceptionHandler {
         data.setInfo(exception.getMessage());
         return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);
     }
+
 }

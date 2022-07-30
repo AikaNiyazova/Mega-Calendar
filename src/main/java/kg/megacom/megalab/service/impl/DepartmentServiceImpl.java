@@ -8,13 +8,18 @@ import kg.megacom.megalab.model.mapper.DepartmentMapper;
 import kg.megacom.megalab.model.mapper.OrganizationMapper;
 import kg.megacom.megalab.model.mapper.UserMapper;
 import kg.megacom.megalab.model.request.CreateDepartmentRequest;
+import kg.megacom.megalab.model.request.SetHeadRequest;
+import kg.megacom.megalab.model.request.UpdateDepartmentRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.DepartmentRepository;
 import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -41,15 +46,39 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentDto create(CreateDepartmentRequest request) {
         OrganizationDto organizationDto = organizationService.findById(request.getOrganizationId());
-        Department department = Department
-                .builder()
-                .organization(OrganizationMapper.INSTANCE.toEntity(organizationDto))
-                .departmentName(request.getDepartmentName())
-//                .head(request.getHeadUserId())  // setHead ?
-                .isDeleted(false)
-                .build();
+        Department department;
+
+        if (request.getHeadUserId() == null) {
+            department = Department
+                    .builder()
+                    .organization(OrganizationMapper.INSTANCE.toEntity(organizationDto))
+                    .departmentName(request.getDepartmentName())
+                    .isDeleted(false)
+                    .build();
+        } else {
+            UserDto userDto = userService.findById(request.getHeadUserId());
+            department = Department
+                    .builder()
+                    .organization(OrganizationMapper.INSTANCE.toEntity(organizationDto))
+                    .departmentName(request.getDepartmentName())
+                    .head(UserMapper.INSTANCE.toEntity(userDto))  // todo: setHead ?
+                    .isDeleted(false)
+                    .build();
+        }
         return DepartmentMapper.INSTANCE.toDto
                 (departmentRepository.save(department));
+    }
+
+    @Override
+    public DepartmentDto setHead(SetHeadRequest request) {
+        UserDto userDto =  userService.findById(request.getHeadId());
+        return departmentRepository.findByIdAndIsDeletedFalse(request.getDepartmentId())
+                .map(department -> {
+                    department.setHead(UserMapper.INSTANCE.toEntity(userDto));
+                    departmentRepository.save(department);
+                    return DepartmentMapper.INSTANCE.toDto(department);
+                }).orElseThrow(() -> new EntityNotFoundException
+                        ("Department with id=" + request.getDepartmentId() + " not found"));
     }
 
     @Override
@@ -61,17 +90,30 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentDto update(DepartmentDto departmentDto) {
-        UserDto userDto = userService.findById(departmentDto.getHead().getId());
-        return departmentRepository.findByIdAndIsDeletedFalse(departmentDto.getId())
+    public List<DepartmentDto> findAll() {
+        return DepartmentMapper.INSTANCE.toDtoList
+                (departmentRepository.findAll());
+    }
+
+    @Override
+    public List<DepartmentDto> findAllByOrganizationId(Long organizationId) {
+        organizationService.findById(organizationId);
+        return DepartmentMapper.INSTANCE.toDtoList
+                (departmentRepository.findAllByOrganizationId(organizationId));
+    }
+
+    @Override
+    public DepartmentDto update(UpdateDepartmentRequest request) {
+        UserDto userDto = userService.findById(request.getHeadId());
+        return departmentRepository.findByIdAndIsDeletedFalse(request.getDepartmentId())
                 .map(department -> {
-                    department.setDepartmentName(departmentDto.getDepartmentName());
+                    department.setDepartmentName(request.getDepartmentName());
                     department.setHead(UserMapper.INSTANCE.toEntity(userDto));
                     departmentRepository.save(department);
 
                 return DepartmentMapper.INSTANCE.toDto(department);
         }).orElseThrow(() -> new EntityNotFoundException
-                        ("Department with id=" + departmentDto.getId() + " not found"));
+                        ("Department with id=" + request.getDepartmentId() + " not found"));
     }
 
     public void delete(Long id) {
@@ -84,25 +126,30 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteAndMoveMembersToAnotherDep(Long oldDepartmentId, Long newDepartmentId) {
+    @Transactional
+    public MessageResponse deleteAndMoveMembersToAnotherDep(Long oldDepartmentId, Long newDepartmentId) {
         delete(oldDepartmentId);
         departmentUserService.changeDepartment(oldDepartmentId, newDepartmentId);
         //position change
         positionService.changeDepartmentInPosition(oldDepartmentId, newDepartmentId);
+        return MessageResponse.of("Department with id=" + oldDepartmentId + " is deleted, " +
+                "and its members have been moved to department with id=" + newDepartmentId);
     }
 
     @Override
-    public void deleteDepAndMembers(Long id) {
+    @Transactional
+    public MessageResponse deleteDepAndMembers(Long id) {
         delete(id);
-//        //users delete (JOIN UPDATE)
-//        List<Long> userIds = departmentUserService.findAllUserIdsByDepartmentId(id);
-//        for (Long userId : userIds) {
-//            userService.delete(userId);
-//        }
-//        //positions delete
-//        positionService.deletePositionsByDepartmentId(id);
-        //users + depPositions delete
-        userService.deleteUsersAndPositions(id); //todo: ???
+        //users delete (JOIN UPDATE)
+        List<Long> userIds = departmentUserService.findAllUserIdsByDepartmentId(id);
+        for (Long userId : userIds) {
+            userService.delete(userId);
+        }
+        //positions delete
+        positionService.deletePositionsByDepartmentId(id);
+//        //users + depPositions delete
+//        userService.deleteUsersAndPositions(id); //todo: ??? doesn't work
+        return MessageResponse.of("Department with id=" + id + " and its members are deleted");
     }
 
     @Override

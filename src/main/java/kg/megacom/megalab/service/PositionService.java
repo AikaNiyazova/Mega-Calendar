@@ -2,7 +2,11 @@ package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.PositionDto;
 import kg.megacom.megalab.model.request.CreatePositionRequest;
+import kg.megacom.megalab.model.request.UpdatePositionRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface PositionService {
@@ -11,9 +15,13 @@ public interface PositionService {
 
     PositionDto findById(Long id);
 
-    PositionDto update(PositionDto positionDto);
+    List<PositionDto> findAll();
 
-    void delete(Long id);
+    List<PositionDto> findAllByDepartmentId(Long departmentId);
+
+    PositionDto update(UpdatePositionRequest request);
+
+    MessageResponse delete(Long id);
 
     void changeDepartmentInPosition(Long oldDepartmentId, Long newDepartmentId);
 

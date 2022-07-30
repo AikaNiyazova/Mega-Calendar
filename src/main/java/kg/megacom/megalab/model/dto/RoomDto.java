@@ -12,10 +12,10 @@ public class RoomDto {
 
     Long id;
     String roomName;
+    Integer roomCapacity;
     String location;
     Boolean isDashboardAvailable;
     Boolean isProjectorAvailable;
     Boolean isAcAvailable;
-    Boolean isDeleted;
 
 }

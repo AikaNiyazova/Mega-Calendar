@@ -16,13 +16,12 @@ public class MeetingDto {
     Long id;
     UserDto meetingAuthor;
     String meetingTopic;
-    LocalDate meetingDate;
+//    LocalDate meetingDate;
     LocalTime meetingStartTime;
     LocalTime meetingEndTime;
     RoomDto room;
     String address;
     Boolean isVisible;
-    MeetingFrequencyDto frequency;
-    Boolean isDeleted;
+//    Boolean isRepeatable;
 
 }

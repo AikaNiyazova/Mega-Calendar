@@ -1,26 +1,26 @@
 package kg.megacom.megalab.service;
 
-import kg.megacom.megalab.model.dto.HiddenRoomDto;
 import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.request.CreateRoomRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface RoomService {
-
-    RoomDto save(RoomDto room);
 
     RoomDto create(CreateRoomRequest request);
 
-    RoomDto findByName(String name);
-
     RoomDto findById(Long id);
+
+    RoomDto findByName(String name);
 
     List<RoomDto> findAll();
 
-    HiddenRoomDto hideRoom(HiddenRoomDto hiddenRoom);
+    RoomDto update(RoomDto roomDto);
 
     void delete(Long id);
+
+    RoomDto save(RoomDto roomDto);
 
 }

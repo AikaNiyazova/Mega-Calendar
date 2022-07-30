@@ -14,4 +14,5 @@ public class IncorrectData {
     public void setInfo(String info) {
         this.info = info;
     }
+
 }

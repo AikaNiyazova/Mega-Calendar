@@ -2,15 +2,10 @@ package kg.megacom.megalab.controller;
 
 import kg.megacom.megalab.exception.room.RoomIsExistsException;
 import kg.megacom.megalab.exception.room.RoomNotFoundException;
-import kg.megacom.megalab.model.dto.HiddenRoomDto;
 import kg.megacom.megalab.model.dto.RoomDto;
-import kg.megacom.megalab.model.entity.HiddenRoom;
 import kg.megacom.megalab.model.request.CreateRoomRequest;
-import kg.megacom.megalab.service.HiddenRoomService;
 import kg.megacom.megalab.service.RoomService;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,12 +20,9 @@ public class RoomController {
 
     private final RoomService roomService;
 
-    private final HiddenRoomService hiddenRoomService;
-
     @Autowired
-    public RoomController(RoomService roomService, HiddenRoomService hiddenRoomService) {
+    public RoomController(RoomService roomService) {
         this.roomService = roomService;
-        this.hiddenRoomService = hiddenRoomService;
     }
 
     @PostMapping("/save")
@@ -44,7 +36,7 @@ public class RoomController {
         return new ResponseEntity<>(roomService.save(roomDto), HttpStatus.CREATED);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateRoomRequest request){
         RoomDto roomDto = roomService.findByName(request.getRoomName());
         if(roomDto!=null){
@@ -55,7 +47,7 @@ public class RoomController {
         return new ResponseEntity<>(roomService.create(request),HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-id/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Long id){
 
         if(id==null){
@@ -66,7 +58,7 @@ public class RoomController {
         return new ResponseEntity<>(roomService.findById(id),HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/find-all")
     public ResponseEntity<?> findAll(){
         List<RoomDto> rooms = roomService.findAll();
         if(rooms.isEmpty()){
@@ -77,32 +69,18 @@ public class RoomController {
         return new ResponseEntity<>(rooms,HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id){
 
         log.info("Room with ID '" + id + "' was successfully deleted");
         roomService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<?> updateRoom(@RequestBody RoomDto roomDto){
         log.info("Room with ID '" + roomDto.getId() + "' was successfully updated");
         return new ResponseEntity<>(roomService.save(roomDto),HttpStatus.OK);
     }
-
-    @PostMapping("/hide")
-    public ResponseEntity<?> hideRoom(@RequestBody HiddenRoomDto hiddenRoom){
-
-        log.info("Room with ID '" + hiddenRoom.getRoom().getId() + "' hided successfully");
-        return new ResponseEntity<>(hiddenRoomService.hideRoom(hiddenRoom),HttpStatus.OK);
-
-    }
-
-
-
-
-
 
 }

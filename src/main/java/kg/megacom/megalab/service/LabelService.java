@@ -2,7 +2,10 @@ package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.LabelDto;
 import kg.megacom.megalab.model.request.CreateLabelRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface LabelService {
@@ -11,9 +14,13 @@ public interface LabelService {
 
     LabelDto findById(Long id);
 
+    List<LabelDto> findAll();
+
+//    List<LabelDto> findAllByUserId(Long userId); //todo: think later!
+
     LabelDto update(LabelDto labelDto);
 
-    void delete(Long id);
+    MessageResponse delete(Long id);
 
     LabelDto save(LabelDto labelDto);
 

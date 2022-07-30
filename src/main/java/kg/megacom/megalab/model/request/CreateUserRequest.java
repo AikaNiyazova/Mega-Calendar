@@ -12,8 +12,6 @@ import javax.validation.constraints.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateUserRequest {
 
-    String photoPath;
-
     @NotBlank
     String firstName;
 
@@ -29,10 +27,6 @@ public class CreateUserRequest {
     @NotBlank
     String email;
 
-    @Min(value = 8, message = "Password should not be less than 8 characters")
-    @NotBlank
-    String password;
-
     @Positive
     Long organizationId;
 
@@ -42,4 +36,10 @@ public class CreateUserRequest {
     @Positive
     Long positionId;
 
+    @Positive
+    Long roleId;
+
+    public String getPassword() {
+        return null;
+    }
 }

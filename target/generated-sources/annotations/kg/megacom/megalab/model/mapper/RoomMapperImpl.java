@@ -8,8 +8,8 @@ import kg.megacom.megalab.model.entity.Room;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-26T22:44:38+0600",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_332 (Amazon.com Inc.)"
+    date = "2022-07-29T14:13:38+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class RoomMapperImpl implements RoomMapper {
 
@@ -19,9 +19,17 @@ public class RoomMapperImpl implements RoomMapper {
             return null;
         }
 
-        RoomDto roomDto = new RoomDto();
+        RoomDto.RoomDtoBuilder roomDto = RoomDto.builder();
 
-        return roomDto;
+        roomDto.id( entity.getId() );
+        roomDto.roomName( entity.getRoomName() );
+        roomDto.roomCapacity( entity.getRoomCapacity() );
+        roomDto.location( entity.getLocation() );
+        roomDto.isDashboardAvailable( entity.getIsDashboardAvailable() );
+        roomDto.isProjectorAvailable( entity.getIsProjectorAvailable() );
+        roomDto.isAcAvailable( entity.getIsAcAvailable() );
+
+        return roomDto.build();
     }
 
     @Override
@@ -30,9 +38,17 @@ public class RoomMapperImpl implements RoomMapper {
             return null;
         }
 
-        Room room = new Room();
+        Room.RoomBuilder room = Room.builder();
 
-        return room;
+        room.id( dto.getId() );
+        room.roomName( dto.getRoomName() );
+        room.roomCapacity( dto.getRoomCapacity() );
+        room.location( dto.getLocation() );
+        room.isDashboardAvailable( dto.getIsDashboardAvailable() );
+        room.isProjectorAvailable( dto.getIsProjectorAvailable() );
+        room.isAcAvailable( dto.getIsAcAvailable() );
+
+        return room.build();
     }
 
     @Override

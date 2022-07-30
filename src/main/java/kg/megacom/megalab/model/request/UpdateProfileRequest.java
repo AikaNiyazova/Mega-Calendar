@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 
 @Data
 @NoArgsConstructor
@@ -24,4 +22,5 @@ public class UpdateProfileRequest {
     String newPassword;
 
     String curPassword;
+
 }
