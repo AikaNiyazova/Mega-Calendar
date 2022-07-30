@@ -19,17 +19,70 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0886d84f-1c60-4b76-8105-a4c2dbc42727" name="Default Changelist" comment="">
+    <list default="true" id="f24f0cf2-29b5-408c-9ba2-f2340a80a3a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_yaml_2_13_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_github_classgraph_classgraph_4_8_138.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_annotations_2_1_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_core_2_1_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_swagger_core_v3_swagger_models_2_1_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_mapstruct_binding_0_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springdoc_springdoc_openapi_common_1_6_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springdoc_springdoc_openapi_ui_1_6_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springdoc_springdoc_openapi_webmvc_core_1_6_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webjars_swagger_ui_4_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webjars_webjars_locator_core_0_50.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/DepartmentController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/LabelController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/MeetingController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/OrganizationController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/PositionController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/controller/RoleController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingDatesDto$MeetingDatesDtoBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/dto/MeetingDatesDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingDates$MeetingDatesBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/entity/MeetingDates.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingDatesMapper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/mapper/MeetingDatesMapperImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/CreateMeetingRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/LoginRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/RegistrationRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/SetAdminRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/SetHeadRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdateDepartmentRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdateMeetingRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdateOrganizationRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdateParticipantsRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdatePositionRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdateUserPersonalInfoRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/request/UpdateUserProfessionalInfoRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/response/MeetingParticipantsResponse$MeetingParticipantsResponseBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/response/MeetingParticipantsResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/response/MeetingResponse$MeetingResponseBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/model/response/MeetingResponse.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/repository/MeetingDatesRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/MeetingDatesService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/MeetingService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/MeetingUserService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/RoleService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/MeetingDatesServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/MeetingServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/MeetingUserServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/kg/megacom/megalab/service/impl/RoleServiceImpl.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/generated-sources/annotations/kg/megacom/megalab/model/mapper/MeetingDatesMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1b29a374-8ac3-4515-a94d-fae4e5e431cb/storage_v2/_src_/database/megalab_app.vSNtxg/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/be969efb-234e-4b87-be08-cae3d3b39590/storage_v2/_src_/database/mega_app.1DT8zg/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/be969efb-234e-4b87-be08-cae3d3b39590/storage_v2/_src_/database/mega_app.1DT8zg/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/be969efb-234e-4b87-be08-cae3d3b39590/storage_v2/_src_/database/mega_app.1DT8zg/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/be969efb-234e-4b87-be08-cae3d3b39590/storage_v2/_src_/database/mega_app.1DT8zg/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp_okhttp_2_7_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_6_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Organization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kg/megacom/megalab/model/entity/Organization.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
