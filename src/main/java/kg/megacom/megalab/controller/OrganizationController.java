@@ -1,6 +1,5 @@
 package kg.megacom.megalab.controller;
 
-import kg.megacom.megalab.model.dto.OrganizationDto;
 import kg.megacom.megalab.model.request.CreateOrganizationRequest;
 import kg.megacom.megalab.model.request.SetAdminRequest;
 import kg.megacom.megalab.model.request.UpdateOrganizationRequest;

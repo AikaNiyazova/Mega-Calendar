@@ -17,6 +17,5 @@ public class RoomDto {
     Boolean isDashboardAvailable;
     Boolean isProjectorAvailable;
     Boolean isAcAvailable;
-    Boolean isDeleted;
 
 }

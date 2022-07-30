@@ -8,8 +8,8 @@ import kg.megacom.megalab.model.entity.Label;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-25T21:23:09+0600",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
+    date = "2022-07-29T14:13:38+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class LabelMapperImpl implements LabelMapper {
 

@@ -40,4 +40,13 @@ public interface UserService {
 
     UserDto save(UserDto userDto);
 
+//    void addPhoto(AddPhotoRequest request);
+
+//    void updateStatus(UserDto userDto);
+
+    //setPassword;
+    //changePassword;
+
+
+
 }

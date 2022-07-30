@@ -1,6 +1,5 @@
 package kg.megacom.megalab.controller;
 
-import kg.megacom.megalab.model.dto.DepartmentDto;
 import kg.megacom.megalab.model.request.CreateDepartmentRequest;
 import kg.megacom.megalab.model.request.SetHeadRequest;
 import kg.megacom.megalab.model.request.UpdateDepartmentRequest;
