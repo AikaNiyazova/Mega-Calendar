@@ -8,8 +8,8 @@ import kg.megacom.megalab.model.entity.Room;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-25T21:23:10+0600",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
+    date = "2022-07-29T14:13:38+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class RoomMapperImpl implements RoomMapper {
 
@@ -28,7 +28,6 @@ public class RoomMapperImpl implements RoomMapper {
         roomDto.isDashboardAvailable( entity.getIsDashboardAvailable() );
         roomDto.isProjectorAvailable( entity.getIsProjectorAvailable() );
         roomDto.isAcAvailable( entity.getIsAcAvailable() );
-        roomDto.isDeleted( entity.getIsDeleted() );
 
         return roomDto.build();
     }
@@ -48,7 +47,6 @@ public class RoomMapperImpl implements RoomMapper {
         room.isDashboardAvailable( dto.getIsDashboardAvailable() );
         room.isProjectorAvailable( dto.getIsProjectorAvailable() );
         room.isAcAvailable( dto.getIsAcAvailable() );
-        room.isDeleted( dto.getIsDeleted() );
 
         return room.build();
     }
