@@ -6,6 +6,7 @@ import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.PositionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class PositionController {
 
     private final PositionService positionService;
 
+    @Autowired
     public PositionController(PositionService positionService) {
         this.positionService = positionService;
     }
