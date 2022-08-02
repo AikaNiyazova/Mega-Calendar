@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {

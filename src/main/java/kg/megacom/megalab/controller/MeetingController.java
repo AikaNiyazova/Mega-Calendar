@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/meeting")

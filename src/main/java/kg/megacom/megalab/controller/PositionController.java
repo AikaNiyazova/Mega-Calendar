@@ -6,6 +6,7 @@ import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.PositionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +14,18 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
+@CrossOrigin
 @RestController
-@RequiredArgsConstructor
+
 @RequestMapping("/api/v1/position")
 public class PositionController {
 
     private final PositionService positionService;
+
+    @Autowired
+    public PositionController(PositionService positionService) {
+        this.positionService = positionService;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody @Valid CreatePositionRequest request) {
@@ -71,6 +78,7 @@ public class PositionController {
     @PatchMapping("/update")
     public ResponseEntity<?> update(@RequestBody UpdatePositionRequest request) {
         try {
+
             log.info("Updating position with id=" + request.getPositionId());
             return ResponseEntity.ok(positionService.update(request));
         } catch (RuntimeException ex) {
