@@ -17,7 +17,7 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-29T14:13:38+0600",
+    date = "2022-08-02T12:39:13+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class PositionMapperImpl implements PositionMapper {

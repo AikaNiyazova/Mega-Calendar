@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/role")
 public class RoleController {
