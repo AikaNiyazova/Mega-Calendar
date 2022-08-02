@@ -16,16 +16,11 @@ import javax.validation.Valid;
 @Slf4j
 @CrossOrigin
 @RestController
-
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/position")
 public class PositionController {
 
     private final PositionService positionService;
-
-    @Autowired
-    public PositionController(PositionService positionService) {
-        this.positionService = positionService;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody @Valid CreatePositionRequest request) {

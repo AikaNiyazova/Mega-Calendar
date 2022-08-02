@@ -19,6 +19,7 @@ target/
 *.iml
 *.ipr
 *.xml
+Megalab-App.iml
 
 ### NetBeans ###
 /nbproject/private/
