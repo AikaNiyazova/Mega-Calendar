@@ -66,4 +66,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE pu.position_id = ?1 ", nativeQuery = true)
     List<User> findAllByPositionId(Long positionId);
 
+    @Query(value = "SELECT * FROM tb_user " +
+            "WHERE (last_name || ' ' || first_name || ' ' || patronymic) ILIKE '%' || ? || '%' ",
+//            "WITH u AS (" +
+//            "SELECT id, photo_path, " +
+//            "concat(last_name, ' ', first_name, ' ', patronymic) AS full_name, " +
+//            "msisdn, email, status " +
+//            "FROM tb_user" +
+//            ") " +
+//            "SELECT * FROM u " +
+//            "WHERE full_name ILIKE '%' || ? || '%' ",
+            nativeQuery = true)
+    List<User> findAllByName(String name);
 }
