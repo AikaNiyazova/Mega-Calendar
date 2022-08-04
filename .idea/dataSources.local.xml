@@ -19,5 +19,35 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="d75c6b6id520h4@ec2-3-213-228-206.compute-1.amazonaws.com" uuid="1c6e4dd8-8502-4ec6-9836-6f4ec30ea2b8">
+      <database-info product="PostgreSQL" version="14.4 (Ubuntu 14.4-1.pgdg20.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.22" dbms="POSTGRES" exact-version="14.4" exact-driver-version="42.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>stbaasxuegtxjn</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="database" qname="@">
+            <node kind="schema" qname="@" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+    <data-source name="d8cjnne2a47h6o@ec2-44-205-41-76.compute-1.amazonaws.com" uuid="078b6036-b663-4701-9125-98e1447d096e">
+      <database-info product="PostgreSQL" version="14.4 (Ubuntu 14.4-1.pgdg20.04+1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.22" dbms="POSTGRES" exact-version="14.4" exact-driver-version="42.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>xosjqvgqzveslj</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="database" qname="@">
+            <node kind="schema" qname="@" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
   </component>
 </project>

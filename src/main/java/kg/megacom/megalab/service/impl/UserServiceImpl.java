@@ -138,6 +138,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> findAllByName(String name) {
+
+            return UserMapper.INSTANCE.toDtoList(userRepository.findAllByName(name));
+    }
+
+    @Override
     public List<UserDto> findAllByOrganizationId(Long organizationId) {
         organizationService.findById(organizationId);
         return UserMapper.INSTANCE.toDtoList(userRepository.findAllByOrganizationId(organizationId));

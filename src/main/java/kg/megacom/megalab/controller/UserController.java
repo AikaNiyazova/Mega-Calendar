@@ -1,6 +1,7 @@
 package kg.megacom.megalab.controller;
 
 import kg.megacom.megalab.model.request.*;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,30 @@ public class UserController {
             log.error("Finding user failed. User with id=" + id + " not found.");
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
+        try {
+            log.info("Finding all users");
+            return ResponseEntity.ok(userService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all users failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
+    @GetMapping("/find-all-by-name")
+    public ResponseEntity<?> findAllByName(@RequestParam String name) {
+        try {
+            log.info("Finding all users by name = " + name);
+            return ResponseEntity.ok(userService.findAllByName(name));
+        } catch (RuntimeException ex) {
+            log.error("Finding all users failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
         }
     }
 

@@ -10,7 +10,7 @@ import kg.megacom.megalab.model.entity.Room;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-25T21:23:09+0600",
+    date = "2022-08-04T14:06:05+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_202 (Oracle Corporation)"
 )
 public class HiddenRoomMapperImpl implements HiddenRoomMapper {

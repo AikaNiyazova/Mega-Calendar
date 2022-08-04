@@ -66,4 +66,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE pu.position_id = ?1 ", nativeQuery = true)
     List<User> findAllByPositionId(Long positionId);
 
+    @Query(value = "SELECT *, concat(last_name, ' ', first_name, ' ', patronymic) AS full_name " +
+            "FROM tb_user " +
+            "WHERE full_name LIKE '%?1%'", nativeQuery = true)
+    List<User> findAllByName(String name);
+
 }
