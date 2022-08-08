@@ -23,6 +23,8 @@ public interface MeetingUserService {
 
     MeetingUserDto findByUserIdAndMeetingId(Long userId, Long meetingId); //todo: remove?
 
+    void deleteByMeetingId(Long meetingId);
+
     void deleteByUserIdAndMeetingId(Long userId, Long meetingId);
 
     void deleteByDelegateIdAndMeetingId(Long delegateId, Long meetingId);

@@ -60,6 +60,10 @@ public class MeetingServiceImpl implements MeetingService {
             throw new RuntimeException("Meeting end time should be no earlier than its start time");
         }
 
+//        if () {
+// todo: check room availability ?
+//        }
+
         User meetingAuthor = UserMapper.INSTANCE.toEntity
                 (userService.findById(request.getMeetingAuthorId()));
         Room room = RoomMapper.INSTANCE.toEntity(roomService.findById(request.getRoomId()));
@@ -198,6 +202,11 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
+    public List<MeetingDto> findAll() {
+        return MeetingMapper.INSTANCE.toDtoList(meetingRepository.findAll());
+    }
+
+    @Override
     public List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date) {
         userService.findById(userId);
         return MeetingMapper.INSTANCE.toDtoList
@@ -324,7 +333,10 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
+    @Transactional
     public MessageResponse delete(Long id) {
+        meetingDatesService.deleteByMeetingId(id);
+        meetingUserService.deleteByMeetingId(id);
         meetingRepository.deleteById(id);
         return MessageResponse.of("Meeting with id=" + id + " is deleted");
         //todo: send email to users about cancellation of the meeting

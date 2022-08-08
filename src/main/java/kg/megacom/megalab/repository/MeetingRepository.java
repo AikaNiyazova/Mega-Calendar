@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -16,7 +17,7 @@ public interface MeetingRepository extends JpaRepository<Meeting, Long> {
             "WHERE md.meeting_date = ?1 " +
             "AND ?2 NOT BETWEEN m.meeting_start_time AND m.meeting_end_time " +
             "AND ?3 NOT BETWEEN m.meeting_start_time AND m.meeting_end_time", nativeQuery = true)
-    void dfknv(); //todo
+    List<Long> findFreeRoomIdsForDate(LocalDate date, LocalTime startTime, LocalTime endTime); //todo
 
     @Query(value = "SELECT * FROM tb_meeting m " +
             "JOIN tb_meeting_user mu on m.id = mu.meeting_id " +

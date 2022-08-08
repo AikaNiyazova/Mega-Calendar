@@ -4,13 +4,17 @@ import kg.megacom.megalab.exception.room.RoomIsExistsException;
 import kg.megacom.megalab.exception.room.RoomNotFoundException;
 import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.request.CreateRoomRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.RoomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Slf4j
@@ -82,6 +86,20 @@ public class RoomController {
     public ResponseEntity<?> updateRoom(@RequestBody RoomDto roomDto){
         log.info("Room with ID '" + roomDto.getId() + "' was successfully updated");
         return new ResponseEntity<>(roomService.save(roomDto),HttpStatus.OK);
+    }
+
+    @GetMapping("/find-free-rooms-for-date-and-time")
+    public ResponseEntity<?> findFreeRoomsForDateAndTime(@RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date,
+                                                         @RequestParam /*@DateTimeFormat(pattern = "HH:mm")*/ LocalTime startTime,
+                                                         @RequestParam /*@DateTimeFormat(pattern = "HH:mm")*/ LocalTime endTime) {
+        try {
+            log.info("Finding free rooms for date " + date + " between " + startTime + " and: " + endTime);
+            return ResponseEntity.ok(roomService.findFreeRoomsForDateAndTime(date, startTime, endTime));
+        } catch (RuntimeException ex) {
+            log.error("Finding free rooms failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
     }
 
 }

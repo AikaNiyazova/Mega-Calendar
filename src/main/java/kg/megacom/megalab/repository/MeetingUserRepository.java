@@ -22,6 +22,11 @@ public interface MeetingUserRepository extends JpaRepository<MeetingUser, Long> 
 
     @Modifying
     @Query(value = "DELETE FROM tb_meeting_user " +
+            "WHERE meeting_id = ?", nativeQuery = true)
+    void deleteByMeetingId(Long meetingId);
+
+    @Modifying
+    @Query(value = "DELETE FROM tb_meeting_user " +
             "WHERE user_id = ?1 AND meeting_id = ?2", nativeQuery = true)
     void deleteByUserIdAndMeetingId(Long userId, Long meetingId);
 
