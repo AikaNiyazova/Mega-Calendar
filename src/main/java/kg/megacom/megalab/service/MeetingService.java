@@ -27,6 +27,8 @@ public interface MeetingService {
 
     MeetingDto findById(Long id);
 
+    List<MeetingDto> findAll();
+
     List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date);
 
     List<MeetingDto> findAllByUserIdAndTwoDates(Long userId, LocalDate startDate, LocalDate endDate);

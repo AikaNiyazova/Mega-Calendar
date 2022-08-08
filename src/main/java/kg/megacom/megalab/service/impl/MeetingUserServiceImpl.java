@@ -51,6 +51,11 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     }
 
     @Override
+    public void deleteByMeetingId(Long meetingId) {
+        meetingUserRepository.deleteByMeetingId(meetingId);
+    }
+
+    @Override
     @Transactional
     public void deleteByUserIdAndMeetingId(Long userId, Long meetingId) {
         meetingUserRepository.deleteByUserIdAndMeetingId(userId, meetingId);

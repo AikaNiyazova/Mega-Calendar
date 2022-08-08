@@ -119,6 +119,18 @@ public class MeetingController {
         }
     }
 
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
+        try {
+            log.info("Finding all meetings");
+            return ResponseEntity.ok(meetingService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all meetings failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
     @GetMapping("/find-all-by-user-id-and-date/{userId}")
     public ResponseEntity<?> findAllByUserIdAndDate(@PathVariable Long userId,
                                                     @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {

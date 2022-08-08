@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -71,4 +73,11 @@ public class RoomServiceImpl implements RoomService {
         return RoomMapper.INSTANCE
                 .toDto(roomRepository.save(RoomMapper.INSTANCE.toEntity(room)));
     }
+
+    @Override
+    public List<RoomDto> findFreeRoomsForDateAndTime(LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return RoomMapper.INSTANCE.toDtoList
+                (roomRepository.findFreeRoomsForDateAndTime(date, startTime, endTime));
+    }
+
 }
