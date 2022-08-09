@@ -78,7 +78,7 @@ public class MeetingController {
         }
     }
 
-    @DeleteMapping("/decline-meeting-by-delegate/{meetingId}/{delegateId}") //todo: decide later
+    @DeleteMapping("/decline-meeting-by-delegate/{meetingId}/{delegateId}")
     public ResponseEntity<?> declineMeetingByDelegate(@PathVariable Long meetingId,
                                                       @PathVariable Long delegateId) {
         try {

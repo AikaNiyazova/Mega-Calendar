@@ -13,6 +13,10 @@ public interface OrganizationRepository extends JpaRepository<Organization, Long
 
     Optional<Organization> findByIdAndIsDeletedFalse(Long id);
 
+//    @Query(value = "SELECT * FROM tb_organization " +
+//            "WHERE is_deleted = false", nativeQuery = true)
+//    List<Organization> findAllAndIsDeletedFalse();
+
     @Modifying
     @Query(value = "WITH dep AS (" +
             "UPDATE tb_department " +
@@ -23,7 +27,7 @@ public interface OrganizationRepository extends JpaRepository<Organization, Long
             "UPDATE tb_position pos " +
             "SET is_deleted = true " +
             "FROM dep " +
-            "WHERE dep.id = pos.department_id", nativeQuery = true) //todo: move to tb_position?
+            "WHERE dep.id = pos.department_id", nativeQuery = true)
     void deleteOrganizationAndRelatedEntities(Long organizationId);
 
 }
