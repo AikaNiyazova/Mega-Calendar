@@ -147,6 +147,7 @@ public class MeetingServiceImpl implements MeetingService {
         Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
         User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
 
+        //todo: maybe delete PARTICIPANT from MeetingUser
         MeetingUser meetingUser = MeetingUser
                 .builder()
                 .meeting(meeting)
@@ -182,6 +183,7 @@ public class MeetingServiceImpl implements MeetingService {
         User participant = UserMapper.INSTANCE.toEntity(userService.findById(participantId));
         User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
 
+        //todo: maybe NOT save it
         MeetingUser meetingUser = MeetingUser
                 .builder()
                 .meeting(meeting)
@@ -335,6 +337,7 @@ public class MeetingServiceImpl implements MeetingService {
     @Override
     @Transactional
     public MessageResponse delete(Long id) {
+        //todo: Check that only AUTHOR can delete the meeting
         meetingDatesService.deleteByMeetingId(id);
         meetingUserService.deleteByMeetingId(id);
         meetingRepository.deleteById(id);

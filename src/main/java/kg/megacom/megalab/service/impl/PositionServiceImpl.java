@@ -85,7 +85,8 @@ public class PositionServiceImpl implements PositionService {
                 }).orElseThrow(() -> new EntityNotFoundException
                         ("Position with id=" + id + " not found"));
         return MessageResponse.of("Position with id=" + id + " is deleted");
-        //todo: if position.isDeleted = true { sout("no position") }
+//  todo: if position.isDeleted = true { sout("no position") }
+//  todo:positionUserService.findByPositionId(set 0 maybe) ?
     }
 
     @Override

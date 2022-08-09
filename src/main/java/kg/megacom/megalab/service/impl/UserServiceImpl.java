@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findAll() {
+    public List<UserDto> findAll() { //todo: findAll without deleted users ?
         return UserMapper.INSTANCE.toDtoList(userRepository.findAll());
     }
 

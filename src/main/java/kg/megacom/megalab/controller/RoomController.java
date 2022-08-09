@@ -93,7 +93,7 @@ public class RoomController {
                                                          @RequestParam /*@DateTimeFormat(pattern = "HH:mm")*/ LocalTime startTime,
                                                          @RequestParam /*@DateTimeFormat(pattern = "HH:mm")*/ LocalTime endTime) {
         try {
-            log.info("Finding free rooms for date " + date + " between " + startTime + " and: " + endTime);
+            log.info("Finding free rooms for date " + date + " between " + startTime + " and " + endTime);
             return ResponseEntity.ok(roomService.findFreeRoomsForDateAndTime(date, startTime, endTime));
         } catch (RuntimeException ex) {
             log.error("Finding free rooms failed. " + ex.getMessage());

@@ -16,6 +16,11 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 
     List<Position> findAllByDepartmentId(Long departmentId);
 
+//    @Query(value = "SELECT * FROM tb_position " +
+//            "WHERE department_id = ? " +
+//            "AND is_deleted = false", nativeQuery = true)
+//    List<Position> findAllByDepartmentIdAndIsDeletedFalse(Long departmentId);
+
     @Modifying
     @Query(value = "UPDATE tb_position " +
             "SET department_id = ?2 " +

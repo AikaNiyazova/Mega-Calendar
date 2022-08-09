@@ -18,7 +18,7 @@ public interface PositionUserRepository extends JpaRepository<PositionUser, Long
             "WHERE position_id = ?1 " +
             "GROUP BY user_id " +
             "HAVING count(user_id) = 1", nativeQuery = true)
-    List<Long> findAllUserIdsByPositionId(Long id); //todo:
+    List<Long> findAllUserIdsByPositionId(Long id); //todo: Why do i need this? Set smth to show "no position"
 
     @Modifying
     @Transactional

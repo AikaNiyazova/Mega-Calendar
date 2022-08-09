@@ -148,7 +148,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         //positions delete
         positionService.deletePositionsByDepartmentId(id);
 //        //users + depPositions delete
-//        userService.deleteUsersAndPositions(id); //todo: ??? doesn't work
+//        userService.deleteUsersAndPositions(id); //todo: doesn't work - delete?
         return MessageResponse.of("Department with id=" + id + " and its members are deleted");
     }
 

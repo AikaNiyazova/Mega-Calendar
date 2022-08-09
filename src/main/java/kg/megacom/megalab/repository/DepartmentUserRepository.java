@@ -27,7 +27,11 @@ public interface DepartmentUserRepository extends JpaRepository<DepartmentUser, 
     void changeDepartmentByUserId(Long userId, Long oldDepartmentId, Long newDepartmentId);
 
     @Query(value = "SELECT user_id FROM tb_department_user " +
-            "WHERE department_id = ?1", nativeQuery = true)
-    List<Long> findAllUserIdsByDepartmentId(Long id);
+//            "JOIN tb_user u ON du.user_id = u.id " +
+            "WHERE department_id = ?1 " +
+//            "WHERE u.is_deleted = false " +
+            "GROUP BY user_id " +
+            "HAVING count(user_id) = 1", nativeQuery = true)
+    List<Long> findAllUserIdsByDepartmentId(Long id); //todo: try this to exclude deleted users
 
 }

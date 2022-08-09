@@ -41,6 +41,6 @@ public interface MeetingService {
 
     MessageResponse updateParticipants(UpdateParticipantsRequest request);
 
-    MessageResponse delete(Long id); //todo ???
+    MessageResponse delete(Long id);
 
 }
