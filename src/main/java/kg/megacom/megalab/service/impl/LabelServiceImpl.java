@@ -1,12 +1,15 @@
 package kg.megacom.megalab.service.impl;
 
 import kg.megacom.megalab.model.dto.LabelDto;
+import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.Label;
 import kg.megacom.megalab.model.mapper.LabelMapper;
+import kg.megacom.megalab.model.mapper.UserMapper;
 import kg.megacom.megalab.model.request.CreateLabelRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.LabelRepository;
 import kg.megacom.megalab.service.LabelService;
+import kg.megacom.megalab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +20,25 @@ import java.util.List;
 public class LabelServiceImpl implements LabelService {
 
     private final LabelRepository labelRepository;
+    private final UserService userService;
 
     @Autowired
-    public LabelServiceImpl(LabelRepository labelRepository) {
+    public LabelServiceImpl(LabelRepository labelRepository, UserService userService) {
         this.labelRepository = labelRepository;
+        this.userService = userService;
     }
 
     @Override
     public LabelDto create(CreateLabelRequest request) {
+        UserDto userDto = userService.findById(request.getUserId());
+
         Label label = Label
                 .builder()
+                .user(UserMapper.INSTANCE.toEntity(userDto))
                 .labelName(request.getLabelName())
+                .labelColor(request.getLabelColor())
                 .build();
+
         return LabelMapper.INSTANCE.toDto
                 (labelRepository.save(label));
     }
@@ -51,6 +61,7 @@ public class LabelServiceImpl implements LabelService {
         return labelRepository.findById(labelDto.getId())
                 .map(label -> {
                     label.setLabelName(labelDto.getLabelName());
+                    label.setLabelColor(labelDto.getLabelColor());
                     labelRepository.save(label);
 
                 return LabelMapper.INSTANCE.toDto(label);

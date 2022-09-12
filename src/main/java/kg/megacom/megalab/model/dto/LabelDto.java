@@ -11,6 +11,8 @@ import lombok.experimental.FieldDefaults;
 public class LabelDto {
 
     Long id;
+    UserDto userDto;
     String labelName;
+    String labelColor;
 
 }

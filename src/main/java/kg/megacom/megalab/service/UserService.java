@@ -38,8 +38,6 @@ public interface UserService {
 
     MessageResponse delete(Long id);
 
-    void deleteUsersAndPositions(Long departmentId);
-
     UserDto save(UserDto userDto);
 
 //    void addPhoto(AddPhotoRequest request);

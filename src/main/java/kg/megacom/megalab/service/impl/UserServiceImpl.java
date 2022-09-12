@@ -68,7 +68,6 @@ public class UserServiceImpl implements UserService {
                 .isDeleted(Boolean.FALSE)
                 .role(role)
                 .build();
-
         userRepository.save(user);
 
         OrganizationUser organizationUser = OrganizationUser
@@ -215,11 +214,6 @@ public class UserServiceImpl implements UserService {
             return userRepository.save(user);
         }).orElseThrow(() -> new EntityNotFoundException("User with id= " + id + " not found"));
         return MessageResponse.of("User with id = " + id + " is deleted");
-    }
-
-    @Override
-    public void deleteUsersAndPositions(Long departmentId) {
-        userRepository.deleteUsersAndPositions(departmentId);
     }
 
     @Override
