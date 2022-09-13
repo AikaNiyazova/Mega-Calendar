@@ -22,8 +22,7 @@ public interface MeetingUserRepository extends JpaRepository<MeetingUser, Long> 
             "WHERE user_id = ?1 AND meeting_id = ?2", nativeQuery = true)
     MeetingUser findByUserIdAndMeetingId(Long userId, Long meetingId);
 
-    @Query(value = "SELECT mu.* " +
-            "FROM tb_meeting_user mu " +
+    @Query(value = "SELECT mu.* FROM tb_meeting_user mu " +
             "JOIN tb_meeting m ON mu.meeting_id = m.id " +
             "JOIN tb_meeting_dates md ON md.meeting_id = m.id " +
             "WHERE mu.user_id = ?1 " +

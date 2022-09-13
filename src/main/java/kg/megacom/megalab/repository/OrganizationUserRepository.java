@@ -13,15 +13,17 @@ import java.util.Optional;
 @Repository
 public interface OrganizationUserRepository extends JpaRepository<OrganizationUser, Long> {
 
-    Optional<OrganizationUser> findById(Long id);
-
-    @Query(value = "SELECT user_id FROM tb_organization_user " +
-//            "JOIN tb_user u ON ou.user_id = u.id " +
-            "WHERE organization_id = ?1 " +
-//            "WHERE u.is_deleted = false " +
-            "GROUP BY user_id " +
-            "HAVING count(user_id) = 1", nativeQuery = true)
-    List<Long> findAllUserIdsByOrganizationId(Long id); //todo: try this to exclude deleted users
+    @Query(value = "WITH separate_orgs AS ( " +
+            "SELECT ou.user_id AS real_user_id FROM tb_organization_user ou " +
+            "JOIN tb_organization o ON ou.organization_id = o.id " +
+            "WHERE  o.is_deleted = false " +
+            "GROUP BY ou.user_id " +
+            "HAVING count(ou.user_id) = 1 " +
+            ") " +
+            "SELECT real_user_id FROM separate_orgs so " +
+            "JOIN tb_organization_user ou ON ou.user_id = so.real_user_id " +
+            "WHERE organization_id = ?", nativeQuery = true)
+    List<Long> findAllUserIdsByOrganizationId(Long id); // this query finds users that are only in that one organization
 
     @Query(value = "SELECT organization_id FROM tb_organization_user " +
             "WHERE user_id = ?1 " +

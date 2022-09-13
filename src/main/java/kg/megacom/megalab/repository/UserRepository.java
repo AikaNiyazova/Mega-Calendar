@@ -26,22 +26,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "AND o.is_deleted = false"*/, nativeQuery = true)
     Optional<ReadUserProfileResponse> readProfile(Long id);
 
-    @Modifying
-    @Query(value = "WITH pos AS (" +
-            "UPDATE tb_position " +
-            "SET is_deleted = true " +
-            "WHERE department_id = ?1 " +
-            "RETURNING department_id" +
-            ") " +
-            "UPDATE tb_user u " +
-            "SET is_deleted = true " +
-            "FROM pos, u " +
-            "JOIN tb_department_user du " +
-            "ON u.id = du.user_id " +
-            "WHERE du.department_id = pos.department_id",
-            nativeQuery = true)
-    void deleteUsersAndPositions(Long departmentId);
-
     Boolean existsByEmailAndIsDeletedFalse(String email);
     User findByEmailAndIsDeletedFalse(String email);
 

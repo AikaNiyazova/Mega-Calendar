@@ -28,6 +28,11 @@ public class PositionUserServiceImpl implements PositionUserService {
     }
 
     @Override
+    public void setNullToPositionId(Long positionId) {
+        positionUserRepository.setNullToPositionId(positionId);
+    }
+
+    @Override
     public void save(PositionUserDto positionUserDto) {
         positionUserRepository.save(PositionUserMapper.INSTANCE.toEntity(positionUserDto));
 

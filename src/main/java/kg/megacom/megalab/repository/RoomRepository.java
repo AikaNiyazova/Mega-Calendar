@@ -26,6 +26,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             "AND (?2 < m.meeting_start_time OR ?2 >= m.meeting_end_time " +
             "AND ?3 <= m.meeting_start_time OR ?3 > m.meeting_end_time) " +
             "AND (m.meeting_start_time < ?2 OR m.meeting_start_time >= ?3 " +
-            "AND m.meeting_end_time <= ?2 OR m.meeting_end_time > ?3)", nativeQuery = true)
+            "AND m.meeting_end_time <= ?2 OR m.meeting_end_time > ?3)",
+            nativeQuery = true)
     List<Room> findFreeRoomsForDateAndTime(LocalDate date, LocalTime startTime, LocalTime endTime); //todo
 }

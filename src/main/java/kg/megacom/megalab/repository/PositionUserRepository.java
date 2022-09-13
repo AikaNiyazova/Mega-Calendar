@@ -28,4 +28,11 @@ public interface PositionUserRepository extends JpaRepository<PositionUser, Long
             "AND position_id = ?2 ", nativeQuery = true)
     void changePosition(Long userId, Long oldPositionId, Long newPositionId);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE tb_position_user " +
+            "SET position_id = null " +
+            "WHERE position_id = ?1", nativeQuery = true)
+    void setNullToPositionId(Long positionId);
+
 }

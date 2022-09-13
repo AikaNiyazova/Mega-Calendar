@@ -33,7 +33,7 @@ public class PositionUser {
     Long id;
 
     @ManyToOne
-    @JoinColumn(name = "position_id", nullable = false)
+    @JoinColumn(name = "position_id")
     Position position;
 
     @ManyToOne
