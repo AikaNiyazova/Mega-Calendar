@@ -1,10 +1,11 @@
 package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.UserDto;
-import kg.megacom.megalab.model.entity.User;
 import kg.megacom.megalab.model.request.*;
+import kg.megacom.megalab.model.response.FindAllUsersForMobileResponse;
+import kg.megacom.megalab.model.response.FindAllUsersForWebResponse;
 import kg.megacom.megalab.model.response.MessageResponse;
-import kg.megacom.megalab.model.response.ReadUserProfileResponse;
+import kg.megacom.megalab.model.response.UserProfileResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,9 @@ public interface UserService {
 
     UserDto findById(Long id);
 
-    List<UserDto> findAll();
+    List<FindAllUsersForWebResponse> findAllForWebResponse();
+
+    List<FindAllUsersForMobileResponse> findAllForMobileResponse();
 
     List<UserDto> findAllByName(String name);
 
@@ -30,7 +33,7 @@ public interface UserService {
 
     List<UserDto> findAllByPositionId(Long positionId);
 
-    ReadUserProfileResponse readProfile(Long id);
+    List<UserProfileResponse> readProfile(Long id);
 
     UserDto updatePersonalInfo(UpdateUserPersonalInfoRequest request);
 
