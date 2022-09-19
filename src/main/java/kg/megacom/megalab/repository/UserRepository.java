@@ -31,7 +31,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<UserProfileResponse> readProfile(Long id);
 
     @Query(value = "SELECT u.id, u.photo_path, TRIM(concat(u.last_name, ' ', u.first_name, ' ', u.patronymic)) AS full_name, " +
-            "p.position_name, d.department_name\n" +
+            "p.position_name, d.department_name, u.email\n" +
             "FROM tb_user u\n" +
             "        JOIN tb_position_user pu on u.id = pu.user_id\n" +
             "        JOIN tb_position p on pu.position_id = p.id\n" +
