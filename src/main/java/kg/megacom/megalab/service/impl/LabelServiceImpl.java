@@ -6,6 +6,7 @@ import kg.megacom.megalab.model.entity.Label;
 import kg.megacom.megalab.model.mapper.LabelMapper;
 import kg.megacom.megalab.model.mapper.UserMapper;
 import kg.megacom.megalab.model.request.CreateLabelRequest;
+import kg.megacom.megalab.model.request.UpdateLabelRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.LabelRepository;
 import kg.megacom.megalab.service.LabelService;
@@ -52,21 +53,22 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public List<LabelDto> findAll() {
-        return LabelMapper.INSTANCE.toDtoList(labelRepository.findAll());
+    public List<LabelDto> findAllByUserId(Long userId) {
+        return LabelMapper.INSTANCE.toDtoList(labelRepository.findAllByUserId(userId));
     }
 
     @Override
-    public LabelDto update(LabelDto labelDto) {
-        return labelRepository.findById(labelDto.getId())
+    public LabelDto update(UpdateLabelRequest request) {
+        // todo: check if the author updates his/her label
+        return labelRepository.findById(request.getId())
                 .map(label -> {
-                    label.setLabelName(labelDto.getLabelName());
-                    label.setLabelColor(labelDto.getLabelColor());
+                    label.setLabelName(request.getLabelName());
+                    label.setLabelColor(request.getLabelColor());
                     labelRepository.save(label);
 
                 return LabelMapper.INSTANCE.toDto(label);
                 }).orElseThrow(() -> new EntityNotFoundException
-                        ("Label with id=" + labelDto.getId() + " not found"));
+                        ("Label with id=" + request.getId() + " not found"));
     }
 
     @Override

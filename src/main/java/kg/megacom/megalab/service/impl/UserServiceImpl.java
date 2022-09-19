@@ -4,8 +4,7 @@ import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.*;
 import kg.megacom.megalab.model.mapper.*;
 import kg.megacom.megalab.model.request.*;
-import kg.megacom.megalab.model.response.MessageResponse;
-import kg.megacom.megalab.model.response.ReadUserProfileResponse;
+import kg.megacom.megalab.model.response.*;
 import kg.megacom.megalab.repository.UserRepository;
 import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,8 +131,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findAll() { //todo: findAll without deleted users ?
-        return UserMapper.INSTANCE.toDtoList(userRepository.findAll());
+    public List<FindAllUsersForWebResponse> findAllForWebResponse() {
+        return userRepository.findAllUsersForWebResponse();
+    }
+
+    @Override
+    public List<FindAllUsersForMobileResponse> findAllForMobileResponse() {
+        return userRepository.findAllUsersForMobileResponse();
     }
 
     @Override
@@ -160,9 +164,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ReadUserProfileResponse readProfile(Long id) {
-        return userRepository.readProfile(id).orElseThrow(() -> new EntityNotFoundException
-                ("User with id=" + id + " not found"));
+    public List<UserProfileResponse> readProfile(Long id) {
+        return userRepository.readProfile(id);
+//                .orElseThrow(() -> new EntityNotFoundException
+//                ("User with id=" + id + " not found"));
     }
 
     @Override
