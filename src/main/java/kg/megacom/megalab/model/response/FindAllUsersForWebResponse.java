@@ -9,5 +9,6 @@ public interface FindAllUsersForWebResponse {
     String getFull_name();
     String getPosition_name();
     String getDepartment_name();
+    String getEmail();
 
 }
