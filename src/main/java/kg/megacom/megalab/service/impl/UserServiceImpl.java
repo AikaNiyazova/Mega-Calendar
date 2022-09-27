@@ -63,7 +63,6 @@ public class UserServiceImpl implements UserService {
                 .patronymic(request.getPatronymic())
                 .msisdn(request.getMsisdn())
                 .email(request.getEmail())
-                .password(request.getPassword())
                 .isDeleted(Boolean.FALSE)
                 .role(role)
                 .build();
@@ -217,7 +216,7 @@ public class UserServiceImpl implements UserService {
          userRepository.findByIdAndIsDeletedFalse(id).map(user -> {
             user.setIsDeleted(true);
             return userRepository.save(user);
-        }).orElseThrow(() -> new EntityNotFoundException("User with id= " + id + " not found"));
+        }).orElseThrow(() -> new EntityNotFoundException("User with id = " + id + " not found"));
         return MessageResponse.of("User with id = " + id + " is deleted");
     }
 

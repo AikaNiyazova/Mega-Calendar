@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public interface MeetingService {
 
-    MeetingDto create(CreateMeetingRequest request);
+    List<MeetingDto> create(CreateMeetingRequest request);
 
     MessageResponse acceptMeetingByParticipant(Long meetingId, Long participantId);
 

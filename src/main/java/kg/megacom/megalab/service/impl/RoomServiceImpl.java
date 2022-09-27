@@ -4,10 +4,12 @@ import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.entity.Room;
 import kg.megacom.megalab.model.mapper.RoomMapper;
 import kg.megacom.megalab.model.request.CreateRoomRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.RoomRepository;
 import kg.megacom.megalab.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
@@ -34,6 +36,7 @@ public class RoomServiceImpl implements RoomService {
                 .isDashboardAvailable(request.getIsDashboardAvailable())
                 .isAcAvailable(request.getIsAcAvailable())
                 .isProjectorAvailable(request.getIsProjectorAvailable())
+                .isDeleted(false)
                 .build();
         return RoomMapper.INSTANCE.toDto(roomRepository.save(room));
     }
@@ -41,12 +44,12 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomDto findById(Long id) {
         return RoomMapper.INSTANCE
-                .toDto(roomRepository.findById(id)
-                        .orElseThrow(() -> new EntityNotFoundException("Room with ID '" + id + "' doesn't exists")));
+                .toDto(roomRepository.findByIdAndIsDeletedFalse(id)
+                        .orElseThrow(() -> new EntityNotFoundException("Room with ID '" + id + "' doesn't exist")));
     }
 
     @Override
-    public RoomDto findByName(String name) {
+    public RoomDto findByRoomName(String name) {
         return RoomMapper.INSTANCE
                 .toDto(roomRepository.findByRoomName(name));
     }
@@ -54,17 +57,43 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<RoomDto> findAll() {
         return RoomMapper.INSTANCE
-                .toDtoList(roomRepository.findAll());
+                .toDtoList(roomRepository.findAllAndIsDeletedFalse());
+    }
+
+    @Override
+    public List<RoomDto> findAllNotHiddenForDate(LocalDate date) {
+        return RoomMapper.INSTANCE
+                .toDtoList(roomRepository.findAllNotHiddenForDate(date));
+    }
+
+    @Override
+    public List<RoomDto> findAllByRoomName(String roomName) {
+        return RoomMapper.INSTANCE
+                .toDtoList(roomRepository.findAllByRoomName(roomName));
     }
 
     @Override
     public RoomDto update(RoomDto roomDto) {
-        return null;
+        return roomRepository.findById(roomDto.getId())
+                .map(room -> {
+                    room.setRoomName(roomDto.getRoomName());
+                    room.setRoomCapacity(roomDto.getRoomCapacity());
+                    room.setLocation(roomDto.getLocation());
+                    room.setIsDashboardAvailable(roomDto.getIsDashboardAvailable());
+                    room.setIsProjectorAvailable(roomDto.getIsProjectorAvailable());
+                    room.setIsAcAvailable(roomDto.getIsAcAvailable());
+                    roomRepository.save(room);
+                return RoomMapper.INSTANCE.toDto(room);
+                }).orElseThrow(() -> new EntityNotFoundException
+                        ("Room with id=" + roomDto.getId() + " not found"));
     }
 
     @Override
-    public void delete(Long id) {
-        roomRepository.deleteById(id);
+    @Transactional
+    public MessageResponse delete(Long id) {
+        //check if there are future meetings in the room
+        roomRepository.deleteRoomById(id);
+        return MessageResponse.of("Room with id=" + id + " is deleted");
         //todo: в митингах, которые уже прошли в этом руме, отображается пометка "Удаленное помещение"
     }
 

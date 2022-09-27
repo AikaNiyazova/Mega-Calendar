@@ -7,10 +7,8 @@ import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class UpdateMeetingRequest {
     Long meetingId;
 
     @NotNull
-    List<LocalDate> meetingDates;
+    LocalDate meetingDate;
 
     LocalTime meetingStartTime;
 
