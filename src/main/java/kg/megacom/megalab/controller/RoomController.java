@@ -30,20 +30,9 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody RoomDto roomDto){
-        RoomDto room = roomService.findByName(roomDto.getRoomName());
-        if(room != null){
-            log.info("Failed to save room");
-            throw new RoomIsExistsException("Room with name = '" + roomDto.getRoomName()+"' is exists");
-        }
-        log.info("Room saved successfully");
-        return new ResponseEntity<>(roomService.save(roomDto), HttpStatus.CREATED);
-    }
-
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody CreateRoomRequest request){
-        RoomDto roomDto = roomService.findByName(request.getRoomName());
+        RoomDto roomDto = roomService.findByRoomName(request.getRoomName());
         if(roomDto!=null){
             log.info("Failed to create room");
             throw new RoomIsExistsException("Room with name = '" + roomDto.getRoomName()+"' is exists");
@@ -68,24 +57,52 @@ public class RoomController {
         List<RoomDto> rooms = roomService.findAll();
         if(rooms.isEmpty()){
             log.info("Failed to get all Rooms");
-            throw new RoomNotFoundException("There is no Rooms");
+            throw new RoomNotFoundException("There are no Rooms");
         }
         log.info("Rooms found successfully");
         return new ResponseEntity<>(rooms,HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Long id){
+    @GetMapping("/find-all-not-hidden-for-date")
+    public ResponseEntity<?> findAllNotHiddenForDate(@RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
+        try {
+            log.info("Finding all rooms without hidden for date " + date);
+            return ResponseEntity.ok(roomService.findAllNotHiddenForDate(date));
+        } catch (RuntimeException ex) {
+            log.error("Finding all rooms without hidden for date " + date + " failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
 
-        log.info("Room with ID '" + id + "' was successfully deleted");
-        roomService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/find-all-by-room-name")
+    public ResponseEntity<?> findAllByRoomName(@RequestParam String name) {
+        try {
+            log.info("Finding all rooms by name = " + name);
+            return ResponseEntity.ok(roomService.findAllByRoomName(name));
+        } catch (RuntimeException ex) {
+            log.error("Finding all rooms by name = " + name + " failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateRoom(@RequestBody RoomDto roomDto){
+    public ResponseEntity<?> update(@RequestBody RoomDto roomDto){
         log.info("Room with ID '" + roomDto.getId() + "' was successfully updated");
         return new ResponseEntity<>(roomService.save(roomDto),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id ){
+        try{
+            log.info("Deleting room");
+            return ResponseEntity.ok(roomService.delete(id));
+        }catch (RuntimeException ex){
+            log.error("Deleting room failed");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
     }
 
     @GetMapping("/find-free-rooms-for-date-and-time")

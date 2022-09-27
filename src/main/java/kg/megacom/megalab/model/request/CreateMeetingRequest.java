@@ -30,8 +30,10 @@ public class CreateMeetingRequest {
 
 //    LocalDate meetingDate;
 
+    @NotNull
     LocalTime meetingStartTime;
 
+    @NotNull
     LocalTime meetingEndTime;
 
     @NotNull

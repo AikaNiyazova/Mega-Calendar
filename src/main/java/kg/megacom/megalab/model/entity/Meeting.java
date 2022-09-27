@@ -41,8 +41,8 @@ public class Meeting {
     @Column(name = "meeting_topic", nullable = false)
     String meetingTopic;
 
-//    @Column(name = "meeting_date", nullable = false)
-//    LocalDate meetingDate;
+    @Column(name = "meeting_date", nullable = false)
+    LocalDate meetingDate;
 
     @Column(name = "meeting_start_time", nullable = false)
     LocalTime meetingStartTime;

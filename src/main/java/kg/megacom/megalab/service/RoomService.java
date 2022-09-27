@@ -2,6 +2,7 @@ package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.request.CreateRoomRequest;
+import kg.megacom.megalab.model.response.MessageResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,13 +16,17 @@ public interface RoomService {
 
     RoomDto findById(Long id);
 
-    RoomDto findByName(String name);
+    RoomDto findByRoomName(String name);
 
     List<RoomDto> findAll();
 
+    List<RoomDto> findAllNotHiddenForDate(LocalDate date);
+
+    List<RoomDto> findAllByRoomName(String roomName);
+
     RoomDto update(RoomDto roomDto);
 
-    void delete(Long id);
+    MessageResponse delete(Long id);
 
     RoomDto save(RoomDto roomDto);
 

@@ -15,7 +15,7 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-19T17:38:23+0600",
+    date = "2022-09-23T17:49:19+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class MeetingMapperImpl implements MeetingMapper {
@@ -142,6 +142,7 @@ public class MeetingMapperImpl implements MeetingMapper {
         roomDto.isDashboardAvailable( room.getIsDashboardAvailable() );
         roomDto.isProjectorAvailable( room.getIsProjectorAvailable() );
         roomDto.isAcAvailable( room.getIsAcAvailable() );
+        roomDto.isDeleted( room.getIsDeleted() );
 
         return roomDto.build();
     }
@@ -200,6 +201,7 @@ public class MeetingMapperImpl implements MeetingMapper {
         room.isDashboardAvailable( roomDto.getIsDashboardAvailable() );
         room.isProjectorAvailable( roomDto.getIsProjectorAvailable() );
         room.isAcAvailable( roomDto.getIsAcAvailable() );
+        room.isDeleted( roomDto.getIsDeleted() );
 
         return room.build();
     }

@@ -50,4 +50,10 @@ public class Room {
     @Column(name = "is_ac_available", nullable = false)
     Boolean isAcAvailable;
 
+//    @Column(name = "is_hidden", nullable = false)
+//    Boolean isHidden;
+
+    @Column(name = "is_deleted", nullable = false)
+    Boolean isDeleted;
+
 }
