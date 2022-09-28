@@ -330,4 +330,9 @@ public class MeetingServiceImpl implements MeetingService {
         //todo: send email to users about cancellation of the meeting
     }
 
+    @Override
+    public void setRoomIdNullInMeetings(Long roomId) {
+        meetingRepository.setRoomIdNullInMeetings(roomId);
+    }
+
 }

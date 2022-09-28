@@ -14,6 +14,8 @@ public interface UserService {
 
     UserDto create(CreateUserRequest request);
 
+    MessageResponse addAdditionalPosition(AddAdditionalPositionRequest request);
+
     UserDto registration(RegistrationRequest request);
 
     UserDto login(LoginRequest request);
@@ -36,10 +38,21 @@ public interface UserService {
 
     MessageResponse updateProfessionalInfo(UpdateUserProfessionalInfoRequest request);
 
+    MessageResponse changeRole(Long userId, Long roleId);
+
     MessageResponse delete(Long id);
 
     void deleteUsersAndPositions(Long departmentId);
 
     UserDto save(UserDto userDto);
+
+//    void addPhoto(AddPhotoRequest request);
+
+//    void updateStatus(UserDto userDto);
+
+    //setPassword;
+    //changePassword;
+
+
 
 }

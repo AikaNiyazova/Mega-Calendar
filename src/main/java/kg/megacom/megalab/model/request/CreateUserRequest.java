@@ -39,7 +39,7 @@ public class CreateUserRequest {
     @Positive
     Long roleId;
 
-    public String getPassword() {
-        return null;
-    }
+//    public String getPassword() {
+//        return null;
+//    }
 }

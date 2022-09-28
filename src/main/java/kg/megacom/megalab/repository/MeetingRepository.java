@@ -2,8 +2,10 @@ package kg.megacom.megalab.repository;
 
 import kg.megacom.megalab.model.entity.Meeting;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,5 +45,10 @@ public interface MeetingRepository extends JpaRepository<Meeting, Long> {
             "WHERE m.room_id = ?1 " +
             "AND md.meeting_date BETWEEN ?2 AND ?3", nativeQuery = true)
     List<Meeting> findAllByRoomIdAndTwoDates(Long roomId, LocalDate startDate, LocalDate endDate);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE tb_meeting SET room_id = null WHERE room_id = ?1 ", nativeQuery = true)
+    void setRoomIdNullInMeetings(Long roomId);
 
 }

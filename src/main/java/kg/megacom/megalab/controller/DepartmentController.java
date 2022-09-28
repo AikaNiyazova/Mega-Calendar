@@ -1,6 +1,5 @@
 package kg.megacom.megalab.controller;
 
-import kg.megacom.megalab.model.dto.DepartmentDto;
 import kg.megacom.megalab.model.request.CreateDepartmentRequest;
 import kg.megacom.megalab.model.request.SetHeadRequest;
 import kg.megacom.megalab.model.request.UpdateDepartmentRequest;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/department")

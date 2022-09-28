@@ -1,5 +1,7 @@
 package kg.megacom.megalab.controller;
 
+import kg.megacom.megalab.exception.user.WrongPasswordException;
+import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.request.*;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
@@ -30,6 +33,18 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CREATED).body(userService.create(request));
         } catch (RuntimeException ex) {
             log.error("User creation failed");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
+        }
+    }
+
+    @PostMapping("/add-additional-position")
+    public ResponseEntity<?> addAdditionalPosition(@RequestBody @Valid AddAdditionalPositionRequest request) {
+        try {
+            log.info("Adding position to user with id = " + request.getUserId());
+            return ResponseEntity.status(HttpStatus.CREATED).body(userService.addAdditionalPosition(request));
+        } catch (RuntimeException ex) {
+            log.error("Adding position to user with id = " + request.getUserId() + " failed");
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
         }
@@ -120,7 +135,7 @@ public class UserController {
     }
 
     @PutMapping("/updateProfessionalInfo")
-    public ResponseEntity updateProfessionalInfo(@RequestBody UpdateUserProfessionalInfoRequest request) {
+    public ResponseEntity<?> updateProfessionalInfo(@RequestBody UpdateUserProfessionalInfoRequest request) {
         try {
             log.info("Updating user's professional info");
             return ResponseEntity.ok(userService.updateProfessionalInfo(request));
@@ -131,8 +146,21 @@ public class UserController {
         }
     }
 
+    @PutMapping("/changeRole/{userId}/{roleId}")
+    public ResponseEntity<?> changeRole(@PathVariable Long userId,
+                                        @PathVariable Long roleId) {
+        try {
+            log.info("Changing role of user");
+            return ResponseEntity.ok(userService.changeRole(userId, roleId));
+        } catch (RuntimeException ex) {
+            log.error("Changing role failed");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
+    }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable Long id ){
+    public ResponseEntity<?> delete(@PathVariable Long id ){
         try{
             log.info("Delete user");
             return ResponseEntity.ok(userService.delete(id));
@@ -178,4 +206,66 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         }
     }
+
+    //    @PutMapping("/updateStatus")
+//    public ResponseEntity<?> updateStatus(@RequestBody UpdateUserStatus request){
+//        UserDto user = userService.findById(request.getId());
+//        user.setStatus(request.getStatus());
+//        userService.save(user);
+//
+//        log.info("Status for User with ID '" + request.getId() + "' updated successfully");
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+//
+//    @PutMapping("/updatePhoto")
+//    public ResponseEntity<?> updatePhoto(@RequestBody AddPhotoRequest request){
+//
+//        UserDto user = userService.findById(request.getUserId());
+//        user.setPhotoPath(request.getPhotoPath());
+//        userService.save(user);
+//
+//        log.info("Photo for User with ID '" + request.getUserId() + "' updated successfully");
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
+    @PutMapping("/profile")
+    public ResponseEntity<?> updateProfile(@RequestBody UpdateProfileRequest request){
+
+        UserDto user = userService.findById(request.getUserId());
+
+        if(request.getStatus()!=null){
+            user.setStatus(request.getStatus());
+            log.info("Status for User with ID '" + request.getUserId() + "' updated successfully");
+        }
+        if(request.getPhotoPath()!=null){
+            user.setPhotoPath(request.getPhotoPath());
+            log.info("Photo for User with ID '" + request.getUserId() + "' updated successfully");
+        }
+        if(request.getNewPassword()!=null){
+            if(user.getPassword().equals(request.getCurPassword())){
+                user.setPassword(request.getNewPassword());
+                log.info("Password for User with ID '" + request.getUserId() + "' updated successfully");
+            }else{
+                throw new WrongPasswordException("Password is wrong");
+            }
+        }
+
+        return new ResponseEntity<>(userService.save(user),HttpStatus.OK);
+    }
+
+//    @PutMapping("/updatePassword")
+//    public ResponseEntity<?> updatePassword(@RequestBody UpdatePasswordRequest request){
+//
+//        UserDto user = userService.findById(request.getUserId());
+//        if(user.getPassword().equals(request.getCurPassword())){
+//            user.setPassword(request.getNewPassword());
+//            userService.save(user);
+//            log.info("Password for User with ID '" + request.getUserId() + "' updated successfully");
+//        }else{
+//            throw new WrongPasswordException("Password is wrong");
+//        }
+//
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
 }

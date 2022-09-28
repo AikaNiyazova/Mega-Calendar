@@ -1,6 +1,7 @@
 package kg.megacom.megalab.controller;
 
 import kg.megacom.megalab.model.dto.RoleDto;
+import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/role")
 public class RoleController {
@@ -53,6 +55,18 @@ public class RoleController {
             log.error("Role deleting is failed");
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
+        try {
+            log.info("Finding all roles");
+            return ResponseEntity.ok(roleService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all roles failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
         }
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +44,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void deleteUsersAndPositions(Long departmentId);
 
     Boolean existsByEmailAndIsDeletedFalse(String email);
+
+    Boolean existsByIdAndIsDeletedFalse(Long id);
+
     User findByEmailAndIsDeletedFalse(String email);
 
     @Query(value = "SELECT * " +
@@ -66,9 +70,21 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE pu.position_id = ?1 ", nativeQuery = true)
     List<User> findAllByPositionId(Long positionId);
 
-    @Query(value = "SELECT *, concat(last_name, ' ', first_name, ' ', patronymic) AS full_name " +
-            "FROM tb_user " +
-            "WHERE full_name LIKE '%?1%'", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_user " +
+            "WHERE (last_name || ' ' || first_name || ' ' || patronymic) ILIKE '%' || ? || '%' ",
+//            "WITH u AS (" +
+//            "SELECT id, photo_path, " +
+//            "concat(last_name, ' ', first_name, ' ', patronymic) AS full_name, " +
+//            "msisdn, email, status " +
+//            "FROM tb_user" +
+//            ") " +
+//            "SELECT * FROM u " +
+//            "WHERE full_name ILIKE '%' || ? || '%' ",
+            nativeQuery = true)
     List<User> findAllByName(String name);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE tb_user SET role_id = ?2 WHERE id = ?1 ", nativeQuery = true)
+    void changeRole(Long userId, Long roleId);
 }

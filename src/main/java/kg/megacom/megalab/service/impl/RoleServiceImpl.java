@@ -9,6 +9,7 @@ import kg.megacom.megalab.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -47,5 +48,10 @@ public class RoleServiceImpl implements RoleService {
             return roleRepository.save(role);
         }).orElseThrow(() -> new EntityNotFoundException("Role with id = " + id + " not found"));
         return MessageResponse.of("Role with id = " + id + " is deleted");
+    }
+
+    @Override
+    public List<RoleDto> findAll() {
+        return RoleMapper.INSTANCE.toDtoList(roleRepository.findAll());
     }
 }

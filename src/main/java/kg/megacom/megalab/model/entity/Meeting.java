@@ -2,6 +2,8 @@ package kg.megacom.megalab.model.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,7 +21,16 @@ import java.time.LocalTime;
 public class Meeting {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "sequence-generator")
+    @GenericGenerator(
+            name = "sequence-generator",
+            strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+            parameters = {
+                    @Parameter(name = "sequence_name", value = "meeting_sequence"),
+                    @Parameter(name = "initial_value", value = "1"),
+                    @Parameter(name = "increment_size", value = "1")
+            }
+    )
     @Column(name = "id")
     Long id;
 
@@ -40,11 +51,11 @@ public class Meeting {
     LocalTime meetingEndTime;
 
     @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
+    @JoinColumn(name = "room_id")
     Room room;
 
     @Column(name = "address")
-    String address;
+    String address; // todo: ???
 
     @Column(name = "is_visible", nullable = false)
     Boolean isVisible;

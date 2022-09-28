@@ -41,4 +41,6 @@ public interface MeetingService {
 
     MessageResponse delete(Long id); //todo ???
 
+    void setRoomIdNullInMeetings(Long roomId);
+
 }
