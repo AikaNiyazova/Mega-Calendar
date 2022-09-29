@@ -3,7 +3,7 @@ package kg.megacom.megalab.service.impl;
 //import kg.megacom.megalab.model.dto.MeetingDatesDto;
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.entity.*;
-import kg.megacom.megalab.model.enums.MemberType;
+import kg.megacom.megalab.model.enums.Status;
 import kg.megacom.megalab.model.mapper.*;
 import kg.megacom.megalab.model.request.CreateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateMeetingRequest;
@@ -82,13 +82,12 @@ public class MeetingServiceImpl implements MeetingService {
                     .room(room)
 //                .address(request.getAddress())
                     .isVisible(request.getIsVisible())
-//                .isRepeatable(request.getIsRepeatable())
+                    .isDeleted(false)
                     .build();
             meetingRepository.save(meeting);
             meetingDtoList.add(MeetingMapper.INSTANCE.toDto(meeting));
 
             Label label = null;
-//                LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
 
             if (!(request.getLabelId() == null)) {
                 label = LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
@@ -98,10 +97,24 @@ public class MeetingServiceImpl implements MeetingService {
                     .builder()
                     .meeting(meeting)
                     .user(meetingAuthor)
-                    .memberType(MemberType.AUTHOR)
+                    .status(Status.ACCEPTED)
                     .label(label)
                     .build();
             meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(author));
+
+            if (!request.getParticipants().isEmpty()) {
+                for (Long userId : request.getParticipants()) {
+                    User participant = UserMapper.INSTANCE.toEntity(userService.findById(userId));
+                    MeetingUser meetingUser = MeetingUser
+                            .builder()
+                            .meeting(meeting)
+                            .user(participant)
+                            .status(Status.PENDING)
+                            .build();
+                    meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
+                    //todo: send invitation for the meeting to the participants
+                }
+            }
         }
 
 //        for (LocalDate meetingDate : request.getMeetingDates()) {
@@ -113,94 +126,80 @@ public class MeetingServiceImpl implements MeetingService {
 //            meetingDatesService.save(MeetingDatesMapper.INSTANCE.toDto(meetingDates));
 //        }
 
-
-//        if (!request.getParticipants().isEmpty()) {
-//            for (Long userId : request.getParticipants()) {
-//                User participant = UserMapper.INSTANCE.toEntity(userService.findById(userId));
-//                MeetingUser meetingUser = MeetingUser
-//                        .builder()
-//                        .meeting(meeting)
-//                        .user(participant)
-//                        .memberType(MemberType.PARTICIPANT)
-//                        .build();
-//                meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
-//            }
-//        }
-        //todo: send invitation for the meeting to the participants
         return meetingDtoList;
     }
 
-    @Override
-    public MessageResponse acceptMeetingByParticipant(Long meetingId, Long participantId) { //todo: set label?
-
-        Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
-        User participant = UserMapper.INSTANCE.toEntity(userService.findById(participantId));
-
-        MeetingUser meetingUser = MeetingUser
-                .builder()
-                .meeting(meeting)
-                .user(participant)
-                .memberType(MemberType.PARTICIPANT)
-                .build();
-        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
-        //todo: send email confirming user participation to the meeting author
-        return MessageResponse.of("The meeting has been successfully added to your calendar");
-    }
-
-    @Override
-    public MessageResponse acceptMeetingByDelegate(Long meetingId, Long delegateId) {
-
-        Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
-        User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
-
-        //todo: maybe delete PARTICIPANT from MeetingUser
-        MeetingUser meetingUser = MeetingUser
-                .builder()
-                .meeting(meeting)
-                .user(delegate)
-                .memberType(MemberType.DELEGATE)
-                .build();
-        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
-        //todo: send email confirming delegate participation to the participant
-        //todo: send email confirming user participation to the meeting author
-        return MessageResponse.of("The meeting has been successfully added to your calendar");
-    }
-
-    @Override
-    public MessageResponse declineMeetingByParticipant(Long meetingId, Long participantId) { //todo: reasonForDeclining?
-        //todo: send email by participant about declining the meeting to the author
-        return MessageResponse.of("The invitation for the meeting has been declined");
-    }
-
-    @Override
-    @Transactional //todo: check this!!!
-    public MessageResponse declineMeetingByDelegate(Long meetingId, Long delegateId) {
-        //todo: send email by delegate about declining the meeting to the participant
-        //todo: send email by participant about declining the meeting to the author
-
-        meetingUserService.deleteByDelegateIdAndMeetingId(delegateId, meetingId); //todo: decide further
-        return MessageResponse.of("The invitation for the meeting has been declined");
-    }
-
-    @Override
-    public MessageResponse delegateMeeting(Long meetingId, Long participantId, Long delegateId) {
-
-        Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
-        User participant = UserMapper.INSTANCE.toEntity(userService.findById(participantId));
-        User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
-
-        //todo: maybe NOT save it
-        MeetingUser meetingUser = MeetingUser
-                .builder()
-                .meeting(meeting)
-                .user(participant)
-                .memberType(MemberType.PARTICIPANT)
-                .delegate(delegate)
-                .build();
-        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
-        //todo: send email with meeting details from user to delegate
-        return MessageResponse.of("Invitation for the meeting has been sent to the delegate");
-    }
+//    @Override
+//    public MessageResponse acceptMeetingByParticipant(Long meetingId, Long participantId) { //todo: set label?
+//
+//        Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
+//        User participant = UserMapper.INSTANCE.toEntity(userService.findById(participantId));
+//
+//        MeetingUser meetingUser = MeetingUser
+//                .builder()
+//                .meeting(meeting)
+//                .user(participant)
+//                .status(Status.ACCEPTED)
+//                .build();
+//        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
+//        //todo: send email confirming user participation to the meeting author
+//        return MessageResponse.of("The meeting has been successfully added to your calendar");
+//    }
+//
+//    @Override
+//    public MessageResponse acceptMeetingByDelegate(Long meetingId, Long delegateId) {
+//
+//        Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
+//        User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
+//
+//        //todo: maybe delete PARTICIPANT from MeetingUser
+//        MeetingUser meetingUser = MeetingUser
+//                .builder()
+//                .meeting(meeting)
+//                .user(delegate)
+//                .status(Status.ACCEPTED)
+//                .build();
+//        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
+//        //todo: send email confirming delegate participation to the participant
+//        //todo: send email confirming user participation to the meeting author
+//        return MessageResponse.of("The meeting has been successfully added to your calendar");
+//    }
+//
+//    @Override
+//    public MessageResponse declineMeetingByParticipant(Long meetingId, Long participantId) { //todo: reasonForDeclining?
+//        //todo: send email by participant about declining the meeting to the author
+//        return MessageResponse.of("The invitation for the meeting has been declined");
+//    }
+//
+//    @Override
+//    @Transactional //todo: check this!!!
+//    public MessageResponse declineMeetingByDelegate(Long meetingId, Long delegateId) {
+//        //todo: send email by delegate about declining the meeting to the participant
+//        //todo: send email by participant about declining the meeting to the author
+//
+//        meetingUserService.deleteByDelegateIdAndMeetingId(delegateId, meetingId); //todo: decide further
+//        return MessageResponse.of("The invitation for the meeting has been declined");
+//    }
+//
+//    @Override
+//    public MessageResponse delegateMeeting(Long meetingId, Long participantId, Long delegateId) {
+//
+//        Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
+//        User participant = UserMapper.INSTANCE.toEntity(userService.findById(participantId));
+//        User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
+//
+//        //todo: maybe NOT save it
+//        MeetingUser meetingUser = MeetingUser
+//                .builder()
+//                .meeting(meeting)
+//                .user(participant)
+//                .status(Status.DELEGATED)
+//                .delegate(delegate)
+//                .build();
+//        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
+//        //todo: send email with meeting details from user to delegate
+//        return MessageResponse.of("Invitation for the meeting has been sent to the delegate");
+//    }
 
     @Override
     public MeetingDto findById(Long id) {
@@ -213,33 +212,34 @@ public class MeetingServiceImpl implements MeetingService {
     public List<MeetingDto> findAll() {
         return MeetingMapper.INSTANCE.toDtoList(meetingRepository.findAll());
     }
+    //todo: remove?
+
+//    @Override
+//    public List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date) {
+//        userService.findById(userId);
+//        return MeetingMapper.INSTANCE.toDtoList
+//                (meetingRepository.findAllByUserIdAndDate(userId, date));
+//    }
 
     @Override
-    public List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date) {
+    public List<MeetingDto> findAllByUserIdAndDates(Long userId, LocalDate startDate, LocalDate endDate) {
         userService.findById(userId);
         return MeetingMapper.INSTANCE.toDtoList
-                (meetingRepository.findAllByUserIdAndDate(userId, date));
+                (meetingRepository.findAllByUserIdAndDates(userId, startDate, endDate));
     }
 
-    @Override
-    public List<MeetingDto> findAllByUserIdAndTwoDates(Long userId, LocalDate startDate, LocalDate endDate) {
-        userService.findById(userId);
-        return MeetingMapper.INSTANCE.toDtoList
-                (meetingRepository.findAllByUserIdAndTwoDates(userId, startDate, endDate));
-    }
+//    @Override
+//    public List<MeetingDto> findAllByRoomIdAndDate(Long roomId, LocalDate date) {
+//        roomService.findById(roomId);
+//        return MeetingMapper.INSTANCE.toDtoList
+//                (meetingRepository.findAllByRoomIdAndDate(roomId, date));
+//    }
 
     @Override
-    public List<MeetingDto> findAllByRoomIdAndDate(Long roomId, LocalDate date) {
+    public List<MeetingDto> findAllByRoomIdAndDates(Long roomId, LocalDate startDate, LocalDate endDate) {
         roomService.findById(roomId);
         return MeetingMapper.INSTANCE.toDtoList
-                (meetingRepository.findAllByRoomIdAndDate(roomId, date));
-    }
-
-    @Override
-    public List<MeetingDto> findAllByRoomIdAndTwoDates(Long roomId, LocalDate startDate, LocalDate endDate) {
-        roomService.findById(roomId);
-        return MeetingMapper.INSTANCE.toDtoList
-                (meetingRepository.findAllByRoomIdAndTwoDates(roomId, startDate, endDate));
+                (meetingRepository.findAllByRoomIdAndDates(roomId, startDate, endDate));
     }
 
     @Override
@@ -265,6 +265,8 @@ public class MeetingServiceImpl implements MeetingService {
                 }).orElseThrow(() -> new EntityNotFoundException
                         ("Meeting with id=" + request.getMeetingId() + " not found"));
 
+        //todo: if date or startTime or endTime different, change meetingUser to MODIFIED
+        // and send notification to users
 //        List<LocalDate> currentMeetingDates = meetingDatesService
 //                .findDatesByMeetingId(request.getMeetingId());
 //        List<LocalDate> requestMeetingDates = request.getMeetingDate();
@@ -333,8 +335,8 @@ public class MeetingServiceImpl implements MeetingService {
             if (!excludedParticipants.isEmpty()) {
                 for (Long userId : excludedParticipants) {
                     meetingUserService.deleteByUserIdAndMeetingId(userId, request.getMeetingId());
-                    //todo: send email to every user and inform
-                    // that they have been excluded from the meeting
+                    //todo: send notification to every user and inform
+                    // that they have been excluded from the meeting (CANCELLED)
                 }
             }
         }
@@ -349,7 +351,7 @@ public class MeetingServiceImpl implements MeetingService {
         meetingUserService.deleteByMeetingId(id);
         meetingRepository.deleteById(id);
         return MessageResponse.of("Meeting with id=" + id + " is deleted");
-        //todo: send email to users about cancellation of the meeting
+        //todo: send notification to users about cancellation of the meeting
     }
 
 }

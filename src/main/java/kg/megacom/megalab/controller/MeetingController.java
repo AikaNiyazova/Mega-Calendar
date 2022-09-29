@@ -120,7 +120,7 @@ public class MeetingController {
     }
 
     @GetMapping("/find-all")
-    public ResponseEntity<?> findAll() {
+    public ResponseEntity<?> findAll() { //todo: remove?
         try {
             log.info("Finding all meetings");
             return ResponseEntity.ok(meetingService.findAll());
@@ -131,27 +131,27 @@ public class MeetingController {
         }
     }
 
-    @GetMapping("/find-all-by-user-id-and-date/{userId}")
-    public ResponseEntity<?> findAllByUserIdAndDate(@PathVariable Long userId,
-                                                    @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
-        try {
-            log.info("Finding meetings for user_id=" + userId + " for date: " + date);
-            return ResponseEntity.ok(meetingService.findAllByUserIdAndDate(userId, date));
-        } catch (RuntimeException ex) {
-            log.error("Finding meetings for user failed. " + ex.getMessage());
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
-        }
-    }
+//    @GetMapping("/find-all-by-user-id-and-date/{userId}")
+//    public ResponseEntity<?> findAllByUserIdAndDate(@PathVariable Long userId,
+//                                                    @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
+//        try {
+//            log.info("Finding meetings for user_id=" + userId + " for date: " + date);
+//            return ResponseEntity.ok(meetingService.findAllByUserIdAndDate(userId, date));
+//        } catch (RuntimeException ex) {
+//            log.error("Finding meetings for user failed. " + ex.getMessage());
+//            ex.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+//        }
+//    }
 
-    @GetMapping("/find-all-by-user-id-and-two-dates/{userId}")
-    public ResponseEntity<?> findAllByUserIdAndTwoDates(@PathVariable Long userId,
-                                                        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate startDate,
-                                                        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate endDate) {
+    @GetMapping("/find-all-by-user-id-and-dates/{userId}")
+    public ResponseEntity<?> findAllByUserIdAndDates(@PathVariable Long userId,
+                                                     @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate startDate,
+                                                     @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate endDate) {
         try {
             log.info("Finding meetings for user_id=" + userId + " for the period from: " + startDate
                     + " to: " + endDate);
-            return ResponseEntity.ok(meetingService.findAllByUserIdAndTwoDates(userId, startDate, endDate));
+            return ResponseEntity.ok(meetingService.findAllByUserIdAndDates(userId, startDate, endDate));
         } catch (RuntimeException ex) {
             log.error("Finding meetings for user failed. " + ex.getMessage());
             ex.printStackTrace();
@@ -159,27 +159,27 @@ public class MeetingController {
         }
     }
 
-    @GetMapping("/find-all-by-room-id-and-date/{roomId}")
-    public ResponseEntity<?> findAllByRoomIdAndDate(@PathVariable Long roomId,
-                                                    @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
-        try {
-            log.info("Finding meetings for room_id=" + roomId + " for date: " + date);
-            return ResponseEntity.ok(meetingService.findAllByRoomIdAndDate(roomId, date));
-        } catch (RuntimeException ex) {
-            log.error("Finding meetings for room failed. " + ex.getMessage());
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
-        }
-    }
+//    @GetMapping("/find-all-by-room-id-and-date/{roomId}")
+//    public ResponseEntity<?> findAllByRoomIdAndDate(@PathVariable Long roomId,
+//                                                    @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate date) {
+//        try {
+//            log.info("Finding meetings for room_id=" + roomId + " for date: " + date);
+//            return ResponseEntity.ok(meetingService.findAllByRoomIdAndDate(roomId, date));
+//        } catch (RuntimeException ex) {
+//            log.error("Finding meetings for room failed. " + ex.getMessage());
+//            ex.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+//        }
+//    }
 
-    @GetMapping("/find-all-by-room-id-and-two-dates/{roomId}")
-    public ResponseEntity<?> findAllByRoomIdAndTwoDates(@PathVariable Long roomId,
-                                                        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate startDate,
-                                                        @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate endDate) {
+    @GetMapping("/find-all-by-room-id-and-dates/{roomId}")
+    public ResponseEntity<?> findAllByRoomIdAndDates(@PathVariable Long roomId,
+                                                     @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate startDate,
+                                                     @RequestParam @DateTimeFormat(pattern = "dd.MM.yyyy") LocalDate endDate) {
         try {
             log.info("Finding meetings for room_id=" + roomId + " for the period from: " + startDate
                     + " to: " + endDate);
-            return ResponseEntity.ok(meetingService.findAllByRoomIdAndTwoDates(roomId, startDate, endDate));
+            return ResponseEntity.ok(meetingService.findAllByRoomIdAndDates(roomId, startDate, endDate));
         } catch (RuntimeException ex) {
             log.error("Finding meetings for room failed. " + ex.getMessage());
             ex.printStackTrace();

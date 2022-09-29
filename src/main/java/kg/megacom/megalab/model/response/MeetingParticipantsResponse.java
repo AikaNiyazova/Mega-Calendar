@@ -1,7 +1,7 @@
 package kg.megacom.megalab.model.response;
 
 import kg.megacom.megalab.model.dto.UserDto;
-import kg.megacom.megalab.model.enums.MemberType;
+import kg.megacom.megalab.model.enums.Status;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +17,6 @@ import java.util.Map;
 public class MeetingParticipantsResponse {
 
     Long meetingId;
-    Map<UserDto, MemberType> participantDetails;
+    Map<UserDto, Status> participantDetails;
 
 }

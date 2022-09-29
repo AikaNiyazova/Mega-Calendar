@@ -19,7 +19,7 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-23T17:49:19+0600",
+    date = "2022-09-28T17:36:00+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class MeetingUserMapperImpl implements MeetingUserMapper {
@@ -35,9 +35,10 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         meetingUserDto.id( entity.getId() );
         meetingUserDto.meeting( meetingToMeetingDto( entity.getMeeting() ) );
         meetingUserDto.user( userToUserDto( entity.getUser() ) );
-        meetingUserDto.memberType( entity.getMemberType() );
+        meetingUserDto.status( entity.getStatus() );
         meetingUserDto.delegate( userToUserDto( entity.getDelegate() ) );
         meetingUserDto.label( labelToLabelDto( entity.getLabel() ) );
+        meetingUserDto.reasonForRejection( entity.getReasonForRejection() );
 
         return meetingUserDto.build();
     }
@@ -53,9 +54,10 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         meetingUser.id( dto.getId() );
         meetingUser.meeting( meetingDtoToMeeting( dto.getMeeting() ) );
         meetingUser.user( userDtoToUser( dto.getUser() ) );
-        meetingUser.memberType( dto.getMemberType() );
+        meetingUser.status( dto.getStatus() );
         meetingUser.delegate( userDtoToUser( dto.getDelegate() ) );
         meetingUser.label( labelDtoToLabel( dto.getLabel() ) );
+        meetingUser.reasonForRejection( dto.getReasonForRejection() );
 
         return meetingUser.build();
     }

@@ -15,27 +15,27 @@ public interface MeetingService {
 
     List<MeetingDto> create(CreateMeetingRequest request);
 
-    MessageResponse acceptMeetingByParticipant(Long meetingId, Long participantId);
-
-    MessageResponse acceptMeetingByDelegate(Long meetingId, Long delegateId);
-
-    MessageResponse declineMeetingByParticipant(Long meetingId, Long participantId);
-
-    MessageResponse declineMeetingByDelegate(Long meetingId, Long delegateId);
-
-    MessageResponse delegateMeeting(Long meetingId, Long userId, Long delegateId);
+//    MessageResponse acceptMeetingByParticipant(Long meetingId, Long participantId);
+//
+//    MessageResponse acceptMeetingByDelegate(Long meetingId, Long delegateId);
+//
+//    MessageResponse declineMeetingByParticipant(Long meetingId, Long participantId);
+//
+//    MessageResponse declineMeetingByDelegate(Long meetingId, Long delegateId);
+//
+//    MessageResponse delegateMeeting(Long meetingId, Long userId, Long delegateId);
 
     MeetingDto findById(Long id);
 
     List<MeetingDto> findAll();
 
-    List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date);
+//    List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date);
 
-    List<MeetingDto> findAllByUserIdAndTwoDates(Long userId, LocalDate startDate, LocalDate endDate);
+    List<MeetingDto> findAllByUserIdAndDates(Long userId, LocalDate startDate, LocalDate endDate);
 
-    List<MeetingDto> findAllByRoomIdAndDate(Long roomId, LocalDate date);
+//    List<MeetingDto> findAllByRoomIdAndDate(Long roomId, LocalDate date);
 
-    List<MeetingDto> findAllByRoomIdAndTwoDates(Long roomId, LocalDate startDate, LocalDate endDate);
+    List<MeetingDto> findAllByRoomIdAndDates(Long roomId, LocalDate startDate, LocalDate endDate);
 
     MeetingDto update(UpdateMeetingRequest request);
 

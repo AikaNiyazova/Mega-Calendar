@@ -60,7 +60,7 @@ public class Meeting {
     @Column(name = "is_visible", nullable = false)
     Boolean isVisible;
 
-//    @Column(name = "is_repeatable", nullable = false)
-//    Boolean isRepeatable;
+    @Column(name = "is_deleted", nullable = false)
+    Boolean isDeleted;
 
 }
