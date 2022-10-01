@@ -23,7 +23,7 @@ public class CreateUserRequest {
     @NotNull
     String msisdn;
 
-    @Email
+    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}")
     @NotBlank
     String email;
 
@@ -39,7 +39,4 @@ public class CreateUserRequest {
     @Positive
     Long roleId;
 
-//    public String getPassword() {
-//        return null;
-//    }
 }

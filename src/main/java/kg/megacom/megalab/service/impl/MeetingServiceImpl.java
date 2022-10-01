@@ -1,6 +1,6 @@
 package kg.megacom.megalab.service.impl;
 
-import kg.megacom.megalab.model.dto.MeetingDatesDto;
+//import kg.megacom.megalab.model.dto.MeetingDatesDto;
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.entity.*;
 import kg.megacom.megalab.model.enums.MemberType;
@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,7 +28,7 @@ public class MeetingServiceImpl implements MeetingService {
     private final MeetingRepository meetingRepository;
     private final UserService userService;
     private final RoomService roomService;
-    private final MeetingDatesService meetingDatesService;
+//    private final MeetingDatesService meetingDatesService;
     private final MeetingUserService meetingUserService;
     private final LabelService labelService;
 
@@ -35,19 +36,19 @@ public class MeetingServiceImpl implements MeetingService {
     public MeetingServiceImpl(MeetingRepository meetingRepository,
                               UserService userService,
                               RoomService roomService,
-                              MeetingDatesService meetingDatesService,
+//                              MeetingDatesService meetingDatesService,
                               MeetingUserService meetingUserService,
                               LabelService labelService) {
         this.meetingRepository = meetingRepository;
         this.userService = userService;
         this.roomService = roomService;
-        this.meetingDatesService = meetingDatesService;
+//        this.meetingDatesService = meetingDatesService;
         this.meetingUserService = meetingUserService;
         this.labelService = labelService;
     }
 
     @Override
-    public MeetingDto create(CreateMeetingRequest request) {
+    public List<MeetingDto> create(CreateMeetingRequest request) {
 
         if (request.getMeetingDates().get(0).isBefore(LocalDate.now())) {
             throw new RuntimeException("Meeting date should be no earlier than today");
@@ -60,49 +61,58 @@ public class MeetingServiceImpl implements MeetingService {
             throw new RuntimeException("Meeting end time should be no earlier than its start time");
         }
 
+//        if () {
+// todo: check room availability ?
+//        }
+
         User meetingAuthor = UserMapper.INSTANCE.toEntity
                 (userService.findById(request.getMeetingAuthorId()));
         Room room = RoomMapper.INSTANCE.toEntity(roomService.findById(request.getRoomId()));
 
-        Meeting meeting = Meeting
-                .builder()
-                .meetingAuthor(meetingAuthor)
-                .meetingTopic(request.getMeetingTopic())
-//                .meetingDate(request.getMeetingDate())
-                .meetingStartTime(request.getMeetingStartTime())
-                .meetingEndTime(request.getMeetingEndTime())
-                .room(room)
-//                .address(request.getAddress())
-                .isVisible(request.getIsVisible())
-//                .isRepeatable(request.getIsRepeatable())
-                .build();
-        meetingRepository.save(meeting);
+        List<MeetingDto> meetingDtoList = new ArrayList<>();
 
         for (LocalDate meetingDate : request.getMeetingDates()) {
-            MeetingDates meetingDates = MeetingDates
+            Meeting meeting = Meeting
                     .builder()
-                    .meeting(meeting)
+                    .meetingAuthor(meetingAuthor)
+                    .meetingTopic(request.getMeetingTopic())
                     .meetingDate(meetingDate)
+                    .meetingStartTime(request.getMeetingStartTime())
+                    .meetingEndTime(request.getMeetingEndTime())
+                    .room(room)
+//                .address(request.getAddress())
+                    .isVisible(request.getIsVisible())
+//                .isRepeatable(request.getIsRepeatable())
                     .build();
-            meetingDatesService.save(MeetingDatesMapper.INSTANCE.toDto(meetingDates));
-        }
+            meetingRepository.save(meeting);
+            meetingDtoList.add(MeetingMapper.INSTANCE.toDto(meeting));
 
-
-        Label label = null;
+            Label label = null;
 //                LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
 
-        if (!(request.getLabelId() == null)) {
-            label = LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
+            if (!(request.getLabelId() == null)) {
+                label = LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
+            }
+
+            MeetingUser author = MeetingUser
+                    .builder()
+                    .meeting(meeting)
+                    .user(meetingAuthor)
+                    .memberType(MemberType.AUTHOR)
+                    .label(label)
+                    .build();
+            meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(author));
         }
 
-        MeetingUser author = MeetingUser
-                .builder()
-                .meeting(meeting)
-                .user(meetingAuthor)
-                .memberType(MemberType.AUTHOR)
-                .label(label)
-                .build();
-        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(author));
+//        for (LocalDate meetingDate : request.getMeetingDates()) {
+//            MeetingDates meetingDates = MeetingDates
+//                    .builder()
+//                    .meeting(meeting)
+//                    .meetingDate(meetingDate)
+//                    .build();
+//            meetingDatesService.save(MeetingDatesMapper.INSTANCE.toDto(meetingDates));
+//        }
+
 
 //        if (!request.getParticipants().isEmpty()) {
 //            for (Long userId : request.getParticipants()) {
@@ -117,7 +127,7 @@ public class MeetingServiceImpl implements MeetingService {
 //            }
 //        }
         //todo: send invitation for the meeting to the participants
-        return MeetingMapper.INSTANCE.toDto(meeting);
+        return meetingDtoList;
     }
 
     @Override
@@ -143,6 +153,7 @@ public class MeetingServiceImpl implements MeetingService {
         Meeting meeting = MeetingMapper.INSTANCE.toEntity(findById(meetingId));
         User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
 
+        //todo: maybe delete PARTICIPANT from MeetingUser
         MeetingUser meetingUser = MeetingUser
                 .builder()
                 .meeting(meeting)
@@ -178,6 +189,7 @@ public class MeetingServiceImpl implements MeetingService {
         User participant = UserMapper.INSTANCE.toEntity(userService.findById(participantId));
         User delegate = UserMapper.INSTANCE.toEntity(userService.findById(delegateId));
 
+        //todo: maybe NOT save it
         MeetingUser meetingUser = MeetingUser
                 .builder()
                 .meeting(meeting)
@@ -195,6 +207,11 @@ public class MeetingServiceImpl implements MeetingService {
         return MeetingMapper.INSTANCE.toDto(meetingRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException
                         ("Meeting with id=" + id + " not found")));
+    }
+
+    @Override
+    public List<MeetingDto> findAll() {
+        return MeetingMapper.INSTANCE.toDtoList(meetingRepository.findAll());
     }
 
     @Override
@@ -231,12 +248,13 @@ public class MeetingServiceImpl implements MeetingService {
 
         //todo: check whether the author updates the meeting
         //todo: check if the meeting hasn't already passed
+        //todo: check if the room is available
 
         Room room = RoomMapper.INSTANCE.toEntity(roomService.findById(request.getRoomId()));
 
         MeetingDto meetingDto = meetingRepository.findById(request.getMeetingId())
                 .map(meeting -> {
-//                    meeting.setMeetingDate(request.getMeetingDates());
+                    meeting.setMeetingDate(request.getMeetingDate());
                     meeting.setMeetingStartTime(request.getMeetingStartTime());
                     meeting.setMeetingEndTime(request.getMeetingEndTime());
                     meeting.setRoom(room);
@@ -247,21 +265,21 @@ public class MeetingServiceImpl implements MeetingService {
                 }).orElseThrow(() -> new EntityNotFoundException
                         ("Meeting with id=" + request.getMeetingId() + " not found"));
 
-        List<LocalDate> currentMeetingDates = meetingDatesService
-                .findDatesByMeetingId(request.getMeetingId());
-        List<LocalDate> requestMeetingDates = request.getMeetingDates();
-
-        if (!currentMeetingDates.equals(requestMeetingDates)) {
-            meetingDatesService.deleteByMeetingId(request.getMeetingId());
-            for (LocalDate meetingDate : requestMeetingDates) {
-                MeetingDatesDto meetingDatesDto = MeetingDatesDto
-                        .builder()
-                        .meeting(meetingDto)
-                        .meetingDate(meetingDate)
-                        .build();
-                meetingDatesService.save(meetingDatesDto);
-            }
-        }
+//        List<LocalDate> currentMeetingDates = meetingDatesService
+//                .findDatesByMeetingId(request.getMeetingId());
+//        List<LocalDate> requestMeetingDates = request.getMeetingDate();
+//
+//        if (!currentMeetingDates.equals(requestMeetingDates)) {
+//            meetingDatesService.deleteByMeetingId(request.getMeetingId());
+//            for (LocalDate meetingDate : requestMeetingDates) {
+//                MeetingDatesDto meetingDatesDto = MeetingDatesDto
+//                        .builder()
+//                        .meeting(meetingDto)
+//                        .meetingDate(meetingDate)
+//                        .build();
+//                meetingDatesService.save(meetingDatesDto);
+//            }
+//        }
 
 //        if (request.getIsRepeatable()) {
 //            if (meetingDatesDto == null) {
@@ -324,7 +342,11 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
+    @Transactional
     public MessageResponse delete(Long id) {
+        //todo: Check that only AUTHOR can delete the meeting
+//        meetingDatesService.deleteByMeetingId(id);
+        meetingUserService.deleteByMeetingId(id);
         meetingRepository.deleteById(id);
         return MessageResponse.of("Meeting with id=" + id + " is deleted");
         //todo: send email to users about cancellation of the meeting

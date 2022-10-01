@@ -3,6 +3,7 @@ package kg.megacom.megalab.service.impl;
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.dto.MeetingUserDto;
 import kg.megacom.megalab.model.dto.UserDto;
+import kg.megacom.megalab.model.entity.MeetingUser;
 import kg.megacom.megalab.model.mapper.MeetingUserMapper;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.MeetingUserRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -51,6 +53,11 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     }
 
     @Override
+    public void deleteByMeetingId(Long meetingId) {
+        meetingUserRepository.deleteByMeetingId(meetingId);
+    }
+
+    @Override
     @Transactional
     public void deleteByUserIdAndMeetingId(Long userId, Long meetingId) {
         meetingUserRepository.deleteByUserIdAndMeetingId(userId, meetingId);
@@ -66,5 +73,13 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     @Override
     public void save(MeetingUserDto meetingUserDto) {
         meetingUserRepository.save(MeetingUserMapper.INSTANCE.toEntity(meetingUserDto));
+    }
+
+    @Override
+    public Boolean isUserAvailableByUserIdAndDateAndTime(Long userId, LocalDate date,
+                                                         LocalTime startTime, LocalTime endTime) {
+        List<MeetingUser> meetingUsers = meetingUserRepository.findByUserIdAndDateAndTime
+                (userId, date, startTime, endTime);
+        return meetingUsers.isEmpty();
     }
 }

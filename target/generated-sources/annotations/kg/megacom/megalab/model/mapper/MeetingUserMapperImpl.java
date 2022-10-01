@@ -19,8 +19,8 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-25T17:20:58+0600",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17 (Oracle Corporation)"
+    date = "2022-09-23T17:49:19+0600",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class MeetingUserMapperImpl implements MeetingUserMapper {
 
@@ -174,7 +174,9 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         LabelDto.LabelDtoBuilder labelDto = LabelDto.builder();
 
         labelDto.id( label.getId() );
+        labelDto.user( userToUserDto( label.getUser() ) );
         labelDto.labelName( label.getLabelName() );
+        labelDto.labelColor( label.getLabelColor() );
 
         return labelDto.build();
     }
@@ -265,7 +267,9 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         Label.LabelBuilder label = Label.builder();
 
         label.id( labelDto.getId() );
+        label.user( userDtoToUser( labelDto.getUser() ) );
         label.labelName( labelDto.getLabelName() );
+        label.labelColor( labelDto.getLabelColor() );
 
         return label.build();
     }

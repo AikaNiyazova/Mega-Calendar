@@ -2,6 +2,7 @@ package kg.megacom.megalab.controller;
 
 import kg.megacom.megalab.model.dto.LabelDto;
 import kg.megacom.megalab.model.request.CreateLabelRequest;
+import kg.megacom.megalab.model.request.UpdateLabelRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.service.LabelService;
 import lombok.RequiredArgsConstructor;
@@ -45,23 +46,23 @@ public class LabelController {
         }
     }
 
-    @GetMapping("/find-all")
-    public ResponseEntity<?> findAll() {
+    @GetMapping("/find-all-by-user-id/{userId}")
+    public ResponseEntity<?> findAllByUserId(@PathVariable Long userId) {
         try {
             log.info("Finding all labels");
-            return ResponseEntity.ok(labelService.findAll());
+            return ResponseEntity.ok(labelService.findAllByUserId(userId));
         } catch (RuntimeException ex) {
-            log.error("Finding all labels failed. " + ex.getMessage());
+            log.error("Finding all labels for user_id=" + userId + " failed. " + ex.getMessage());
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
         }
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<?> update(@RequestBody LabelDto labelDto) {
+    public ResponseEntity<?> update(@RequestBody @Valid UpdateLabelRequest request) {
         try {
-            log.info("Updating label with id=" + labelDto.getId());
-            return ResponseEntity.ok(labelService.update(labelDto));
+            log.info("Updating label with id=" + request.getId());
+            return ResponseEntity.ok(labelService.update(request));
         } catch (RuntimeException ex) {
             log.error("Updating label failed. " + ex.getMessage());
             ex.printStackTrace();

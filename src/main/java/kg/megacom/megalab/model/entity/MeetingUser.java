@@ -46,7 +46,7 @@ public class MeetingUser {
 
     @ManyToOne
     @JoinColumn(name = "delegate_user_id")
-    User delegate; //todo ???
+    User delegate; //todo: Do we need this at all ?
 
     @ManyToOne
     @JoinColumn(name = "label_id")

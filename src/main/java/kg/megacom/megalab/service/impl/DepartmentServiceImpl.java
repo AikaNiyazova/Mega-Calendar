@@ -140,15 +140,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     public MessageResponse deleteDepAndMembers(Long id) {
         delete(id);
-        //users delete (JOIN UPDATE)
         List<Long> userIds = departmentUserService.findAllUserIdsByDepartmentId(id);
         for (Long userId : userIds) {
             userService.delete(userId);
         }
-        //positions delete
         positionService.deletePositionsByDepartmentId(id);
-//        //users + depPositions delete
-//        userService.deleteUsersAndPositions(id); //todo: ??? doesn't work
         return MessageResponse.of("Department with id=" + id + " and its members are deleted");
     }
 

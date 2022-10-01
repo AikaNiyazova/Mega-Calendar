@@ -78,7 +78,7 @@ public class MeetingController {
         }
     }
 
-    @DeleteMapping("/decline-meeting-by-delegate/{meetingId}/{delegateId}") //todo: decide later
+    @DeleteMapping("/decline-meeting-by-delegate/{meetingId}/{delegateId}")
     public ResponseEntity<?> declineMeetingByDelegate(@PathVariable Long meetingId,
                                                       @PathVariable Long delegateId) {
         try {
@@ -116,6 +116,18 @@ public class MeetingController {
             log.error("Finding meeting failed. Meeting with id=" + id + " not found");
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+    }
+
+    @GetMapping("/find-all")
+    public ResponseEntity<?> findAll() {
+        try {
+            log.info("Finding all meetings");
+            return ResponseEntity.ok(meetingService.findAll());
+        } catch (RuntimeException ex) {
+            log.error("Finding all meetings failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
         }
     }
 

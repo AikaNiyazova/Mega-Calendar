@@ -32,9 +32,14 @@ public class Label {
     @Column(name = "id")
     Long id;
 
-//    User user; //todo: think later
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    User user; //todo: think later
 
     @Column(name = "label_name", nullable = false)
     String labelName;
+
+    @Column(name = "label_color", nullable = false)
+    String labelColor;
 
 }

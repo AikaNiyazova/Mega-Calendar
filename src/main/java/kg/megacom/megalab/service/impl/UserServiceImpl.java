@@ -4,8 +4,7 @@ import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.*;
 import kg.megacom.megalab.model.mapper.*;
 import kg.megacom.megalab.model.request.*;
-import kg.megacom.megalab.model.response.MessageResponse;
-import kg.megacom.megalab.model.response.ReadUserProfileResponse;
+import kg.megacom.megalab.model.response.*;
 import kg.megacom.megalab.repository.UserRepository;
 import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +52,9 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Email: " + request.getEmail() + " already in use");
         }
         Role role = RoleMapper.INSTANCE.toEntity(roleService.findById(request.getRoleId()));
-//        Organization organization = OrganizationMapper.INSTANCE.toEntity(organizationService.findById(request.getOrganizationId()));
-//        Department department = DepartmentMapper.INSTANCE.toEntity(departmentService.findById(request.getDepartmentId()));
-//        Position position = PositionMapper.INSTANCE.toEntity(positionService.findById(request.getPositionId()));
+        Organization organization = OrganizationMapper.INSTANCE.toEntity(organizationService.findById(request.getOrganizationId()));
+        Department department = DepartmentMapper.INSTANCE.toEntity(departmentService.findById(request.getDepartmentId()));
+        Position position = PositionMapper.INSTANCE.toEntity(positionService.findById(request.getPositionId()));
 
         User user = User
                 .builder()
@@ -65,35 +64,9 @@ public class UserServiceImpl implements UserService {
                 .msisdn(request.getMsisdn())
                 .email(request.getEmail())
                 .isDeleted(Boolean.FALSE)
-                .role(role) // TODO set role(USER) as Default
+                .role(role)
                 .build();
-
         userRepository.save(user);
-
-        addPositionDepartmentOrganization(user, request.getOrganizationId(), request.getDepartmentId(), request.getPositionId());
-
-        return UserMapper.INSTANCE.toDto(user);
-    }
-
-    @Override
-    public MessageResponse addAdditionalPosition(AddAdditionalPositionRequest request) {
-
-//        Organization organization = OrganizationMapper.INSTANCE.toEntity(organizationService.findById(request.getOrganizationId()));
-//        Department department = DepartmentMapper.INSTANCE.toEntity(departmentService.findById(request.getDepartmentId()));
-//        Position position = PositionMapper.INSTANCE.toEntity(positionService.findById(request.getPositionId()));
-
-        User user = UserMapper.INSTANCE.toEntity(findById(request.getUserId()));
-
-        addPositionDepartmentOrganization(user, request.getOrganizationId(), request.getDepartmentId(), request.getPositionId());
-
-        return MessageResponse.of("New position for user with id = " + request.getUserId() + " is added");
-    }
-
-    private void addPositionDepartmentOrganization(User user, Long organizationId, Long departmentId, Long positionId) {
-
-        Organization organization = OrganizationMapper.INSTANCE.toEntity(organizationService.findById(organizationId));
-        Department department = DepartmentMapper.INSTANCE.toEntity(departmentService.findById(departmentId));
-        Position position = PositionMapper.INSTANCE.toEntity(positionService.findById(positionId));
 
         OrganizationUser organizationUser = OrganizationUser
                 .builder()
@@ -115,6 +88,8 @@ public class UserServiceImpl implements UserService {
                 .user(user)
                 .build();
         positionUserService.save(PositionUserMapper.INSTANCE.toDto(positionUser));
+
+        return UserMapper.INSTANCE.toDto(user);
     }
 
     @Override
@@ -155,9 +130,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> findAll() {
+    public List<FindAllUsersForWebResponse> findAllForWebResponse() {
+        return userRepository.findAllUsersForWebResponse();
+    }
 
-        return UserMapper.INSTANCE.toDtoList(userRepository.findAll());
+    @Override
+    public List<FindAllUsersForMobileResponse> findAllForMobileResponse() {
+        return userRepository.findAllUsersForMobileResponse();
     }
 
     @Override
@@ -184,9 +163,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ReadUserProfileResponse readProfile(Long id) {
-        return userRepository.readProfile(id).orElseThrow(() -> new EntityNotFoundException
-                ("User with id=" + id + " not found"));
+    public List<UserProfileResponse> readProfile(Long id) {
+        return userRepository.readProfile(id);
+//                .orElseThrow(() -> new EntityNotFoundException
+//                ("User with id=" + id + " not found"));
     }
 
     @Override
@@ -232,24 +212,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public MessageResponse changeRole(Long userId, Long roleId) {
-        userRepository.changeRole(userId, roleId);
-        return MessageResponse.of("Role of user is changed");
-    }
-
-    @Override
     public MessageResponse delete(Long id) {
          userRepository.findByIdAndIsDeletedFalse(id).map(user -> {
             user.setIsDeleted(true);
             return userRepository.save(user);
-        }).orElseThrow(() -> new EntityNotFoundException("User with id= " + id + " not found"));
+        }).orElseThrow(() -> new EntityNotFoundException("User with id = " + id + " not found"));
         return MessageResponse.of("User with id = " + id + " is deleted");
-    }
-
-    @Override
-    public void deleteUsersAndPositions(Long departmentId) {
-
-        userRepository.deleteUsersAndPositions(departmentId);
     }
 
     @Override

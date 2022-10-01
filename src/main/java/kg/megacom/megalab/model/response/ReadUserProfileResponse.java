@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @SqlResultSetMapping(
-        name = "xxxDto",
+        name = "userDto",
         entities = {
                 @EntityResult(
                         entityClass = ReadUserProfileResponse.class, // имя текущего класса

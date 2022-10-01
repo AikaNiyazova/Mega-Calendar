@@ -38,20 +38,8 @@ public class UserController {
         }
     }
 
-    @PostMapping("/add-additional-position")
-    public ResponseEntity<?> addAdditionalPosition(@RequestBody @Valid AddAdditionalPositionRequest request) {
-        try {
-            log.info("Adding position to user with id = " + request.getUserId());
-            return ResponseEntity.status(HttpStatus.CREATED).body(userService.addAdditionalPosition(request));
-        } catch (RuntimeException ex) {
-            log.error("Adding position to user with id = " + request.getUserId() + " failed");
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
-        }
-    }
-
     @GetMapping("/find/{id}")
-    public ResponseEntity<?> find(@PathVariable Long id) {
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         try {
             log.info("Finding user with id=" + id);
             return ResponseEntity.ok(userService.findById(id));
@@ -62,13 +50,25 @@ public class UserController {
         }
     }
 
-    @GetMapping("/find-all")
-    public ResponseEntity<?> findAll() {
+    @GetMapping("/find-all-for-web")
+    public ResponseEntity<?> findAllForWeb() {
         try {
             log.info("Finding all users");
-            return ResponseEntity.ok(userService.findAll());
+            return ResponseEntity.ok(userService.findAllForWebResponse());
         } catch (RuntimeException ex) {
-            log.error("Finding all users failed. " + ex.getMessage());
+            log.error("Finding all users for web response failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
+    @GetMapping("/find-all-for-mobile")
+    public ResponseEntity<?> findAllForMobile() {
+        try {
+            log.info("Finding all users");
+            return ResponseEntity.ok(userService.findAllForMobileResponse());
+        } catch (RuntimeException ex) {
+            log.error("Finding all users for mobile response failed. " + ex.getMessage());
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
         }
@@ -141,19 +141,6 @@ public class UserController {
             return ResponseEntity.ok(userService.updateProfessionalInfo(request));
         } catch (RuntimeException ex) {
             log.error("User's professional info update is failed");
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
-        }
-    }
-
-    @PutMapping("/changeRole/{userId}/{roleId}")
-    public ResponseEntity<?> changeRole(@PathVariable Long userId,
-                                        @PathVariable Long roleId) {
-        try {
-            log.info("Changing role of user");
-            return ResponseEntity.ok(userService.changeRole(userId, roleId));
-        } catch (RuntimeException ex) {
-            log.error("Changing role failed");
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
         }

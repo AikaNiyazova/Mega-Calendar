@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public interface MeetingService {
 
-    MeetingDto create(CreateMeetingRequest request);
+    List<MeetingDto> create(CreateMeetingRequest request);
 
     MessageResponse acceptMeetingByParticipant(Long meetingId, Long participantId);
 
@@ -27,6 +27,8 @@ public interface MeetingService {
 
     MeetingDto findById(Long id);
 
+    List<MeetingDto> findAll();
+
     List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date);
 
     List<MeetingDto> findAllByUserIdAndTwoDates(Long userId, LocalDate startDate, LocalDate endDate);
@@ -39,7 +41,7 @@ public interface MeetingService {
 
     MessageResponse updateParticipants(UpdateParticipantsRequest request);
 
-    MessageResponse delete(Long id); //todo ???
+    MessageResponse delete(Long id);
 
     void setRoomIdNullInMeetings(Long roomId);
 

@@ -8,6 +8,7 @@ import kg.megacom.megalab.model.response.MessageResponse;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -23,10 +24,15 @@ public interface MeetingUserService {
 
     MeetingUserDto findByUserIdAndMeetingId(Long userId, Long meetingId); //todo: remove?
 
+    void deleteByMeetingId(Long meetingId);
+
     void deleteByUserIdAndMeetingId(Long userId, Long meetingId);
 
     void deleteByDelegateIdAndMeetingId(Long delegateId, Long meetingId);
 
     void save(MeetingUserDto meetingUserDto);
+
+    Boolean isUserAvailableByUserIdAndDateAndTime(Long userId, LocalDate date,
+                                                  LocalTime startTime, LocalTime endTime);
 
 }

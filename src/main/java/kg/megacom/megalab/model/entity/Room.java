@@ -1,6 +1,7 @@
 package kg.megacom.megalab.model.entity;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_room")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Room {
 
     @Id
@@ -47,6 +49,9 @@ public class Room {
 
     @Column(name = "is_ac_available", nullable = false)
     Boolean isAcAvailable;
+
+//    @Column(name = "is_hidden", nullable = false)
+//    Boolean isHidden;
 
     @Column(name = "is_deleted", nullable = false)
     Boolean isDeleted;

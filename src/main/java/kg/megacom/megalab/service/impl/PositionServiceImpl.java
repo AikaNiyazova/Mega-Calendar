@@ -11,6 +11,7 @@ import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.PositionRepository;
 import kg.megacom.megalab.service.DepartmentService;
 import kg.megacom.megalab.service.PositionService;
+import kg.megacom.megalab.service.PositionUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +23,15 @@ public class PositionServiceImpl implements PositionService {
 
     private final PositionRepository positionRepository;
     private final DepartmentService departmentService;
+    private final PositionUserService positionUserService;
 
     @Autowired
     public PositionServiceImpl(PositionRepository positionRepository,
-                               DepartmentService departmentService) {
+                               DepartmentService departmentService,
+                               PositionUserService positionUserService) {
         this.positionRepository = positionRepository;
         this.departmentService = departmentService;
+        this.positionUserService = positionUserService;
     }
 
     @Override
@@ -78,6 +82,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public MessageResponse delete(Long id) {
+        positionUserService.setNullToPositionId(id);
         positionRepository.findByIdAndIsDeletedFalse(id)
                 .map(position -> {
                     position.setIsDeleted(true);
@@ -85,7 +90,8 @@ public class PositionServiceImpl implements PositionService {
                 }).orElseThrow(() -> new EntityNotFoundException
                         ("Position with id=" + id + " not found"));
         return MessageResponse.of("Position with id=" + id + " is deleted");
-        //todo: if position.isDeleted = true { sout("no position") }
+//  todo: if position.isDeleted = true { sout("no position") }
+//  todo:positionUserService.findByPositionId(set 0 maybe) ?
     }
 
     @Override
