@@ -19,7 +19,7 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-28T17:36:00+0600",
+    date = "2022-10-02T19:29:45+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class MeetingUserMapperImpl implements MeetingUserMapper {
@@ -159,11 +159,10 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         meetingDto.id( meeting.getId() );
         meetingDto.meetingAuthor( userToUserDto( meeting.getMeetingAuthor() ) );
         meetingDto.meetingTopic( meeting.getMeetingTopic() );
-        meetingDto.meetingStartTime( meeting.getMeetingStartTime() );
-        meetingDto.meetingEndTime( meeting.getMeetingEndTime() );
         meetingDto.room( roomToRoomDto( meeting.getRoom() ) );
         meetingDto.address( meeting.getAddress() );
         meetingDto.isVisible( meeting.getIsVisible() );
+        meetingDto.isRepeatable( meeting.getIsRepeatable() );
 
         return meetingDto.build();
     }
@@ -252,11 +251,10 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         meeting.id( meetingDto.getId() );
         meeting.meetingAuthor( userDtoToUser( meetingDto.getMeetingAuthor() ) );
         meeting.meetingTopic( meetingDto.getMeetingTopic() );
-        meeting.meetingStartTime( meetingDto.getMeetingStartTime() );
-        meeting.meetingEndTime( meetingDto.getMeetingEndTime() );
         meeting.room( roomDtoToRoom( meetingDto.getRoom() ) );
         meeting.address( meetingDto.getAddress() );
         meeting.isVisible( meetingDto.getIsVisible() );
+        meeting.isRepeatable( meetingDto.getIsRepeatable() );
 
         return meeting.build();
     }

@@ -4,16 +4,16 @@ import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.request.CreateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateParticipantsRequest;
+import kg.megacom.megalab.model.response.MeetingResponse;
 import kg.megacom.megalab.model.response.MessageResponse;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public interface MeetingService {
 
-    List<MeetingDto> create(CreateMeetingRequest request);
+    MeetingResponse create(CreateMeetingRequest request);
 
 //    MessageResponse acceptMeetingByParticipant(Long meetingId, Long participantId);
 //
@@ -31,11 +31,7 @@ public interface MeetingService {
 
 //    List<MeetingDto> findAllByUserIdAndDate(Long userId, LocalDate date);
 
-    List<MeetingDto> findAllByUserIdAndDates(Long userId, LocalDate startDate, LocalDate endDate);
-
 //    List<MeetingDto> findAllByRoomIdAndDate(Long roomId, LocalDate date);
-
-    List<MeetingDto> findAllByRoomIdAndDates(Long roomId, LocalDate startDate, LocalDate endDate);
 
     MeetingDto update(UpdateMeetingRequest request);
 

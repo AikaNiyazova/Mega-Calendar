@@ -4,6 +4,7 @@ import kg.megacom.megalab.model.request.CreateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateParticipantsRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
+import kg.megacom.megalab.service.MeetingDateTimeService;
 import kg.megacom.megalab.service.MeetingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.List;
 
 @Slf4j
 @CrossOrigin
@@ -23,6 +25,7 @@ import java.time.LocalDate;
 public class MeetingController {
 
     private final MeetingService meetingService;
+    private final MeetingDateTimeService meetingDateTimeService;
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody @Valid CreateMeetingRequest request) {
@@ -36,76 +39,76 @@ public class MeetingController {
         }
     }
 
-    @PostMapping("/accept-meeting-by-participant/{meetingId}/{participantId}")
-    public ResponseEntity<?> acceptMeetingByParticipant(@PathVariable Long meetingId,
-                                                        @PathVariable Long participantId) {
-        try {
-            log.info("Participant with user_id=" + participantId + " is accepting " +
-                    "the meeting with id=" + meetingId);
-            return ResponseEntity.ok(meetingService.acceptMeetingByParticipant(meetingId, participantId));
-        } catch (RuntimeException ex) {
-            log.error("Accepting meeting by participant failed. " + ex.getMessage());
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
-        }
-    }
-
-    @PostMapping("/accept-meeting-by-delegate/{meetingId}/{delegateId}")
-    public ResponseEntity<?> acceptMeetingByDelegate(@PathVariable Long meetingId,
-                                                     @PathVariable Long delegateId) {
-        try {
-            log.info("Delegate with user_id=" + delegateId + " is accepting " +
-                    "the meeting with id=" + meetingId);
-            return ResponseEntity.ok(meetingService.acceptMeetingByDelegate(meetingId, delegateId));
-        } catch (RuntimeException ex) {
-            log.error("Accepting meeting by delegate failed. " + ex.getMessage());
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
-        }
-    }
-
-    @GetMapping("/decline-meeting-by-participant/{meetingId}/{participantId}")
-    public ResponseEntity<?> declineMeetingByParticipant(@PathVariable Long meetingId,
-                                                         @PathVariable Long participantId) {
-        try {
-            log.info("Participant with user_id=" + participantId + " is declining " +
-                    "the meeting with id=" + meetingId);
-            return ResponseEntity.ok(meetingService.declineMeetingByParticipant(meetingId, participantId));
-        } catch (RuntimeException ex) {
-            log.error("Declining meeting by participant failed. " + ex.getMessage());
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
-        }
-    }
-
-    @DeleteMapping("/decline-meeting-by-delegate/{meetingId}/{delegateId}")
-    public ResponseEntity<?> declineMeetingByDelegate(@PathVariable Long meetingId,
-                                                      @PathVariable Long delegateId) {
-        try {
-            log.info("Delegate with user_id=" + delegateId + " is declining " +
-                    "the meeting with id=" + meetingId);
-            return ResponseEntity.ok(meetingService.declineMeetingByDelegate(meetingId, delegateId));
-        } catch (RuntimeException ex) {
-            log.error("Declining meeting by delegate failed. " + ex.getMessage());
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
-        }
-    }
-
-    @PostMapping("/delegate-meeting/{meetingId}/{participantId}/{delegateId}")
-    public ResponseEntity<?> delegateMeeting(@PathVariable Long meetingId,
-                                             @PathVariable Long participantId,
-                                             @PathVariable Long delegateId) {
-        try {
-            log.info("Participant with user_id=" + participantId + " is delegating " +
-                    "the meeting with id=" + meetingId + " to delegate with user_id=" + delegateId);
-            return ResponseEntity.ok(meetingService.delegateMeeting(meetingId, participantId, delegateId));
-        } catch (RuntimeException ex) {
-            log.error("Delegating meeting failed. " + ex.getMessage());
-            ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
-        }
-    }
+//    @PostMapping("/accept-meeting-by-participant/{meetingId}/{participantId}")
+//    public ResponseEntity<?> acceptMeetingByParticipant(@PathVariable Long meetingId,
+//                                                        @PathVariable Long participantId) {
+//        try {
+//            log.info("Participant with user_id=" + participantId + " is accepting " +
+//                    "the meeting with id=" + meetingId);
+//            return ResponseEntity.ok(meetingService.acceptMeetingByParticipant(meetingId, participantId));
+//        } catch (RuntimeException ex) {
+//            log.error("Accepting meeting by participant failed. " + ex.getMessage());
+//            ex.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+//        }
+//    }
+//
+//    @PostMapping("/accept-meeting-by-delegate/{meetingId}/{delegateId}")
+//    public ResponseEntity<?> acceptMeetingByDelegate(@PathVariable Long meetingId,
+//                                                     @PathVariable Long delegateId) {
+//        try {
+//            log.info("Delegate with user_id=" + delegateId + " is accepting " +
+//                    "the meeting with id=" + meetingId);
+//            return ResponseEntity.ok(meetingService.acceptMeetingByDelegate(meetingId, delegateId));
+//        } catch (RuntimeException ex) {
+//            log.error("Accepting meeting by delegate failed. " + ex.getMessage());
+//            ex.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+//        }
+//    }
+//
+//    @GetMapping("/decline-meeting-by-participant/{meetingId}/{participantId}")
+//    public ResponseEntity<?> declineMeetingByParticipant(@PathVariable Long meetingId,
+//                                                         @PathVariable Long participantId) {
+//        try {
+//            log.info("Participant with user_id=" + participantId + " is declining " +
+//                    "the meeting with id=" + meetingId);
+//            return ResponseEntity.ok(meetingService.declineMeetingByParticipant(meetingId, participantId));
+//        } catch (RuntimeException ex) {
+//            log.error("Declining meeting by participant failed. " + ex.getMessage());
+//            ex.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+//        }
+//    }
+//
+//    @DeleteMapping("/decline-meeting-by-delegate/{meetingId}/{delegateId}")
+//    public ResponseEntity<?> declineMeetingByDelegate(@PathVariable Long meetingId,
+//                                                      @PathVariable Long delegateId) {
+//        try {
+//            log.info("Delegate with user_id=" + delegateId + " is declining " +
+//                    "the meeting with id=" + meetingId);
+//            return ResponseEntity.ok(meetingService.declineMeetingByDelegate(meetingId, delegateId));
+//        } catch (RuntimeException ex) {
+//            log.error("Declining meeting by delegate failed. " + ex.getMessage());
+//            ex.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+//        }
+//    }
+//
+//    @PostMapping("/delegate-meeting/{meetingId}/{participantId}/{delegateId}")
+//    public ResponseEntity<?> delegateMeeting(@PathVariable Long meetingId,
+//                                             @PathVariable Long participantId,
+//                                             @PathVariable Long delegateId) {
+//        try {
+//            log.info("Participant with user_id=" + participantId + " is delegating " +
+//                    "the meeting with id=" + meetingId + " to delegate with user_id=" + delegateId);
+//            return ResponseEntity.ok(meetingService.delegateMeeting(meetingId, participantId, delegateId));
+//        } catch (RuntimeException ex) {
+//            log.error("Delegating meeting failed. " + ex.getMessage());
+//            ex.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+//        }
+//    }
 
     @GetMapping("/find-by-id/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
@@ -151,7 +154,7 @@ public class MeetingController {
         try {
             log.info("Finding meetings for user_id=" + userId + " for the period from: " + startDate
                     + " to: " + endDate);
-            return ResponseEntity.ok(meetingService.findAllByUserIdAndDates(userId, startDate, endDate));
+            return ResponseEntity.ok(meetingDateTimeService.findAllByUserIdAndDates(userId, startDate, endDate));
         } catch (RuntimeException ex) {
             log.error("Finding meetings for user failed. " + ex.getMessage());
             ex.printStackTrace();
@@ -179,7 +182,7 @@ public class MeetingController {
         try {
             log.info("Finding meetings for room_id=" + roomId + " for the period from: " + startDate
                     + " to: " + endDate);
-            return ResponseEntity.ok(meetingService.findAllByRoomIdAndDates(roomId, startDate, endDate));
+            return ResponseEntity.ok(meetingDateTimeService.findAllByRoomIdAndDates(roomId, startDate, endDate));
         } catch (RuntimeException ex) {
             log.error("Finding meetings for room failed. " + ex.getMessage());
             ex.printStackTrace();
@@ -211,13 +214,13 @@ public class MeetingController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> delete(@RequestParam List<Long> ids) {
         try {
-            log.info("Deleting meeting with id=" + id);
-            return ResponseEntity.ok(meetingService.delete(id));
+            log.info("Deleting meeting with MeetingDateTime id(s)=" + ids);
+            return ResponseEntity.ok(meetingDateTimeService.deleteByMeetingId(ids));
         } catch (RuntimeException ex) {
-            log.error("Deleting meeting failed. " + ex.getMessage());
+            log.error("Deleting MeetingDateTime failed. " + ex.getMessage());
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
         }

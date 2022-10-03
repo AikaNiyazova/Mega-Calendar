@@ -1,16 +1,12 @@
 package kg.megacom.megalab.model.response;
 
-import kg.megacom.megalab.model.entity.Room;
-import kg.megacom.megalab.model.entity.User;
+import kg.megacom.megalab.model.dto.MeetingDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -21,19 +17,22 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MeetingResponse {
 
-    Long id;
-    User meetingAuthor;
-    String meetingTopic;
-
-    List<LocalDate> meetingDates;
+    MeetingDto meetingDto;
+    List<LocalDate> dates;
     LocalTime meetingStartTime;
     LocalTime meetingEndTime;
 
-    String roomName;
-    String roomLocation;
-
-//    String address;
-
-    Boolean isVisible;
+//    Long id;
+//    User meetingAuthor;
+//    String meetingTopic;
+//
+//    List<LocalDate> meetingDates;
+//
+//    String roomName;
+//    String roomLocation;
+//
+////    String address;
+//
+//    Boolean isVisible;
 
 }

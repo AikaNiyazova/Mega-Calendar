@@ -11,17 +11,16 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MeetingDto {
+public class MeetingDateTimeDto {
 
     Long id;
-    UserDto meetingAuthor;
-    String meetingTopic;
-//    LocalDate meetingDate;
-//    LocalTime meetingStartTime;
-//    LocalTime meetingEndTime;
-    RoomDto room;
-    String address;
-    Boolean isVisible;
-    Boolean isRepeatable;
+    MeetingDto meeting;
+    LocalDate meetingDate;
+    LocalTime meetingStartTime;
+    LocalTime meetingEndTime;
+    Boolean isDeleted;
+
+//    List<DayOfWeek> daysOfWeek;
+//    Integer numberOfWeeks;
 
 }

@@ -1,6 +1,7 @@
 package kg.megacom.megalab.service.impl;
 
 //import kg.megacom.megalab.model.dto.MeetingDatesDto;
+import kg.megacom.megalab.model.dto.MeetingDateTimeDto;
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.entity.*;
 import kg.megacom.megalab.model.enums.Status;
@@ -8,6 +9,7 @@ import kg.megacom.megalab.model.mapper.*;
 import kg.megacom.megalab.model.request.CreateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateParticipantsRequest;
+import kg.megacom.megalab.model.response.MeetingResponse;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.MeetingRepository;
 import kg.megacom.megalab.service.*;
@@ -28,7 +30,7 @@ public class MeetingServiceImpl implements MeetingService {
     private final MeetingRepository meetingRepository;
     private final UserService userService;
     private final RoomService roomService;
-//    private final MeetingDatesService meetingDatesService;
+    private final MeetingDateTimeService meetingDateTimeService;
     private final MeetingUserService meetingUserService;
     private final LabelService labelService;
 
@@ -36,19 +38,19 @@ public class MeetingServiceImpl implements MeetingService {
     public MeetingServiceImpl(MeetingRepository meetingRepository,
                               UserService userService,
                               RoomService roomService,
-//                              MeetingDatesService meetingDatesService,
+                              MeetingDateTimeService meetingDateTimeService,
                               MeetingUserService meetingUserService,
                               LabelService labelService) {
         this.meetingRepository = meetingRepository;
         this.userService = userService;
         this.roomService = roomService;
-//        this.meetingDatesService = meetingDatesService;
+        this.meetingDateTimeService = meetingDateTimeService;
         this.meetingUserService = meetingUserService;
         this.labelService = labelService;
     }
 
     @Override
-    public List<MeetingDto> create(CreateMeetingRequest request) {
+    public MeetingResponse create(CreateMeetingRequest request) {
 
         if (request.getMeetingDates().get(0).isBefore(LocalDate.now())) {
             throw new RuntimeException("Meeting date should be no earlier than today");
@@ -67,66 +69,76 @@ public class MeetingServiceImpl implements MeetingService {
 
         User meetingAuthor = UserMapper.INSTANCE.toEntity
                 (userService.findById(request.getMeetingAuthorId()));
-        Room room = RoomMapper.INSTANCE.toEntity(roomService.findById(request.getRoomId()));
+        Room room = RoomMapper.INSTANCE.toEntity
+                (roomService.findById(request.getRoomId()));
 
-        List<MeetingDto> meetingDtoList = new ArrayList<>();
-
-        for (LocalDate meetingDate : request.getMeetingDates()) {
-            Meeting meeting = Meeting
-                    .builder()
-                    .meetingAuthor(meetingAuthor)
-                    .meetingTopic(request.getMeetingTopic())
-                    .meetingDate(meetingDate)
-                    .meetingStartTime(request.getMeetingStartTime())
-                    .meetingEndTime(request.getMeetingEndTime())
-                    .room(room)
+        Meeting meeting = Meeting
+                .builder()
+                .meetingAuthor(meetingAuthor)
+                .meetingTopic(request.getMeetingTopic())
+//                    .meetingDate(meetingDate)
+//                    .meetingStartTime(request.getMeetingStartTime())
+//                    .meetingEndTime(request.getMeetingEndTime())
+                .room(room)
 //                .address(request.getAddress())
-                    .isVisible(request.getIsVisible())
-                    .isDeleted(false)
-                    .build();
-            meetingRepository.save(meeting);
-            meetingDtoList.add(MeetingMapper.INSTANCE.toDto(meeting));
+                .isVisible(request.getIsVisible())
+                .isRepeatable(request.getIsRepeatable())
+//                    .isDeleted(false)
+                .build();
+        meetingRepository.save(meeting);
+        MeetingDto meetingDto = MeetingMapper.INSTANCE.toDto(meeting);
 
-            Label label = null;
+        Label label = null;
+        if (!(request.getLabelId() == null)) {
+            label = LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
+        }
 
-            if (!(request.getLabelId() == null)) {
-                label = LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
-            }
+        MeetingUser author = MeetingUser
+                .builder()
+                .meeting(meeting)
+                .user(meetingAuthor)
+                .status(Status.ACCEPTED)
+                .label(label)
+                .build();
+        meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(author));
 
-            MeetingUser author = MeetingUser
-                    .builder()
-                    .meeting(meeting)
-                    .user(meetingAuthor)
-                    .status(Status.ACCEPTED)
-                    .label(label)
-                    .build();
-            meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(author));
-
-            if (!request.getParticipants().isEmpty()) {
-                for (Long userId : request.getParticipants()) {
-                    User participant = UserMapper.INSTANCE.toEntity(userService.findById(userId));
-                    MeetingUser meetingUser = MeetingUser
-                            .builder()
-                            .meeting(meeting)
-                            .user(participant)
-                            .status(Status.PENDING)
-                            .build();
-                    meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
-                    //todo: send invitation for the meeting to the participants
-                }
+        if (!request.getParticipants().isEmpty()) {
+            for (Long userId : request.getParticipants()) {
+                User participant = UserMapper.INSTANCE.toEntity(userService.findById(userId));
+                MeetingUser meetingUser = MeetingUser
+                        .builder()
+                        .meeting(meeting)
+                        .user(participant)
+                        .status(Status.PENDING)
+                        .build();
+                meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
+                //todo: send invitation for the meeting to the participants
             }
         }
 
-//        for (LocalDate meetingDate : request.getMeetingDates()) {
-//            MeetingDates meetingDates = MeetingDates
-//                    .builder()
-//                    .meeting(meeting)
-//                    .meetingDate(meetingDate)
-//                    .build();
-//            meetingDatesService.save(MeetingDatesMapper.INSTANCE.toDto(meetingDates));
-//        }
+        List<LocalDate> dates = new ArrayList<>();
 
-        return meetingDtoList;
+        for (LocalDate meetingDate : request.getMeetingDates()) {
+            MeetingDateTime meetingDateTime = MeetingDateTime
+                    .builder()
+                    .meeting(meeting)
+                    .meetingDate(meetingDate)
+                    .meetingStartTime(request.getMeetingStartTime())
+                    .meetingEndTime(request.getMeetingEndTime())
+                    .isDeleted(false)
+                    .build();
+            MeetingDateTimeDto meetingDateTimeDto = MeetingDateTimeMapper.INSTANCE.toDto(meetingDateTime);
+            meetingDateTimeService.save(meetingDateTimeDto);
+            dates.add(meetingDate);
+        }
+
+        return MeetingResponse
+                .builder()
+                .meetingDto(meetingDto)
+                .dates(dates)
+                .meetingStartTime(request.getMeetingStartTime())
+                .meetingEndTime(request.getMeetingEndTime())
+                .build();
     }
 
 //    @Override
@@ -221,26 +233,12 @@ public class MeetingServiceImpl implements MeetingService {
 //                (meetingRepository.findAllByUserIdAndDate(userId, date));
 //    }
 
-    @Override
-    public List<MeetingDto> findAllByUserIdAndDates(Long userId, LocalDate startDate, LocalDate endDate) {
-        userService.findById(userId);
-        return MeetingMapper.INSTANCE.toDtoList
-                (meetingRepository.findAllByUserIdAndDates(userId, startDate, endDate));
-    }
-
 //    @Override
 //    public List<MeetingDto> findAllByRoomIdAndDate(Long roomId, LocalDate date) {
 //        roomService.findById(roomId);
 //        return MeetingMapper.INSTANCE.toDtoList
 //                (meetingRepository.findAllByRoomIdAndDate(roomId, date));
 //    }
-
-    @Override
-    public List<MeetingDto> findAllByRoomIdAndDates(Long roomId, LocalDate startDate, LocalDate endDate) {
-        roomService.findById(roomId);
-        return MeetingMapper.INSTANCE.toDtoList
-                (meetingRepository.findAllByRoomIdAndDates(roomId, startDate, endDate));
-    }
 
     @Override
     @Transactional //todo: check this!!!
@@ -254,9 +252,9 @@ public class MeetingServiceImpl implements MeetingService {
 
         MeetingDto meetingDto = meetingRepository.findById(request.getMeetingId())
                 .map(meeting -> {
-                    meeting.setMeetingDate(request.getMeetingDate());
-                    meeting.setMeetingStartTime(request.getMeetingStartTime());
-                    meeting.setMeetingEndTime(request.getMeetingEndTime());
+//                    meeting.setMeetingDate(request.getMeetingDate());
+//                    meeting.setMeetingStartTime(request.getMeetingStartTime());
+//                    meeting.setMeetingEndTime(request.getMeetingEndTime());
                     meeting.setRoom(room);
                     meeting.setIsVisible(request.getIsVisible());
 //                    meeting.setIsRepeatable(request.getIsRepeatable());
