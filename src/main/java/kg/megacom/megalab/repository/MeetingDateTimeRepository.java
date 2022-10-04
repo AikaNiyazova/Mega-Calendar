@@ -12,13 +12,18 @@ import java.util.List;
 @Repository
 public interface MeetingDateTimeRepository extends JpaRepository<MeetingDateTime, Long> {
 
+    MeetingDateTime findByIdAndIsDeletedFalse(Long id);
+
     @Query(value = "SELECT meeting_id FROM tb_meeting_date_time " +
             "WHERE id = ?", nativeQuery = true)
     Long findMeetingIdById(Long id);
 
-    @Query(value = "SELECT * FROM tb_meeting_dates " +
-            "WHERE meeting_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM tb_meeting_date_time " +
+            "WHERE meeting_id = ?1 " +
+            "AND is_deleted = false", nativeQuery = true) //todo
     List<MeetingDateTime> findDatesByMeetingId(Long meetingId);
+
+//    List<MeetingDateTime> findAllBy
 
     @Query(value = "SELECT md.* FROM tb_meeting_date_time md " +
             "JOIN tb_meeting m on m.id = md.meeting_id " +
@@ -31,7 +36,7 @@ public interface MeetingDateTimeRepository extends JpaRepository<MeetingDateTime
 
     @Query(value = "SELECT md.* FROM tb_meeting_date_time md " +
             "JOIN tb_meeting m on m.id = md.meeting_id " +
-            "WHERE m.room_id = ?1 " +
+            "WHERE md.room_id = ?1 " +
             "AND md.is_deleted = false " +
             "AND md.meeting_date BETWEEN ?2 AND ?3", nativeQuery = true)
     List<MeetingDateTime> findAllByRoomIdAndDates(Long roomId, LocalDate startDate, LocalDate endDate);

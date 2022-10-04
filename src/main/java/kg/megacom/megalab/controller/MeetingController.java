@@ -218,7 +218,7 @@ public class MeetingController {
     public ResponseEntity<?> delete(@RequestParam List<Long> ids) {
         try {
             log.info("Deleting meeting with MeetingDateTime id(s)=" + ids);
-            return ResponseEntity.ok(meetingDateTimeService.deleteByMeetingId(ids));
+            return ResponseEntity.ok(meetingDateTimeService.deleteByIds(ids));
         } catch (RuntimeException ex) {
             log.error("Deleting MeetingDateTime failed. " + ex.getMessage());
             ex.printStackTrace();

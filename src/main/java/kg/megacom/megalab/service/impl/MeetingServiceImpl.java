@@ -1,8 +1,7 @@
 package kg.megacom.megalab.service.impl;
 
 //import kg.megacom.megalab.model.dto.MeetingDatesDto;
-import kg.megacom.megalab.model.dto.MeetingDateTimeDto;
-import kg.megacom.megalab.model.dto.MeetingDto;
+import kg.megacom.megalab.model.dto.*;
 import kg.megacom.megalab.model.entity.*;
 import kg.megacom.megalab.model.enums.Status;
 import kg.megacom.megalab.model.mapper.*;
@@ -23,6 +22,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MeetingServiceImpl implements MeetingService {
@@ -63,8 +63,21 @@ public class MeetingServiceImpl implements MeetingService {
             throw new RuntimeException("Meeting end time should be no earlier than its start time");
         }
 
-//        if () {
-// todo: check room availability ?
+//        roomService.checkRoomAvailabilityForDates(request.getRoomId(), request.getMeetingDates(),
+//                request.getMeetingStartTime(), request.getMeetingEndTime());
+//
+//        RoomDto roomDto = roomService.findById(request.getRoomId());
+//        List<LocalDate> busyDates = new ArrayList<>();
+//        for (LocalDate meetingDate : request.getMeetingDates()) {
+//            List<RoomDto> freeRooms = roomService.findFreeRoomsForDateAndTime(meetingDate,
+//                    request.getMeetingStartTime(), request.getMeetingEndTime());
+//            if (!freeRooms.contains(roomDto)) {
+//                busyDates.add(meetingDate);
+//            }
+//        }
+//        if (!busyDates.isEmpty()) {
+//            throw new RuntimeException("Room with id=" + request.getRoomId() +
+//                    " is not available at this time for date(s): " + busyDates);
 //        }
 
         User meetingAuthor = UserMapper.INSTANCE.toEntity
@@ -79,7 +92,7 @@ public class MeetingServiceImpl implements MeetingService {
 //                    .meetingDate(meetingDate)
 //                    .meetingStartTime(request.getMeetingStartTime())
 //                    .meetingEndTime(request.getMeetingEndTime())
-                .room(room)
+//                .room(room)
 //                .address(request.getAddress())
                 .isVisible(request.getIsVisible())
                 .isRepeatable(request.getIsRepeatable())
@@ -125,6 +138,7 @@ public class MeetingServiceImpl implements MeetingService {
                     .meetingDate(meetingDate)
                     .meetingStartTime(request.getMeetingStartTime())
                     .meetingEndTime(request.getMeetingEndTime())
+                    .room(room)
                     .isDeleted(false)
                     .build();
             MeetingDateTimeDto meetingDateTimeDto = MeetingDateTimeMapper.INSTANCE.toDto(meetingDateTime);
@@ -242,26 +256,133 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     @Transactional //todo: check this!!!
-    public MeetingDto update(UpdateMeetingRequest request) {
+    public MeetingResponse update(UpdateMeetingRequest request) {
 
         //todo: check whether the author updates the meeting
         //todo: check if the meeting hasn't already passed
         //todo: check if the room is available
 
-        Room room = RoomMapper.INSTANCE.toEntity(roomService.findById(request.getRoomId()));
+        MeetingDateTimeDto curDateTimeDto = meetingDateTimeService
+                .findById(request.getMeetingDateTimeId());
 
-        MeetingDto meetingDto = meetingRepository.findById(request.getMeetingId())
-                .map(meeting -> {
+        if (curDateTimeDto.getMeetingDate().isBefore(LocalDate.now())) {
+            throw new RuntimeException("You cannot modify the meeting that has already passed");
+        }
+
+//        roomService.checkRoomAvailabilityForDates(request.getRoomId(), request.getMeetingDates(),
+//                request.getMeetingStartTime(), request.getMeetingEndTime());
+
+        Long meetingId = request.getMeetingId();
+        MeetingDto meetingDto = findById(meetingId);
+
+        RoomDto roomDto = roomService.findById(request.getRoomId());
+
+        List<LocalDate> newMeetingDates = request.getMeetingDates();
+
+        List<MeetingDateTimeDto> meetingDateTimeDtoList = meetingDateTimeService
+                .findDatesByMeetingId(request.getMeetingId())
+                .stream().filter(meetingDateTimeDto ->
+                        !meetingDateTimeDto.getMeetingDate()
+                        .isBefore(newMeetingDates.get(0)))
+                .collect(Collectors.toList());
+
+        List<LocalDate> curMeetingDates = meetingDateTimeDtoList
+                .stream().map(MeetingDateTimeDto::getMeetingDate)
+                .collect(Collectors.toList());
+
+        List<Long> meetingDateTimeIds = meetingDateTimeDtoList
+                .stream().map(MeetingDateTimeDto::getId)
+                .collect(Collectors.toList());
+
+        if (!curMeetingDates.equals(newMeetingDates)) {
+            meetingDateTimeService.deleteByIds(meetingDateTimeIds);
+            for (LocalDate date : newMeetingDates) {
+                MeetingDateTimeDto meetingDateTimeDto = MeetingDateTimeDto
+                        .builder()
+                        .meeting(meetingDto)
+                        .meetingDate(date)
+                        .meetingStartTime(request.getMeetingStartTime())
+                        .meetingEndTime(request.getMeetingEndTime())
+                        .room(roomDto)
+                        .isDeleted(false)
+                        .build();
+                meetingDateTimeService.save(meetingDateTimeDto);
+                //todo: code below
+            }
+        } else if (!curDateTimeDto.getMeetingStartTime().equals(request.getMeetingStartTime()) ||
+                !curDateTimeDto.getMeetingEndTime().equals(request.getMeetingEndTime())) {
+            for (MeetingDateTimeDto mdt : meetingDateTimeDtoList) {
+                mdt.setMeetingStartTime(request.getMeetingStartTime());
+                mdt.setMeetingEndTime(request.getMeetingEndTime());
+                meetingDateTimeService.save(mdt);
+            }
+            List<Long> userIds = meetingUserService.findAllUserIdsByMeetingId(meetingId);
+            for (Long userId : userIds) {
+                MeetingUserDto meetingUserDto = meetingUserService
+                        .findByUserIdAndMeetingId(userId, meetingId);
+                meetingUserDto.setStatus(Status.PENDING); //todo: MODIFIED
+                meetingUserService.save(meetingUserDto);
+            }
+            //todo: send notification to users for approval
+        } else if (!curDateTimeDto.getRoom().getId().equals(request.getRoomId())) {
+            for (MeetingDateTimeDto mdt : meetingDateTimeDtoList) {
+                mdt.setRoom(roomDto);
+                meetingDateTimeService.save(mdt);
+            }
+            //todo: send notification to users for information
+        }
+
+        meetingDto.setIsVisible(request.getIsVisible());
+        meetingDto.setIsRepeatable(request.getIsRepeatable());
+        meetingRepository.save(MeetingMapper.INSTANCE.toEntity(meetingDto));
+
+//        MeetingDto meetingDto = meetingRepository.findById(meetingId)
+//                .map(meeting -> {
 //                    meeting.setMeetingDate(request.getMeetingDate());
 //                    meeting.setMeetingStartTime(request.getMeetingStartTime());
 //                    meeting.setMeetingEndTime(request.getMeetingEndTime());
-                    meeting.setRoom(room);
-                    meeting.setIsVisible(request.getIsVisible());
-//                    meeting.setIsRepeatable(request.getIsRepeatable());
-                meetingRepository.save(meeting);
-                return MeetingMapper.INSTANCE.toDto(meeting);
-                }).orElseThrow(() -> new EntityNotFoundException
-                        ("Meeting with id=" + request.getMeetingId() + " not found"));
+//                    meeting.setRoom(room);
+//                    meetingDto.setIsVisible(request.getIsVisible());
+//                    meetingDto.setIsRepeatable(request.getIsRepeatable());
+//                meetingRepository.save(meetingDto);
+//                return MeetingMapper.INSTANCE.toDto(meeting);
+//                }).orElseThrow(() -> new EntityNotFoundException
+//                        ("Meeting with id=" + meetingId + " not found"));
+
+        Long meetingAuthorId = meetingDto.getMeetingAuthor().getId();
+        MeetingUserDto meetingAuthor = meetingUserService.findByUserIdAndMeetingId
+                (meetingAuthorId, meetingId);
+
+        LabelDto newLabel = null;
+        if (!(request.getLabelId() == null)) {
+            newLabel = labelService.findById(request.getLabelId());
+        }
+        meetingAuthor.setLabel(newLabel);
+        meetingUserService.save(meetingAuthor);
+
+//        LabelDto curLabel = meetingAuthor.getLabel();
+//
+//        if (!curLabel) {
+//
+//        } else (!curLabel.equals(newLabel)) {
+//            meetingAuthor.setLabel(newLabel);
+//            meetingUserService.save(meetingAuthor);
+//        }
+
+
+//        for (int i = 0; i < meetingDateTimeIds.size(); i++) {
+//
+//        }
+//        for (LocalDate date : newMeetingDates) {
+//            for (Long meetingDateTimeId : meetingDateTimeIds){
+//                MeetingDateTimeDto meetingDateTimeDto = meetingDateTimeService.findById(meetingDateTimeId);
+//                meetingDateTimeDto.setMeetingDate(date);
+//                meetingDateTimeDto.setMeetingStartTime(request.getMeetingStartTime());
+//                meetingDateTimeDto.setMeetingEndTime(request.getMeetingEndTime());
+//                meetingDateTimeDto.setRoom(roomDto);
+//                meetingDateTimeService.save(meetingDateTimeDto);
+//            }
+//        }
 
         //todo: if date or startTime or endTime different, change meetingUser to MODIFIED
         // and send notification to users
@@ -303,13 +424,17 @@ public class MeetingServiceImpl implements MeetingService {
 //            }
 //        }
 
-        return meetingDto;
+        return MeetingResponse
+                .builder()
+                .meetingDto(meetingDto)
+                .dates(newMeetingDates)
+                .meetingStartTime(request.getMeetingStartTime())
+                .meetingEndTime(request.getMeetingEndTime())
+                .build();
     }
 
     @Override
     public MessageResponse updateParticipants(UpdateParticipantsRequest request) {
-
-//        MeetingDto meetingDto = findById(request.getMeetingId());
 
         List<Long> oldParticipantIds = meetingUserService.findAllUserIdsByMeetingId(request.getMeetingId());
         List<Long> newParticipantIds = request.getParticipants();
@@ -320,13 +445,20 @@ public class MeetingServiceImpl implements MeetingService {
         if (!oldParticipantIds.equals(newParticipantIds)) {
             if (!additionalParticipants.isEmpty()/*newParticipantIds.removeAll(oldParticipantIds)*/) {
                 for (Long userId : additionalParticipants) {
-//                    MeetingUserDto meetingUserDto = MeetingUserDto
-//                            .builder()
-//                            .meeting(meetingDto)
-//                            .user(userService.findById(userId))
-//                            .memberType(MemberType.PARTICIPANT)
-//                            .build();
-//                    meetingUserService.save(meetingUserDto);
+                    MeetingUserDto invitedBefore = meetingUserService
+                            .findByUserIdAndMeetingId(userId, request.getMeetingId());
+                    if (!(invitedBefore == null)) {
+                        invitedBefore.setStatus(Status.PENDING); //MODIFIED
+                        meetingUserService.save(invitedBefore);
+                    } else {
+                        MeetingUserDto meetingUserDto = MeetingUserDto
+                            .builder()
+                            .meeting(findById(request.getMeetingId()))
+                            .user(userService.findById(userId))
+                            .status(Status.PENDING)
+                            .build();
+                        meetingUserService.save(meetingUserDto);
+                    }
                     //todo: send invitation for the meeting to every user
                 }
             }
@@ -343,7 +475,7 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Override
     @Transactional
-    public MessageResponse delete(Long id) {
+    public MessageResponse delete(Long id) {                                    //todo: delete !?
         //todo: Check that only AUTHOR can delete the meeting
 //        meetingDatesService.deleteByMeetingId(id);
         meetingUserService.deleteByMeetingId(id);

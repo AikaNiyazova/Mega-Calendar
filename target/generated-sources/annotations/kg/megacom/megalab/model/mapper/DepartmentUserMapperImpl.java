@@ -17,7 +17,7 @@ import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-02T19:29:44+0600",
+    date = "2022-10-04T14:35:51+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class DepartmentUserMapperImpl implements DepartmentUserMapper {

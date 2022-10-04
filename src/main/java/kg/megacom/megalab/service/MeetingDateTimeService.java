@@ -12,7 +12,9 @@ public interface MeetingDateTimeService {
 
     void save(MeetingDateTimeDto meetingDateTimeDto);
 
-    List<LocalDate> findDatesByMeetingId(Long meetingId);
+    MeetingDateTimeDto findById(Long id);
+
+    List<MeetingDateTimeDto> findDatesByMeetingId(Long meetingId);
 
     List<MeetingDateTimeDto> findAllByUserIdAndDates(Long userId, LocalDate startDate, LocalDate endDate);
 
@@ -20,6 +22,6 @@ public interface MeetingDateTimeService {
 
 //    MessageResponse delete(MeetingDates meetingDates);
 
-    MessageResponse deleteByMeetingId(List<Long> meetingId);
+    MessageResponse deleteByIds(List<Long> meetingId);
 
 }

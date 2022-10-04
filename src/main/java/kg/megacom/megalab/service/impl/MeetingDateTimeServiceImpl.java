@@ -1,7 +1,6 @@
 package kg.megacom.megalab.service.impl;
 
 import kg.megacom.megalab.model.dto.MeetingDateTimeDto;
-import kg.megacom.megalab.model.entity.MeetingDateTime;
 import kg.megacom.megalab.model.mapper.MeetingDateTimeMapper;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.MeetingDateTimeRepository;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MeetingDateTimeServiceImpl implements MeetingDateTimeService {
@@ -42,11 +40,19 @@ public class MeetingDateTimeServiceImpl implements MeetingDateTimeService {
     }
 
     @Override
-    public List<LocalDate> findDatesByMeetingId(Long meetingId) {
-        return meetingDateTimeRepository.findDatesByMeetingId(meetingId)
-                .stream()
-                .map(MeetingDateTime::getMeetingDate)
-                .collect(Collectors.toList());
+    public MeetingDateTimeDto findById(Long id) {
+        return MeetingDateTimeMapper.INSTANCE.toDto
+                (meetingDateTimeRepository.findByIdAndIsDeletedFalse(id));
+    }
+
+    @Override
+    public List<MeetingDateTimeDto> findDatesByMeetingId(Long meetingId) {
+        return MeetingDateTimeMapper.INSTANCE.toDtoList
+                (meetingDateTimeRepository.findDatesByMeetingId(meetingId));
+//                meetingDateTimeRepository.findDatesByMeetingId(meetingId)
+//                .stream()
+//                .map(MeetingDateTime::getMeetingDate)
+//                .collect(Collectors.toList());
     }
 
     @Override
@@ -70,11 +76,10 @@ public class MeetingDateTimeServiceImpl implements MeetingDateTimeService {
 //    }
 
     @Override
-    public MessageResponse deleteByMeetingId(List<Long> ids) {
+    public MessageResponse deleteByIds(List<Long> ids) {
         //todo: Check that only AUTHOR can delete the meeting
         for (Long id : ids) {
             meetingDateTimeRepository.delete(id);
-
         }
         List<Long> userIds = meetingUserService.findAllUserIdsByMeetingId
                 (meetingDateTimeRepository.findMeetingIdById(ids.get(0)));

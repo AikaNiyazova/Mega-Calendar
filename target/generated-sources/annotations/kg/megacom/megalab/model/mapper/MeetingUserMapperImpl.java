@@ -7,19 +7,17 @@ import kg.megacom.megalab.model.dto.LabelDto;
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.dto.MeetingUserDto;
 import kg.megacom.megalab.model.dto.RoleDto;
-import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.Label;
 import kg.megacom.megalab.model.entity.Meeting;
 import kg.megacom.megalab.model.entity.MeetingUser;
 import kg.megacom.megalab.model.entity.Role;
-import kg.megacom.megalab.model.entity.Room;
 import kg.megacom.megalab.model.entity.User;
 import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-10-02T19:29:45+0600",
+    date = "2022-10-04T14:35:51+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class MeetingUserMapperImpl implements MeetingUserMapper {
@@ -130,25 +128,6 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         return userDto.build();
     }
 
-    protected RoomDto roomToRoomDto(Room room) {
-        if ( room == null ) {
-            return null;
-        }
-
-        RoomDto.RoomDtoBuilder roomDto = RoomDto.builder();
-
-        roomDto.id( room.getId() );
-        roomDto.roomName( room.getRoomName() );
-        roomDto.roomCapacity( room.getRoomCapacity() );
-        roomDto.location( room.getLocation() );
-        roomDto.isDashboardAvailable( room.getIsDashboardAvailable() );
-        roomDto.isProjectorAvailable( room.getIsProjectorAvailable() );
-        roomDto.isAcAvailable( room.getIsAcAvailable() );
-        roomDto.isDeleted( room.getIsDeleted() );
-
-        return roomDto.build();
-    }
-
     protected MeetingDto meetingToMeetingDto(Meeting meeting) {
         if ( meeting == null ) {
             return null;
@@ -159,7 +138,6 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         meetingDto.id( meeting.getId() );
         meetingDto.meetingAuthor( userToUserDto( meeting.getMeetingAuthor() ) );
         meetingDto.meetingTopic( meeting.getMeetingTopic() );
-        meetingDto.room( roomToRoomDto( meeting.getRoom() ) );
         meetingDto.address( meeting.getAddress() );
         meetingDto.isVisible( meeting.getIsVisible() );
         meetingDto.isRepeatable( meeting.getIsRepeatable() );
@@ -222,25 +200,6 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         return user.build();
     }
 
-    protected Room roomDtoToRoom(RoomDto roomDto) {
-        if ( roomDto == null ) {
-            return null;
-        }
-
-        Room.RoomBuilder room = Room.builder();
-
-        room.id( roomDto.getId() );
-        room.roomName( roomDto.getRoomName() );
-        room.roomCapacity( roomDto.getRoomCapacity() );
-        room.location( roomDto.getLocation() );
-        room.isDashboardAvailable( roomDto.getIsDashboardAvailable() );
-        room.isProjectorAvailable( roomDto.getIsProjectorAvailable() );
-        room.isAcAvailable( roomDto.getIsAcAvailable() );
-        room.isDeleted( roomDto.getIsDeleted() );
-
-        return room.build();
-    }
-
     protected Meeting meetingDtoToMeeting(MeetingDto meetingDto) {
         if ( meetingDto == null ) {
             return null;
@@ -251,7 +210,6 @@ public class MeetingUserMapperImpl implements MeetingUserMapper {
         meeting.id( meetingDto.getId() );
         meeting.meetingAuthor( userDtoToUser( meetingDto.getMeetingAuthor() ) );
         meeting.meetingTopic( meetingDto.getMeetingTopic() );
-        meeting.room( roomDtoToRoom( meetingDto.getRoom() ) );
         meeting.address( meetingDto.getAddress() );
         meeting.isVisible( meetingDto.getIsVisible() );
         meeting.isRepeatable( meetingDto.getIsRepeatable() );

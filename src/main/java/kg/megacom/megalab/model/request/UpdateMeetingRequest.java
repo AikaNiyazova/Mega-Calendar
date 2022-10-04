@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,10 +18,14 @@ public class UpdateMeetingRequest {
 
     @NotNull
     @Positive
+    Long meetingDateTimeId;
+
+    @NotNull
+    @Positive
     Long meetingId;
 
     @NotNull
-    LocalDate meetingDate;
+    List<LocalDate> meetingDates;
 
     LocalTime meetingStartTime;
 
@@ -34,7 +39,9 @@ public class UpdateMeetingRequest {
 
     Boolean isVisible;
 
-//    Boolean isRepeatable;
+    Boolean isRepeatable;
+
+    Long labelId;
 
 //    List<DayOfWeek> daysOfWeek;
 

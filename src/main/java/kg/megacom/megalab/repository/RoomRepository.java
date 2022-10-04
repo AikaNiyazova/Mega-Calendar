@@ -38,8 +38,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     void deleteRoomById(Long id);
 
     @Query(value = "SELECT DISTINCT r.* FROM tb_room r " +
-            "LEFT JOIN tb_meeting m ON r.id = m.room_id " +
-            "LEFT JOIN tb_meeting_date_time md on m.id = md.meeting_id " +
+//            "LEFT JOIN tb_meeting m ON r.id = m.room_id " +
+            "LEFT JOIN tb_meeting_date_time md on r.id = md.room_id " +
             "WHERE md.is_deleted = false " +
             "AND md.meeting_date = ?1 " +
             "AND ((?2 < md.meeting_start_time OR ?2 >= md.meeting_end_time) " +

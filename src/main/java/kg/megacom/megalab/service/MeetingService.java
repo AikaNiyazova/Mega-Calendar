@@ -33,7 +33,7 @@ public interface MeetingService {
 
 //    List<MeetingDto> findAllByRoomIdAndDate(Long roomId, LocalDate date);
 
-    MeetingDto update(UpdateMeetingRequest request);
+    MeetingResponse update(UpdateMeetingRequest request);
 
     MessageResponse updateParticipants(UpdateParticipantsRequest request);
 

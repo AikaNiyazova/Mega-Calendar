@@ -19,7 +19,7 @@ public class MeetingDto {
 //    LocalDate meetingDate;
 //    LocalTime meetingStartTime;
 //    LocalTime meetingEndTime;
-    RoomDto room;
+//    RoomDto room;
     String address;
     Boolean isVisible;
     Boolean isRepeatable;

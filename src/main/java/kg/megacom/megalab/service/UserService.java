@@ -1,6 +1,7 @@
 package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.UserDto;
+import kg.megacom.megalab.model.entity.User;
 import kg.megacom.megalab.model.request.*;
 import kg.megacom.megalab.model.response.FindAllUsersForMobileResponse;
 import kg.megacom.megalab.model.response.FindAllUsersForWebResponse;
@@ -32,6 +33,8 @@ public interface UserService {
     List<UserDto> findAllByDepartmentId(Long departmentId);
 
     List<UserDto> findAllByPositionId(Long positionId);
+
+//    List<UserDto> findAllUsersByMeetingId(Long meetingId);
 
     List<UserProfileResponse> readProfile(Long id);
 

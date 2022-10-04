@@ -47,6 +47,10 @@ public class MeetingDateTime {
     @Column(name = "meeting_end_time", nullable = false)
     LocalTime meetingEndTime;
 
+    @ManyToOne
+    @JoinColumn(name = "room_id", nullable = false)
+    Room room;
+
     @Column(name = "is_deleted", nullable = false)
     Boolean isDeleted;
 

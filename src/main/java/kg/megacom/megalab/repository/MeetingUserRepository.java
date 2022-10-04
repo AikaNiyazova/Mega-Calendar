@@ -15,7 +15,8 @@ public interface MeetingUserRepository extends JpaRepository<MeetingUser, Long> 
 
     @Query(value = "SELECT user_id " +
             "FROM tb_meeting_user " +
-            "WHERE  meeting_id = ?1", nativeQuery = true)
+            "WHERE meeting_id = ?1 " +
+            "AND status IN ('ACCEPTED', 'PENDING')", nativeQuery = true)
     List<Long> findAllUserIdsByMeetingId(Long meetingId);
 
     @Query(value = "SELECT * FROM tb_meeting_user " +
@@ -42,7 +43,8 @@ public interface MeetingUserRepository extends JpaRepository<MeetingUser, Long> 
     void deleteByMeetingId(Long meetingId);
 
     @Modifying
-    @Query(value = "DELETE FROM tb_meeting_user " +
+    @Query(value = "UPDATE tb_meeting_user " +
+            "SET status = 'CANCELLED' " +
             "WHERE user_id = ?1 AND meeting_id = ?2", nativeQuery = true)
     void deleteByUserIdAndMeetingId(Long userId, Long meetingId);
 

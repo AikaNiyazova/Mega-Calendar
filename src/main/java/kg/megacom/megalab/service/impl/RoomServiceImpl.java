@@ -7,6 +7,7 @@ import kg.megacom.megalab.model.request.CreateRoomRequest;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.RoomRepository;
 import kg.megacom.megalab.service.RoomService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -105,8 +107,28 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<RoomDto> findFreeRoomsForDateAndTime(LocalDate date, LocalTime startTime, LocalTime endTime) {
-        return RoomMapper.INSTANCE.toDtoList
-                (roomRepository.findFreeRoomsForDateAndTime(date, startTime, endTime));
+        List<Room> freeRooms = roomRepository.findFreeRoomsForDateAndTime(date, startTime, endTime);
+        List<Room> notHiddenRooms = roomRepository.findAllNotHiddenForDate(date);
+        List<Room> availableRooms = (List<Room>) CollectionUtils.intersection(freeRooms, notHiddenRooms);
+        return RoomMapper.INSTANCE.toDtoList(availableRooms);
     }
+
+//    @Override
+//    public void checkRoomAvailabilityForDates(Long roomId, List<LocalDate> dates,
+//                                              LocalTime meetingStartTime, LocalTime meetingEndTime) {
+//        RoomDto roomDto = findById(roomId);
+//        List<LocalDate> busyDates = new ArrayList<>();
+//        for (LocalDate meetingDate : dates) {
+//            List<RoomDto> freeRooms = findFreeRoomsForDateAndTime(meetingDate,
+//                    meetingStartTime, meetingEndTime);
+//            if (!freeRooms.contains(roomDto)) {
+//                busyDates.add(meetingDate);
+//            }
+//        }
+//        if (!busyDates.isEmpty()) {
+//            throw new RuntimeException("Room with id=" + roomId +
+//                    " is not available at this time for date(s): " + busyDates);
+//        }
+//    }
 
 }

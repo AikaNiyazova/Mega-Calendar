@@ -49,10 +49,10 @@ public class Meeting {
 //
 //    @Column(name = "meeting_end_time", nullable = false)
 //    LocalTime meetingEndTime;
-
-    @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
-    Room room;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "room_id", nullable = false)
+//    Room room;
 
     @Column(name = "address")
     String address; // todo: ???

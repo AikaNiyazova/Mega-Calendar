@@ -18,6 +18,7 @@ public class MeetingDateTimeDto {
     LocalDate meetingDate;
     LocalTime meetingStartTime;
     LocalTime meetingEndTime;
+    RoomDto room;
     Boolean isDeleted;
 
 //    List<DayOfWeek> daysOfWeek;
