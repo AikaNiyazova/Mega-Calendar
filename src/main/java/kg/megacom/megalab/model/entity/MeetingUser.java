@@ -1,6 +1,6 @@
 package kg.megacom.megalab.model.entity;
 
-import kg.megacom.megalab.model.enums.MemberType;
+import kg.megacom.megalab.model.enums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.GenericGenerator;
@@ -41,8 +41,8 @@ public class MeetingUser {
     User user;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "member_type", nullable = false)
-    MemberType memberType;
+    @Column(name = "status", nullable = false)
+    Status status;
 
     @ManyToOne
     @JoinColumn(name = "delegate_user_id")
@@ -52,10 +52,7 @@ public class MeetingUser {
     @JoinColumn(name = "label_id")
     Label label;
 
-//    @Column(name = "is_declined"/*, nullable = false*/) // todo ???
-//    Boolean isDeclined;
-//
-//    @Column(name = "reason_for_declining"/*, nullable = false*/) //todo ???
-//    String reasonForDeclining;
+    @Column(name = "reason_for_rejection")
+    String reasonForRejection;
 
 }

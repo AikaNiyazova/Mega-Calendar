@@ -5,17 +5,15 @@ import java.util.List;
 import javax.annotation.Generated;
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.dto.RoleDto;
-import kg.megacom.megalab.model.dto.RoomDto;
 import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.Meeting;
 import kg.megacom.megalab.model.entity.Role;
-import kg.megacom.megalab.model.entity.Room;
 import kg.megacom.megalab.model.entity.User;
 import kg.megacom.megalab.model.enums.Authority;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-23T17:49:19+0600",
+    date = "2022-10-04T14:35:52+0600",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 1.8.0_301 (Oracle Corporation)"
 )
 public class MeetingMapperImpl implements MeetingMapper {
@@ -31,11 +29,9 @@ public class MeetingMapperImpl implements MeetingMapper {
         meetingDto.id( entity.getId() );
         meetingDto.meetingAuthor( userToUserDto( entity.getMeetingAuthor() ) );
         meetingDto.meetingTopic( entity.getMeetingTopic() );
-        meetingDto.meetingStartTime( entity.getMeetingStartTime() );
-        meetingDto.meetingEndTime( entity.getMeetingEndTime() );
-        meetingDto.room( roomToRoomDto( entity.getRoom() ) );
         meetingDto.address( entity.getAddress() );
         meetingDto.isVisible( entity.getIsVisible() );
+        meetingDto.isRepeatable( entity.getIsRepeatable() );
 
         return meetingDto.build();
     }
@@ -51,11 +47,9 @@ public class MeetingMapperImpl implements MeetingMapper {
         meeting.id( dto.getId() );
         meeting.meetingAuthor( userDtoToUser( dto.getMeetingAuthor() ) );
         meeting.meetingTopic( dto.getMeetingTopic() );
-        meeting.meetingStartTime( dto.getMeetingStartTime() );
-        meeting.meetingEndTime( dto.getMeetingEndTime() );
-        meeting.room( roomDtoToRoom( dto.getRoom() ) );
         meeting.address( dto.getAddress() );
         meeting.isVisible( dto.getIsVisible() );
+        meeting.isRepeatable( dto.getIsRepeatable() );
 
         return meeting.build();
     }
@@ -128,25 +122,6 @@ public class MeetingMapperImpl implements MeetingMapper {
         return userDto.build();
     }
 
-    protected RoomDto roomToRoomDto(Room room) {
-        if ( room == null ) {
-            return null;
-        }
-
-        RoomDto.RoomDtoBuilder roomDto = RoomDto.builder();
-
-        roomDto.id( room.getId() );
-        roomDto.roomName( room.getRoomName() );
-        roomDto.roomCapacity( room.getRoomCapacity() );
-        roomDto.location( room.getLocation() );
-        roomDto.isDashboardAvailable( room.getIsDashboardAvailable() );
-        roomDto.isProjectorAvailable( room.getIsProjectorAvailable() );
-        roomDto.isAcAvailable( room.getIsAcAvailable() );
-        roomDto.isDeleted( room.getIsDeleted() );
-
-        return roomDto.build();
-    }
-
     protected Role roleDtoToRole(RoleDto roleDto) {
         if ( roleDto == null ) {
             return null;
@@ -185,24 +160,5 @@ public class MeetingMapperImpl implements MeetingMapper {
         user.isDeleted( userDto.getIsDeleted() );
 
         return user.build();
-    }
-
-    protected Room roomDtoToRoom(RoomDto roomDto) {
-        if ( roomDto == null ) {
-            return null;
-        }
-
-        Room.RoomBuilder room = Room.builder();
-
-        room.id( roomDto.getId() );
-        room.roomName( roomDto.getRoomName() );
-        room.roomCapacity( roomDto.getRoomCapacity() );
-        room.location( roomDto.getLocation() );
-        room.isDashboardAvailable( roomDto.getIsDashboardAvailable() );
-        room.isProjectorAvailable( roomDto.getIsProjectorAvailable() );
-        room.isAcAvailable( roomDto.getIsAcAvailable() );
-        room.isDeleted( roomDto.getIsDeleted() );
-
-        return room.build();
     }
 }

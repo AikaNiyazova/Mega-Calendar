@@ -32,4 +32,7 @@ public interface RoomService {
 
     List<RoomDto> findFreeRoomsForDateAndTime(LocalDate date, LocalTime startTime, LocalTime endTime);
 
+//    void checkRoomAvailabilityForDates(Long roomId, List<LocalDate> dates,
+//                                       LocalTime meetingStartTime, LocalTime meetingEndTime);
+
 }

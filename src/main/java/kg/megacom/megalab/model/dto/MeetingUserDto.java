@@ -1,6 +1,6 @@
 package kg.megacom.megalab.model.dto;
 
-import kg.megacom.megalab.model.enums.MemberType;
+import kg.megacom.megalab.model.enums.Status;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,10 +14,9 @@ public class MeetingUserDto {
     Long id;
     MeetingDto meeting;
     UserDto user;
-    MemberType memberType;
+    Status status;
     UserDto delegate;
     LabelDto label;
-//    Boolean isDeclined;
-//    String reasonForDeclining;
+    String reasonForRejection;
 
 }

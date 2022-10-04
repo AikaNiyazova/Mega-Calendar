@@ -38,14 +38,15 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     void deleteRoomById(Long id);
 
     @Query(value = "SELECT DISTINCT r.* FROM tb_room r " +
-            "LEFT JOIN tb_meeting m ON r.id = m.room_id " +
-//            "JOIN tb_meeting_dates md on m.id = md.meeting_id " +
-            "WHERE m.meeting_date = ?1 " +
-            "AND (?2 < m.meeting_start_time OR ?2 >= m.meeting_end_time " +
-            "AND ?3 <= m.meeting_start_time OR ?3 > m.meeting_end_time) " +
-            "AND (m.meeting_start_time < ?2 OR m.meeting_start_time >= ?3 " +
-            "AND m.meeting_end_time <= ?2 OR m.meeting_end_time > ?3) " +
-            "OR m.meeting_date IS NULL",
+//            "LEFT JOIN tb_meeting m ON r.id = m.room_id " +
+            "LEFT JOIN tb_meeting_date_time md on r.id = md.room_id " +
+            "WHERE md.is_deleted = false " +
+            "AND md.meeting_date = ?1 " +
+            "AND ((?2 < md.meeting_start_time OR ?2 >= md.meeting_end_time) " +
+            "AND (?3 <= md.meeting_start_time OR ?3 > md.meeting_end_time)) " +
+            "AND ((md.meeting_start_time < ?2 OR md.meeting_start_time >= ?3) " +
+            "AND (md.meeting_end_time <= ?2 OR md.meeting_end_time > ?3)) " +
+            "OR md.meeting_date IS NULL",
             nativeQuery = true)
     List<Room> findFreeRoomsForDateAndTime(LocalDate date, LocalTime startTime, LocalTime endTime); //todo
 }

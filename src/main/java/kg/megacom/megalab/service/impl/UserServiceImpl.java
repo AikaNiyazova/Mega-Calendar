@@ -4,7 +4,10 @@ import kg.megacom.megalab.model.dto.UserDto;
 import kg.megacom.megalab.model.entity.*;
 import kg.megacom.megalab.model.mapper.*;
 import kg.megacom.megalab.model.request.*;
-import kg.megacom.megalab.model.response.*;
+import kg.megacom.megalab.model.response.FindAllUsersForMobileResponse;
+import kg.megacom.megalab.model.response.FindAllUsersForWebResponse;
+import kg.megacom.megalab.model.response.MessageResponse;
+import kg.megacom.megalab.model.response.UserProfileResponse;
 import kg.megacom.megalab.repository.UserRepository;
 import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,6 +164,12 @@ public class UserServiceImpl implements UserService {
         positionService.findById(positionId);
         return UserMapper.INSTANCE.toDtoList(userRepository.findAllByPositionId(positionId));
     }
+
+//    @Override
+//    public List<UserDto> findAllUsersByMeetingId(Long meetingId) {
+//        return UserMapper.INSTANCE.toDtoList
+//                (userRepository.findAllUsersByMeetingId(meetingId));
+//    }
 
     @Override
     public List<UserProfileResponse> readProfile(Long id) {

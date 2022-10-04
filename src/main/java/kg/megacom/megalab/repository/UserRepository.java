@@ -87,6 +87,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
             nativeQuery = true)
     List<User> findAllByName(String name);
 
+//    @Query(value = "SELECT u.* FROM tb_user u " +
+//            "JOIN tb_meeting_user mu ON u.id = mu.user_id " +
+//            "WHERE mu.meeting_id = ?1 " +
+//            "AND mu.status IN ('ACCEPTED', 'PENDING')", nativeQuery = true)
+//    List<User> findAllUsersByMeetingId(Long meetingId);
 
     // orgId: 42
     // depId: 9

@@ -2,16 +2,22 @@ package kg.megacom.megalab.service.impl;
 
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.dto.MeetingUserDto;
-import kg.megacom.megalab.model.dto.UserDto;
+import kg.megacom.megalab.model.entity.Label;
 import kg.megacom.megalab.model.entity.MeetingUser;
+import kg.megacom.megalab.model.entity.User;
+import kg.megacom.megalab.model.mapper.LabelMapper;
 import kg.megacom.megalab.model.mapper.MeetingUserMapper;
-import kg.megacom.megalab.model.response.MessageResponse;
+import kg.megacom.megalab.model.mapper.UserMapper;
+import kg.megacom.megalab.model.request.UpdateMeetingUserRequest;
 import kg.megacom.megalab.repository.MeetingUserRepository;
+import kg.megacom.megalab.service.LabelService;
 import kg.megacom.megalab.service.MeetingUserService;
+import kg.megacom.megalab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -20,10 +26,44 @@ import java.util.List;
 public class MeetingUserServiceImpl implements MeetingUserService {
 
     private final MeetingUserRepository meetingUserRepository;
+    private final LabelService labelService;
+    private final UserService userService;
 
     @Autowired
-    public MeetingUserServiceImpl(MeetingUserRepository meetingUserRepository) {
+    public MeetingUserServiceImpl(MeetingUserRepository meetingUserRepository,
+                                  LabelService labelService,
+                                  UserService userService) {
         this.meetingUserRepository = meetingUserRepository;
+        this.labelService = labelService;
+        this.userService = userService;
+    }
+
+    @Override
+    public MeetingUserDto update(UpdateMeetingUserRequest request) {
+
+        Label label = null;
+        if (!(request.getLabelId() == null)) {
+            label = LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
+        }
+
+        User delegate = null;
+        if (!(request.getDelegateId() == null)) {
+            delegate = UserMapper.INSTANCE.toEntity(userService.findById(request.getDelegateId()));
+            //todo: send notification to delegate
+        }
+
+        MeetingUser meetingUser = meetingUserRepository.findById(request.getId())
+                .orElseThrow(() -> new EntityNotFoundException
+                        ("MeetingUser with id=" + request.getId() + " not found"));
+
+        meetingUser.setStatus(request.getStatus());
+        meetingUser.setLabel(label);
+        meetingUser.setDelegate(delegate);
+        meetingUser.setReasonForRejection(request.getReasonForRejection());
+
+        meetingUserRepository.save(meetingUser);
+        return MeetingUserMapper.INSTANCE.toDto(meetingUser);
+        //todo: send notification to meetingAuthor
     }
 
     @Override
@@ -78,8 +118,8 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     @Override
     public Boolean isUserAvailableByUserIdAndDateAndTime(Long userId, LocalDate date,
                                                          LocalTime startTime, LocalTime endTime) {
-        List<MeetingUser> meetingUsers = meetingUserRepository.findByUserIdAndDateAndTime
-                (userId, date, startTime, endTime);
+        List<MeetingUser> meetingUsers = meetingUserRepository
+                .findByUserIdAndDateAndTime(userId, date, startTime, endTime);
         return meetingUsers.isEmpty();
     }
 }

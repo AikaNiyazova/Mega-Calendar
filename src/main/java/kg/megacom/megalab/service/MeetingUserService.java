@@ -2,9 +2,7 @@ package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.dto.MeetingUserDto;
-import kg.megacom.megalab.model.dto.UserDto;
-import kg.megacom.megalab.model.entity.MeetingUser;
-import kg.megacom.megalab.model.response.MessageResponse;
+import kg.megacom.megalab.model.request.UpdateMeetingUserRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -13,6 +11,8 @@ import java.util.List;
 
 @Service
 public interface MeetingUserService {
+
+    MeetingUserDto update(UpdateMeetingUserRequest request);
 
     List<MeetingDto> findByLabel(Long labelId);
 

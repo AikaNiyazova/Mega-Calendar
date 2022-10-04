@@ -50,7 +50,7 @@ public class CreateMeetingRequest {
 
     Boolean isVisible;
 
-//    Boolean isRepeatable;
+    Boolean isRepeatable;
 
 //    List<DayOfWeek> daysOfWeek;
 
