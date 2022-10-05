@@ -21,9 +21,9 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query(value = "SELECT * FROM tb_room r " +
             "LEFT JOIN tb_hidden_room hr ON r.id = hr.room_id " +
-            "WHERE r.is_deleted = false " +
-            "AND ? NOT BETWEEN hr.hiding_start_date AND hr.hiding_end_date " +
-            "OR hr.room_id IS NULL", nativeQuery = true)
+            "WHERE ? NOT BETWEEN hr.hiding_start_date AND hr.hiding_end_date " +
+            "OR hr.room_id IS NULL " +
+            "AND r.is_deleted = false ", nativeQuery = true)
     List<Room> findAllNotHiddenForDate(LocalDate date);
 
     Room findByRoomName(String name);
