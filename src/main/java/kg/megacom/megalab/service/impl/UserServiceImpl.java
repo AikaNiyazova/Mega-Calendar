@@ -9,13 +9,16 @@ import kg.megacom.megalab.repository.UserRepository;
 import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
@@ -90,6 +93,43 @@ public class UserServiceImpl implements UserService {
         positionUserService.save(PositionUserMapper.INSTANCE.toDto(positionUser));
 
         return UserMapper.INSTANCE.toDto(user);
+    }
+
+    @Override
+    public MessageResponse addAdditionalPosition(AddAdditionalPositionRequest request) {
+        User user = UserMapper.INSTANCE.toEntity(findById(request.getUserId()));
+
+        addPositionDepartmentOrganization(user, request.getOrganizationId(), request.getDepartmentId(), request.getPositionId());
+
+        return MessageResponse.of("New position for user with id = " + request.getUserId() + " is added");
+    }
+
+    private void addPositionDepartmentOrganization(User user, Long organizationId, Long departmentId, Long positionId) {
+
+        Organization organization = OrganizationMapper.INSTANCE.toEntity(organizationService.findById(organizationId));
+        Department department = DepartmentMapper.INSTANCE.toEntity(departmentService.findById(departmentId));
+        Position position = PositionMapper.INSTANCE.toEntity(positionService.findById(positionId));
+
+        OrganizationUser organizationUser = OrganizationUser
+                .builder()
+                .organization(organization)
+                .user(user)
+                .build();
+        organizationUserService.save(OrganizationUserMapper.INSTANCE.toDto(organizationUser));
+
+        DepartmentUser departmentUser = DepartmentUser
+                .builder()
+                .department(department)
+                .user(user)
+                .build();
+        departmentUserService.save(DepartmentUserMapper.INSTANCE.toDto(departmentUser));
+
+        PositionUser positionUser = PositionUser
+                .builder()
+                .position(position)
+                .user(user)
+                .build();
+        positionUserService.save(PositionUserMapper.INSTANCE.toDto(positionUser));
     }
 
     @Override
@@ -212,6 +252,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public MessageResponse changeRole(Long userId, Long roleId) {
+        userRepository.changeRole(userId, roleId);
+        return MessageResponse.of("Role of user is changed");
+    }
+
+    @Override
     public MessageResponse delete(Long id) {
          userRepository.findByIdAndIsDeletedFalse(id).map(user -> {
             user.setIsDeleted(true);
@@ -223,5 +269,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto save(UserDto userDto) {
         return null;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+            return userRepository.findByEmail(email)
+                    .orElseThrow(() ->
+                            new UsernameNotFoundException(
+                                    String.format("User is not found with " + email)));
     }
 }

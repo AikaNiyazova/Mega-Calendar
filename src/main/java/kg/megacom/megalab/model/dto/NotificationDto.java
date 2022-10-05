@@ -1,5 +1,7 @@
 package kg.megacom.megalab.model.dto;
 
+import kg.megacom.megalab.model.entity.Meeting;
+import kg.megacom.megalab.model.entity.User;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,7 +15,9 @@ import java.time.LocalDateTime;
 public class NotificationDto {
 
     Long id;
-    MeetingUserDto meetingUserDto;
-    LocalDateTime createdDate;
+    User sendFrom;
+    User sendTo;
+    Meeting message;
+    LocalDateTime sendAt;
     Boolean isRead;
 }

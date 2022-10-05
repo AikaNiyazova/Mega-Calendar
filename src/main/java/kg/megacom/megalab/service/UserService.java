@@ -29,8 +29,6 @@ public interface UserService {
 
     List<UserDto> findAllByName(String name);
 
-    List<UserDto> findAllByName(String name);
-
     List<UserDto> findAllByOrganizationId(Long organizationId);
 
     List<UserDto> findAllByDepartmentId(Long departmentId);

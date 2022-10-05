@@ -1,11 +1,9 @@
 package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.OrganizationUserDto;
-import kg.megacom.megalab.model.entity.OrganizationUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface OrganizationUserService {

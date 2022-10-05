@@ -34,11 +34,19 @@ public class Notification {
     Long id;
 
     @OneToOne
-    @JoinColumn(name = "meeting_user_id", nullable = false)
-    MeetingUser meetingUser;
+    @JoinColumn(name = "send_from", nullable = false)
+    User sendFrom;
 
-    @Column(name = "created_date", nullable = false)
-    LocalDateTime createdDate;
+    @OneToOne
+    @JoinColumn(name = "send_to", nullable = false)
+    User sendTo;
+
+    @OneToOne
+    @JoinColumn(name = "message", nullable = false)
+    Meeting message;
+
+    @Column(name = "send_at", nullable = false)
+    LocalDateTime sendAt;
 
     @Column(name = "is_read", nullable = false)
     Boolean isRead;

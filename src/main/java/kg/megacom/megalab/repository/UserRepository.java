@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,6 +87,19 @@ public interface UserRepository extends JpaRepository<User, Long> {
 //            "WHERE full_name ILIKE '%' || ? || '%' ",
             nativeQuery = true)
     List<User> findAllByName(String name);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE tb_user SET role_id = ?2 WHERE id = ?1 ", nativeQuery = true)
+    void changeRole(Long userId, Long roleId);
+
+    Optional<User> findByEmail(String email);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u " +
+            "SET u.enabled = TRUE WHERE a.email = ?1")
+    int enableUser(String email);
 
 
     // orgId: 42
