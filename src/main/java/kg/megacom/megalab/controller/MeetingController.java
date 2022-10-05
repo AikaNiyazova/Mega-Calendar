@@ -1,5 +1,6 @@
 package kg.megacom.megalab.controller;
 
+import kg.megacom.megalab.model.dto.MeetingDateTimeDto;
 import kg.megacom.megalab.model.request.CreateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateMeetingRequest;
 import kg.megacom.megalab.model.request.UpdateParticipantsRequest;
@@ -205,7 +206,7 @@ public class MeetingController {
     @PatchMapping("/update-participants")
     public ResponseEntity<?> updateParticipants(@RequestBody @Valid UpdateParticipantsRequest request) {
         try {
-            log.info("Updating participants for the meeting with id=" + request.getMeetingId());
+            log.info("Updating participants for the meeting with id=" + request.getMeetingDateTimeDto());
             return ResponseEntity.ok(meetingService.updateParticipants(request));
         } catch (RuntimeException ex) {
             log.error("Updating participants for the meeting failed. " + ex.getMessage());
@@ -215,10 +216,10 @@ public class MeetingController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> delete(@RequestParam List<Long> ids) {
+    public ResponseEntity<?> delete(@RequestParam List<MeetingDateTimeDto> meetingDateTimeDtoList) {
         try {
-            log.info("Deleting meeting with MeetingDateTime id(s)=" + ids);
-            return ResponseEntity.ok(meetingDateTimeService.deleteByIds(ids));
+            log.info("Deleting meeting with MeetingDateTime id(s)=" + meetingDateTimeDtoList);
+            return ResponseEntity.ok(meetingDateTimeService.delete(meetingDateTimeDtoList));
         } catch (RuntimeException ex) {
             log.error("Deleting MeetingDateTime failed. " + ex.getMessage());
             ex.printStackTrace();

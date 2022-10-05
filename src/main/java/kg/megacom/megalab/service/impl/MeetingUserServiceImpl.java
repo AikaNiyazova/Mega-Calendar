@@ -1,26 +1,22 @@
 package kg.megacom.megalab.service.impl;
 
-import kg.megacom.megalab.model.dto.MeetingDto;
-import kg.megacom.megalab.model.dto.MeetingUserDto;
-import kg.megacom.megalab.model.entity.Label;
+import kg.megacom.megalab.model.dto.*;
 import kg.megacom.megalab.model.entity.MeetingUser;
-import kg.megacom.megalab.model.entity.User;
-import kg.megacom.megalab.model.mapper.LabelMapper;
+import kg.megacom.megalab.model.enums.Status;
 import kg.megacom.megalab.model.mapper.MeetingUserMapper;
-import kg.megacom.megalab.model.mapper.UserMapper;
 import kg.megacom.megalab.model.request.UpdateMeetingUserRequest;
+import kg.megacom.megalab.model.response.MeetingResponse;
 import kg.megacom.megalab.repository.MeetingUserRepository;
-import kg.megacom.megalab.service.LabelService;
-import kg.megacom.megalab.service.MeetingUserService;
-import kg.megacom.megalab.service.UserService;
+import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MeetingUserServiceImpl implements MeetingUserService {
@@ -28,41 +24,65 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     private final MeetingUserRepository meetingUserRepository;
     private final LabelService labelService;
     private final UserService userService;
+    private final MeetingService meetingService;
+    private final MeetingDateTimeService meetingDateTimeService;
 
     @Autowired
     public MeetingUserServiceImpl(MeetingUserRepository meetingUserRepository,
                                   LabelService labelService,
-                                  UserService userService) {
+                                  UserService userService,
+                                  MeetingService meetingService,
+                                  @Lazy MeetingDateTimeService meetingDateTimeService) {
         this.meetingUserRepository = meetingUserRepository;
         this.labelService = labelService;
         this.userService = userService;
+        this.meetingService = meetingService;
+        this.meetingDateTimeService = meetingDateTimeService;
     }
 
     @Override
     public MeetingUserDto update(UpdateMeetingUserRequest request) {
 
-        Label label = null;
+        LabelDto labelDto = null;
         if (!(request.getLabelId() == null)) {
-            label = LabelMapper.INSTANCE.toEntity(labelService.findById(request.getLabelId()));
+            labelDto = labelService.findById(request.getLabelId());
         }
 
-        User delegate = null;
+        UserDto delegate = null;
         if (!(request.getDelegateId() == null)) {
-            delegate = UserMapper.INSTANCE.toEntity(userService.findById(request.getDelegateId()));
+            delegate = userService.findById(request.getDelegateId());
             //todo: send notification to delegate
         }
 
-        MeetingUser meetingUser = meetingUserRepository.findById(request.getId())
-                .orElseThrow(() -> new EntityNotFoundException
-                        ("MeetingUser with id=" + request.getId() + " not found"));
+        MeetingUserDto meetingUserDto = findByUserIdAndMeetingId(request.getSentToUserId(), request.getMeetingId());
+//        meetingUserRepository.findById(request.getId())
+//                .orElseThrow(() -> new EntityNotFoundException
+//                        ("MeetingUser with id=" + request.getId() + " not found"));
 
-        meetingUser.setStatus(request.getStatus());
-        meetingUser.setLabel(label);
-        meetingUser.setDelegate(delegate);
-        meetingUser.setReasonForRejection(request.getReasonForRejection());
+        meetingUserDto.setStatus(request.getStatus());
+        meetingUserDto.setLabel(labelDto);
+        meetingUserDto.setDelegate(delegate);
+        meetingUserDto.setReasonForRejection(request.getReasonForRejection());
+        save(meetingUserDto);
 
-        meetingUserRepository.save(meetingUser);
-        return MeetingUserMapper.INSTANCE.toDto(meetingUser);
+        MeetingDto meetingDto = meetingService.findById(request.getMeetingId());
+        MeetingDateTimeDto meetingDateTimeDto = meetingDateTimeService
+                .findDatesByMeetingId(meetingDto.getId()).get(0);
+        List<LocalDate> dates = meetingDateTimeService
+                .findDatesByMeetingId(request.getMeetingId())
+                .stream()
+                .map(MeetingDateTimeDto::getMeetingDate)
+                .collect(Collectors.toList());
+
+        MeetingResponse meetingResponse = MeetingResponse
+                .builder()
+                .meetingDto(meetingDto)
+                .dates(dates)
+                .meetingStartTime(meetingDateTimeDto.getMeetingStartTime())
+                .meetingEndTime(meetingDateTimeDto.getMeetingEndTime())
+                .roomDto(meetingDateTimeDto.getRoom())
+                .build();
+        return meetingUserDto;
         //todo: send notification to meetingAuthor
     }
 
@@ -82,14 +102,24 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     }
 
     @Override
-    public List<Long> findAllUserIdsByMeetingId(Long meetingId) {
-        return meetingUserRepository.findAllUserIdsByMeetingId(meetingId);
+    public List<MeetingUserDto> findAllUsersByMeetingId(Long meetingId) {
+        return MeetingUserMapper.INSTANCE.toDtoList
+                (meetingUserRepository.findAllUsersByMeetingId(meetingId));
     }
 
     @Override
     public MeetingUserDto findByUserIdAndMeetingId(Long userId, Long meetingId) {
         return MeetingUserMapper.INSTANCE.toDto
                 (meetingUserRepository.findByUserIdAndMeetingId(userId, meetingId));
+    }
+
+    @Override
+    public void changeStatus(Long meetingId, Status status) {
+        List<MeetingUserDto> meetingUserDtoList = findAllUsersByMeetingId(meetingId);
+        for (MeetingUserDto meetingUserDto : meetingUserDtoList) {
+            meetingUserDto.setStatus(status);
+            save(meetingUserDto);
+        }
     }
 
     @Override

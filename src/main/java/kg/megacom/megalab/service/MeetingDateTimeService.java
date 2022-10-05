@@ -22,6 +22,6 @@ public interface MeetingDateTimeService {
 
 //    MessageResponse delete(MeetingDates meetingDates);
 
-    MessageResponse deleteByIds(List<Long> meetingId);
+    MessageResponse delete(List<MeetingDateTimeDto> meetingDateTimeDtoList);
 
 }
