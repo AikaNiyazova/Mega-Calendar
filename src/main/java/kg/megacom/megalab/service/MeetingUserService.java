@@ -33,7 +33,7 @@ public interface MeetingUserService {
 
     void deleteByDelegateIdAndMeetingId(Long delegateId, Long meetingId);
 
-    void save(MeetingUserDto meetingUserDto);
+    MeetingUserDto save(MeetingUserDto meetingUserDto);
 
     Boolean isUserAvailableByUserIdAndDateAndTime(Long userId, LocalDate date,
                                                   LocalTime startTime, LocalTime endTime);

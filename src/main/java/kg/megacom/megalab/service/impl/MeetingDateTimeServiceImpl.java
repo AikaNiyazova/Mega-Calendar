@@ -3,13 +3,9 @@ package kg.megacom.megalab.service.impl;
 import kg.megacom.megalab.model.dto.MeetingDateTimeDto;
 import kg.megacom.megalab.model.dto.MeetingUserDto;
 import kg.megacom.megalab.model.mapper.MeetingDateTimeMapper;
-import kg.megacom.megalab.model.response.MeetingResponse;
 import kg.megacom.megalab.model.response.MessageResponse;
 import kg.megacom.megalab.repository.MeetingDateTimeRepository;
-import kg.megacom.megalab.service.MeetingDateTimeService;
-import kg.megacom.megalab.service.MeetingUserService;
-import kg.megacom.megalab.service.RoomService;
-import kg.megacom.megalab.service.UserService;
+import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -26,22 +22,25 @@ public class MeetingDateTimeServiceImpl implements MeetingDateTimeService {
     private final MeetingUserService meetingUserService;
     private final UserService userService;
     private final RoomService roomService;
+    private final NotificationService notificationService;
 
     @Autowired
     public MeetingDateTimeServiceImpl(MeetingDateTimeRepository meetingDateTimeRepository,
                                       @Lazy MeetingUserService meetingUserService,
                                       UserService userService,
-                                      RoomService roomService) {
+                                      RoomService roomService,
+                                      NotificationService notificationService) {
         this.meetingDateTimeRepository = meetingDateTimeRepository;
         this.meetingUserService = meetingUserService;
         this.userService = userService;
         this.roomService = roomService;
+        this.notificationService = notificationService;
     }
 
     @Override
-    public void save(MeetingDateTimeDto meetingDatesDto) {
-        meetingDateTimeRepository.save
-                (MeetingDateTimeMapper.INSTANCE.toEntity(meetingDatesDto));
+    public MeetingDateTimeDto save(MeetingDateTimeDto meetingDatesDto) {
+        return MeetingDateTimeMapper.INSTANCE.toDto(meetingDateTimeRepository
+                .save(MeetingDateTimeMapper.INSTANCE.toEntity(meetingDatesDto)));
     }
 
     @Override
@@ -93,19 +92,20 @@ public class MeetingDateTimeServiceImpl implements MeetingDateTimeService {
                 .stream().map(MeetingDateTimeDto::getMeetingDate)
                 .collect(Collectors.toList());
 
-        MeetingResponse meetingResponse = MeetingResponse
-                .builder()
-                .meetingDto(meetingDateTimeDto.getMeeting())
-                .dates(dates)
-                .meetingStartTime(meetingDateTimeDto.getMeetingStartTime())
-                .meetingEndTime(meetingDateTimeDto.getMeetingEndTime())
-                .roomDto(meetingDateTimeDto.getRoom())
-                .build();
+//        MeetingResponse meetingResponse = MeetingResponse
+//                .builder()
+//                .meetingDto(meetingDateTimeDto.getMeeting())
+//                .dates(dates)
+//                .meetingStartTime(meetingDateTimeDto.getMeetingStartTime())
+//                .meetingEndTime(meetingDateTimeDto.getMeetingEndTime())
+//                .roomDto(meetingDateTimeDto.getRoom())
+//                .build();
 
         List<MeetingUserDto> meetingUserDtoList = meetingUserService.findAllUsersByMeetingId
                 (meetingDateTimeRepository.findMeetingIdById(meetingDateTimeDtoList.get(0).getId()));
-        for (MeetingUserDto m : meetingUserDtoList) {
+        for (MeetingUserDto meetingUserDto : meetingUserDtoList) {
             //todo: send notification to users about cancellation of the meeting (maybe change to User obj)
+            notificationService.sendToParticipant(meetingDateTimeDto, meetingUserDto);
         }
         return MessageResponse.of("The meeting is deleted");
     }

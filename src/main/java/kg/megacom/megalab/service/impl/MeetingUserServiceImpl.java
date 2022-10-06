@@ -5,7 +5,6 @@ import kg.megacom.megalab.model.entity.MeetingUser;
 import kg.megacom.megalab.model.enums.Status;
 import kg.megacom.megalab.model.mapper.MeetingUserMapper;
 import kg.megacom.megalab.model.request.UpdateMeetingUserRequest;
-import kg.megacom.megalab.model.response.MeetingResponse;
 import kg.megacom.megalab.repository.MeetingUserRepository;
 import kg.megacom.megalab.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MeetingUserServiceImpl implements MeetingUserService {
@@ -26,22 +24,43 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     private final UserService userService;
     private final MeetingService meetingService;
     private final MeetingDateTimeService meetingDateTimeService;
+    private final NotificationService notificationService;
 
     @Autowired
     public MeetingUserServiceImpl(MeetingUserRepository meetingUserRepository,
                                   LabelService labelService,
                                   UserService userService,
                                   MeetingService meetingService,
-                                  @Lazy MeetingDateTimeService meetingDateTimeService) {
+                                  @Lazy MeetingDateTimeService meetingDateTimeService,
+                                  NotificationService notificationService) {
         this.meetingUserRepository = meetingUserRepository;
         this.labelService = labelService;
         this.userService = userService;
         this.meetingService = meetingService;
         this.meetingDateTimeService = meetingDateTimeService;
+        this.notificationService = notificationService;
     }
 
     @Override
     public MeetingUserDto update(UpdateMeetingUserRequest request) {
+
+        MeetingDto meetingDto = meetingService.findById(request.getMeetingId());
+        MeetingDateTimeDto meetingDateTimeDto = meetingDateTimeService
+                .findDatesByMeetingId(meetingDto.getId()).get(0);
+//        List<LocalDate> dates = meetingDateTimeService
+//                .findDatesByMeetingId(request.getMeetingId())
+//                .stream()
+//                .map(MeetingDateTimeDto::getMeetingDate)
+//                .collect(Collectors.toList());
+//
+//        MeetingResponse meetingResponse = MeetingResponse
+//                .builder()
+//                .meetingDto(meetingDto)
+//                .dates(dates)
+//                .meetingStartTime(meetingDateTimeDto.getMeetingStartTime())
+//                .meetingEndTime(meetingDateTimeDto.getMeetingEndTime())
+//                .roomDto(meetingDateTimeDto.getRoom())
+//                .build();
 
         LabelDto labelDto = null;
         if (!(request.getLabelId() == null)) {
@@ -52,6 +71,8 @@ public class MeetingUserServiceImpl implements MeetingUserService {
         if (!(request.getDelegateId() == null)) {
             delegate = userService.findById(request.getDelegateId());
             //todo: send notification to delegate
+            MeetingUserDto meetingUserDto = findByUserIdAndMeetingId(delegate.getId(), meetingDto.getId());
+            notificationService.sendToParticipant(meetingDateTimeDto, meetingUserDto);
         }
 
         MeetingUserDto meetingUserDto = findByUserIdAndMeetingId(request.getSentToUserId(), request.getMeetingId());
@@ -65,25 +86,12 @@ public class MeetingUserServiceImpl implements MeetingUserService {
         meetingUserDto.setReasonForRejection(request.getReasonForRejection());
         save(meetingUserDto);
 
-        MeetingDto meetingDto = meetingService.findById(request.getMeetingId());
-        MeetingDateTimeDto meetingDateTimeDto = meetingDateTimeService
-                .findDatesByMeetingId(meetingDto.getId()).get(0);
-        List<LocalDate> dates = meetingDateTimeService
-                .findDatesByMeetingId(request.getMeetingId())
-                .stream()
-                .map(MeetingDateTimeDto::getMeetingDate)
-                .collect(Collectors.toList());
-
-        MeetingResponse meetingResponse = MeetingResponse
-                .builder()
-                .meetingDto(meetingDto)
-                .dates(dates)
-                .meetingStartTime(meetingDateTimeDto.getMeetingStartTime())
-                .meetingEndTime(meetingDateTimeDto.getMeetingEndTime())
-                .roomDto(meetingDateTimeDto.getRoom())
-                .build();
-        return meetingUserDto;
         //todo: send notification to meetingAuthor
+        MeetingUserDto author = findByUserIdAndMeetingId
+                (meetingDto.getMeetingAuthor().getId(), request.getMeetingId());
+        notificationService.sendToAuthor(meetingDateTimeDto, meetingUserDto);
+
+        return meetingUserDto;
     }
 
     @Override
@@ -141,8 +149,9 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     }
 
     @Override
-    public void save(MeetingUserDto meetingUserDto) {
-        meetingUserRepository.save(MeetingUserMapper.INSTANCE.toEntity(meetingUserDto));
+    public MeetingUserDto save(MeetingUserDto meetingUserDto) {
+        return MeetingUserMapper.INSTANCE.toDto(meetingUserRepository
+                .save(MeetingUserMapper.INSTANCE.toEntity(meetingUserDto)));
     }
 
     @Override
