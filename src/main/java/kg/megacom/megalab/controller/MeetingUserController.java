@@ -27,10 +27,10 @@ public class MeetingUserController {
     @PatchMapping("/update")
     public ResponseEntity<?> update(@RequestBody @Valid UpdateMeetingUserRequest request) {
         try {
-            log.info("Updating meeting_user with id=" + request.getId());
+            log.info("Updating meeting for user with id=" + request.getSentToUserId());
             return ResponseEntity.ok(meetingUserService.update(request));
         } catch (RuntimeException ex) {
-            log.error("Updating meeting_user with id=" + request.getId() + " failed. " + ex.getMessage());
+            log.error("Updating meeting for user with id=" + request.getSentToUserId() + " failed. " + ex.getMessage());
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
         }

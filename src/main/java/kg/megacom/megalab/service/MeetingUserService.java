@@ -2,6 +2,7 @@ package kg.megacom.megalab.service;
 
 import kg.megacom.megalab.model.dto.MeetingDto;
 import kg.megacom.megalab.model.dto.MeetingUserDto;
+import kg.megacom.megalab.model.enums.Status;
 import kg.megacom.megalab.model.request.UpdateMeetingUserRequest;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,11 @@ public interface MeetingUserService {
 
     List<MeetingDto> findByDates(LocalDate startDate, LocalDate endDate);
 
-    List<Long> findAllUserIdsByMeetingId(Long meetingId);
+    List<MeetingUserDto> findAllUsersByMeetingId(Long meetingId);
 
     MeetingUserDto findByUserIdAndMeetingId(Long userId, Long meetingId); //todo: remove?
+
+    void changeStatus(Long meetingId, Status status);
 
     void deleteByMeetingId(Long meetingId);
 
@@ -30,7 +33,7 @@ public interface MeetingUserService {
 
     void deleteByDelegateIdAndMeetingId(Long delegateId, Long meetingId);
 
-    void save(MeetingUserDto meetingUserDto);
+    MeetingUserDto save(MeetingUserDto meetingUserDto);
 
     Boolean isUserAvailableByUserIdAndDateAndTime(Long userId, LocalDate date,
                                                   LocalTime startTime, LocalTime endTime);

@@ -1,6 +1,7 @@
 package kg.megacom.megalab.model.response;
 
 import kg.megacom.megalab.model.dto.MeetingDto;
+import kg.megacom.megalab.model.dto.RoomDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class MeetingResponse {
     List<LocalDate> dates;
     LocalTime meetingStartTime;
     LocalTime meetingEndTime;
+    RoomDto roomDto;
 
 //    Long id;
 //    User meetingAuthor;

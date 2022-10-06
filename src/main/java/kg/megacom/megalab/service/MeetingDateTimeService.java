@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public interface MeetingDateTimeService {
 
-    void save(MeetingDateTimeDto meetingDateTimeDto);
+    MeetingDateTimeDto save(MeetingDateTimeDto meetingDateTimeDto);
 
     MeetingDateTimeDto findById(Long id);
 
@@ -22,6 +22,6 @@ public interface MeetingDateTimeService {
 
 //    MessageResponse delete(MeetingDates meetingDates);
 
-    MessageResponse deleteByIds(List<Long> meetingId);
+    MessageResponse delete(List<MeetingDateTimeDto> meetingDateTimeDtoList);
 
 }

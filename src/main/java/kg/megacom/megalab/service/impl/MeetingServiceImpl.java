@@ -14,6 +14,7 @@ import kg.megacom.megalab.repository.MeetingRepository;
 import kg.megacom.megalab.service.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,23 +34,27 @@ public class MeetingServiceImpl implements MeetingService {
     private final MeetingDateTimeService meetingDateTimeService;
     private final MeetingUserService meetingUserService;
     private final LabelService labelService;
+    private final NotificationService notificationService;
 
     @Autowired
     public MeetingServiceImpl(MeetingRepository meetingRepository,
                               UserService userService,
                               RoomService roomService,
-                              MeetingDateTimeService meetingDateTimeService,
-                              MeetingUserService meetingUserService,
-                              LabelService labelService) {
+                              /*@Lazy*/ MeetingDateTimeService meetingDateTimeService,
+                              @Lazy MeetingUserService meetingUserService,
+                              LabelService labelService,
+                              NotificationService notificationService) {
         this.meetingRepository = meetingRepository;
         this.userService = userService;
         this.roomService = roomService;
         this.meetingDateTimeService = meetingDateTimeService;
         this.meetingUserService = meetingUserService;
         this.labelService = labelService;
+        this.notificationService = notificationService;
     }
 
     @Override
+    @Transactional
     public MeetingResponse create(CreateMeetingRequest request) {
 
         if (request.getMeetingDates().get(0).isBefore(LocalDate.now())) {
@@ -82,8 +87,7 @@ public class MeetingServiceImpl implements MeetingService {
 
         User meetingAuthor = UserMapper.INSTANCE.toEntity
                 (userService.findById(request.getMeetingAuthorId()));
-        Room room = RoomMapper.INSTANCE.toEntity
-                (roomService.findById(request.getRoomId()));
+        RoomDto roomDto = roomService.findById(request.getRoomId());
 
         Meeting meeting = Meeting
                 .builder()
@@ -115,44 +119,51 @@ public class MeetingServiceImpl implements MeetingService {
                 .build();
         meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(author));
 
-        if (!request.getParticipants().isEmpty()) {
-            for (Long userId : request.getParticipants()) {
-                User participant = UserMapper.INSTANCE.toEntity(userService.findById(userId));
-                MeetingUser meetingUser = MeetingUser
-                        .builder()
-                        .meeting(meeting)
-                        .user(participant)
-                        .status(Status.PENDING)
-                        .build();
-                meetingUserService.save(MeetingUserMapper.INSTANCE.toDto(meetingUser));
-                //todo: send invitation for the meeting to the participants
-            }
-        }
-
+        List<MeetingDateTimeDto> meetingDateTimeDtoList = new ArrayList<>();
         List<LocalDate> dates = new ArrayList<>();
-
         for (LocalDate meetingDate : request.getMeetingDates()) {
-            MeetingDateTime meetingDateTime = MeetingDateTime
+            MeetingDateTimeDto meetingDateTimeDto = MeetingDateTimeDto
                     .builder()
-                    .meeting(meeting)
+                    .meeting(meetingDto)
                     .meetingDate(meetingDate)
                     .meetingStartTime(request.getMeetingStartTime())
                     .meetingEndTime(request.getMeetingEndTime())
-                    .room(room)
+                    .room(roomDto)
                     .isDeleted(false)
                     .build();
-            MeetingDateTimeDto meetingDateTimeDto = MeetingDateTimeMapper.INSTANCE.toDto(meetingDateTime);
-            meetingDateTimeService.save(meetingDateTimeDto);
+//            MeetingDateTimeDto meetingDateTimeDto = MeetingDateTimeMapper.INSTANCE.toDto(meetingDateTime);
+            MeetingDateTimeDto dto = meetingDateTimeService.save(meetingDateTimeDto);
             dates.add(meetingDate);
+            meetingDateTimeDtoList.add(dto);
         }
 
-        return MeetingResponse
+        MeetingResponse meetingResponse = MeetingResponse
                 .builder()
                 .meetingDto(meetingDto)
                 .dates(dates)
                 .meetingStartTime(request.getMeetingStartTime())
                 .meetingEndTime(request.getMeetingEndTime())
+                .roomDto(roomDto)
                 .build();
+
+        if (!request.getParticipants().isEmpty()) {
+            for (Long userId : request.getParticipants()) {
+                UserDto participant = userService.findById(userId);
+                MeetingUserDto meetingUserDto = MeetingUserDto
+                        .builder()
+                        .meeting(meetingDto)
+                        .user(participant)
+                        .status(Status.PENDING)
+                        .build();
+                MeetingUserDto dto=meetingUserService.save(meetingUserDto);
+                //todo: send invitation for the meeting to the participants
+                MeetingDateTimeDto meetingDateTimeDto = meetingDateTimeDtoList.get(0);
+                notificationService.sendToParticipant(meetingDateTimeDto, dto);
+            }
+        }
+
+        return meetingResponse;
+
     }
 
 //    @Override
@@ -274,7 +285,6 @@ public class MeetingServiceImpl implements MeetingService {
 
         Long meetingId = request.getMeetingId();
         MeetingDto meetingDto = findById(meetingId);
-
         RoomDto roomDto = roomService.findById(request.getRoomId());
 
         List<LocalDate> newMeetingDates = request.getMeetingDates();
@@ -290,12 +300,13 @@ public class MeetingServiceImpl implements MeetingService {
                 .stream().map(MeetingDateTimeDto::getMeetingDate)
                 .collect(Collectors.toList());
 
-        List<Long> meetingDateTimeIds = meetingDateTimeDtoList
-                .stream().map(MeetingDateTimeDto::getId)
-                .collect(Collectors.toList());
+//        List<Long> meetingDateTimeIds = meetingDateTimeDtoList
+//                .stream().map(MeetingDateTimeDto::getId)
+//                .collect(Collectors.toList());
 
+        List<MeetingDateTimeDto> newList = new ArrayList<>();
         if (!curMeetingDates.equals(newMeetingDates)) {
-            meetingDateTimeService.deleteByIds(meetingDateTimeIds);
+            meetingDateTimeService.delete(meetingDateTimeDtoList);
             for (LocalDate date : newMeetingDates) {
                 MeetingDateTimeDto meetingDateTimeDto = MeetingDateTimeDto
                         .builder()
@@ -307,8 +318,10 @@ public class MeetingServiceImpl implements MeetingService {
                         .isDeleted(false)
                         .build();
                 meetingDateTimeService.save(meetingDateTimeDto);
-                //todo: code below
+                newList.add(meetingDateTimeDto);
             }
+            meetingUserService.changeStatus(meetingId, Status.PENDING);
+            //todo: send notification to users for approval
         } else if (!curDateTimeDto.getMeetingStartTime().equals(request.getMeetingStartTime()) ||
                 !curDateTimeDto.getMeetingEndTime().equals(request.getMeetingEndTime())) {
             for (MeetingDateTimeDto mdt : meetingDateTimeDtoList) {
@@ -316,20 +329,35 @@ public class MeetingServiceImpl implements MeetingService {
                 mdt.setMeetingEndTime(request.getMeetingEndTime());
                 meetingDateTimeService.save(mdt);
             }
-            List<Long> userIds = meetingUserService.findAllUserIdsByMeetingId(meetingId);
-            for (Long userId : userIds) {
-                MeetingUserDto meetingUserDto = meetingUserService
-                        .findByUserIdAndMeetingId(userId, meetingId);
-                meetingUserDto.setStatus(Status.PENDING); //todo: MODIFIED
-                meetingUserService.save(meetingUserDto);
-            }
+            meetingUserService.changeStatus(meetingId, Status.PENDING);
             //todo: send notification to users for approval
         } else if (!curDateTimeDto.getRoom().getId().equals(request.getRoomId())) {
             for (MeetingDateTimeDto mdt : meetingDateTimeDtoList) {
                 mdt.setRoom(roomDto);
                 meetingDateTimeService.save(mdt);
             }
+            meetingUserService.changeStatus(meetingId, Status.MODIFIED); //todo: here
             //todo: send notification to users for information
+        }
+
+        MeetingResponse meetingResponse = MeetingResponse
+                .builder()
+                .meetingDto(meetingDto)
+                .dates(newMeetingDates)
+                .meetingStartTime(request.getMeetingStartTime())
+                .meetingEndTime(request.getMeetingEndTime())
+                .roomDto(roomDto)
+                .build();
+
+        List<MeetingUserDto> meetingUserDtoList = meetingUserService.findAllUsersByMeetingId(meetingId);
+
+        for (MeetingUserDto meetingUserDto : meetingUserDtoList) {
+            //todo: send notification here
+            if (!curMeetingDates.equals(newMeetingDates)) {
+                notificationService.sendToParticipant(newList.get(0), meetingUserDto);
+            } else {
+                notificationService.sendToParticipant(meetingDateTimeDtoList.get(0), meetingUserDto);
+            }
         }
 
         meetingDto.setIsVisible(request.getIsVisible());
@@ -359,6 +387,9 @@ public class MeetingServiceImpl implements MeetingService {
         }
         meetingAuthor.setLabel(newLabel);
         meetingUserService.save(meetingAuthor);
+
+        return meetingResponse;
+    }
 
 //        LabelDto curLabel = meetingAuthor.getLabel();
 //
@@ -424,49 +455,72 @@ public class MeetingServiceImpl implements MeetingService {
 //            }
 //        }
 
-        return MeetingResponse
-                .builder()
-                .meetingDto(meetingDto)
-                .dates(newMeetingDates)
-                .meetingStartTime(request.getMeetingStartTime())
-                .meetingEndTime(request.getMeetingEndTime())
-                .build();
-    }
 
     @Override
+    @Transactional
     public MessageResponse updateParticipants(UpdateParticipantsRequest request) {
 
-        List<Long> oldParticipantIds = meetingUserService.findAllUserIdsByMeetingId(request.getMeetingId());
+        MeetingDateTimeDto meetingDateTimeDto = request.getMeetingDateTimeDto();
+        Long meetingId = meetingDateTimeDto.getMeeting().getId();
+        MeetingDto meetingDto = findById(meetingId);
+
+        List<MeetingUserDto> meetingUserDtoList = meetingUserService
+                .findAllUsersByMeetingId(meetingId); //todo: optimize
+
+        List<Long> oldParticipantIds = meetingUserDtoList
+                .stream().map(MeetingUserDto::getId).collect(Collectors.toList());
         List<Long> newParticipantIds = request.getParticipants();
 
         List<Long> additionalParticipants = (List<Long>) CollectionUtils.subtract(newParticipantIds, oldParticipantIds);
         List<Long> excludedParticipants = (List<Long>) CollectionUtils.subtract(oldParticipantIds, newParticipantIds);
 
+//        List<LocalDate> dates = meetingDateTimeService
+//                .findDatesByMeetingId(meetingId)
+//                .stream().map(MeetingDateTimeDto::getMeetingDate)
+//                .filter(date -> date.isBefore
+//                        (meetingDateTimeDto.getMeetingDate()))
+//                .collect(Collectors.toList());
+//
+//        MeetingResponse meetingResponse = MeetingResponse
+//                .builder()
+//                .meetingDto(meetingDto)
+//                .dates(dates)
+//                .meetingStartTime(meetingDateTimeDto.getMeetingStartTime())
+//                .meetingEndTime(meetingDateTimeDto.getMeetingEndTime())
+//                .roomDto(meetingDateTimeDto.getRoom())
+//                .build();
+
         if (!oldParticipantIds.equals(newParticipantIds)) {
             if (!additionalParticipants.isEmpty()/*newParticipantIds.removeAll(oldParticipantIds)*/) {
                 for (Long userId : additionalParticipants) {
                     MeetingUserDto invitedBefore = meetingUserService
-                            .findByUserIdAndMeetingId(userId, request.getMeetingId());
+                            .findByUserIdAndMeetingId(userId, meetingId);
                     if (!(invitedBefore == null)) {
-                        invitedBefore.setStatus(Status.PENDING); //MODIFIED
+                        invitedBefore.setStatus(Status.PENDING);
                         meetingUserService.save(invitedBefore);
+                        //todo: send invitation for the meeting to every user
+                        notificationService.sendToParticipant(meetingDateTimeDto, invitedBefore);
                     } else {
                         MeetingUserDto meetingUserDto = MeetingUserDto
                             .builder()
-                            .meeting(findById(request.getMeetingId()))
+                            .meeting(meetingDto)
                             .user(userService.findById(userId))
                             .status(Status.PENDING)
                             .build();
                         meetingUserService.save(meetingUserDto);
+                        //todo: send invitation for the meeting to every user
+                        notificationService.sendToParticipant(meetingDateTimeDto, meetingUserDto);
                     }
-                    //todo: send invitation for the meeting to every user
                 }
             }
             if (!excludedParticipants.isEmpty()) {
                 for (Long userId : excludedParticipants) {
-                    meetingUserService.deleteByUserIdAndMeetingId(userId, request.getMeetingId());
+                    meetingUserService.deleteByUserIdAndMeetingId(userId, meetingId);
+                    MeetingUserDto meetingUserDto = meetingUserService
+                            .findByUserIdAndMeetingId(userId, meetingId);
                     //todo: send notification to every user and inform
                     // that they have been excluded from the meeting (CANCELLED)
+                    notificationService.sendToParticipant(meetingDateTimeDto, meetingUserDto);
                 }
             }
         }

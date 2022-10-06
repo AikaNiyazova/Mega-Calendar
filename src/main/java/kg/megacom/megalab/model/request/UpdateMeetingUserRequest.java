@@ -15,7 +15,10 @@ import javax.validation.constraints.NotNull;
 public class UpdateMeetingUserRequest {
 
     @NotNull
-    Long id;
+    Long sentToUserId;
+
+    @NotNull
+    Long meetingId;
 
     @NotEmpty
     Status status;
