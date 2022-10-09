@@ -101,7 +101,7 @@ public class MeetingDateTimeServiceImpl implements MeetingDateTimeService {
 //                .roomDto(meetingDateTimeDto.getRoom())
 //                .build();
 
-        List<MeetingUserDto> meetingUserDtoList = meetingUserService.findAllUsersByMeetingId
+        List<MeetingUserDto> meetingUserDtoList = meetingUserService.findAllUsersByMeetingIdAcceptedAndPending
                 (meetingDateTimeRepository.findMeetingIdById(meetingDateTimeDtoList.get(0).getId()));
         for (MeetingUserDto meetingUserDto : meetingUserDtoList) {
             //todo: send notification to users about cancellation of the meeting (maybe change to User obj)

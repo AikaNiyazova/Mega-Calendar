@@ -87,8 +87,8 @@ public class MeetingUserServiceImpl implements MeetingUserService {
         save(meetingUserDto);
 
         //todo: send notification to meetingAuthor
-        MeetingUserDto author = findByUserIdAndMeetingId
-                (meetingDto.getMeetingAuthor().getId(), request.getMeetingId());
+//        MeetingUserDto author = findByUserIdAndMeetingId
+//                (meetingDto.getMeetingAuthor().getId(), request.getMeetingId());
         notificationService.sendToAuthor(meetingDateTimeDto, meetingUserDto);
 
         return meetingUserDto;
@@ -110,6 +110,12 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     }
 
     @Override
+    public List<MeetingUserDto> findAllUsersByMeetingIdAcceptedAndPending(Long meetingId) {
+        return MeetingUserMapper.INSTANCE.toDtoList
+                (meetingUserRepository.findAllUsersByMeetingIdAcceptedAndPending(meetingId));
+    }
+
+    @Override
     public List<MeetingUserDto> findAllUsersByMeetingId(Long meetingId) {
         return MeetingUserMapper.INSTANCE.toDtoList
                 (meetingUserRepository.findAllUsersByMeetingId(meetingId));
@@ -123,7 +129,7 @@ public class MeetingUserServiceImpl implements MeetingUserService {
 
     @Override
     public void changeStatus(Long meetingId, Status status) {
-        List<MeetingUserDto> meetingUserDtoList = findAllUsersByMeetingId(meetingId);
+        List<MeetingUserDto> meetingUserDtoList = findAllUsersByMeetingIdAcceptedAndPending(meetingId);
         for (MeetingUserDto meetingUserDto : meetingUserDtoList) {
             meetingUserDto.setStatus(status);
             save(meetingUserDto);
@@ -149,7 +155,7 @@ public class MeetingUserServiceImpl implements MeetingUserService {
     }
 
     @Override
-    public MeetingUserDto save(MeetingUserDto meetingUserDto) {
+    public MeetingUserDto save(MeetingUserDto meetingUserDto) { // todo: optimize
         return MeetingUserMapper.INSTANCE.toDto(meetingUserRepository
                 .save(MeetingUserMapper.INSTANCE.toEntity(meetingUserDto)));
     }
