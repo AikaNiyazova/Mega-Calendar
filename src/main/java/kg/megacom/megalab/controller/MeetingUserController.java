@@ -51,4 +51,16 @@ public class MeetingUserController {
         }
     }
 
+    @GetMapping("/find-all-users-by-meeting-id/{meetingId}")
+    public ResponseEntity<?> findAllUsersByMeetingId(@PathVariable Long meetingId) {
+        try {
+            log.info("Finding all users for the meeting with id=" + meetingId);
+            return ResponseEntity.ok(meetingUserService.findAllUsersByMeetingId(meetingId));
+        } catch (RuntimeException ex) {
+            log.error("Finding all users for the meeting with id=" + meetingId + " failed. " + ex.getMessage());
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new MessageResponse(ex.getMessage()));
+        }
+    }
+
 }

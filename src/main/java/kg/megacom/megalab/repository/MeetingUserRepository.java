@@ -17,6 +17,11 @@ public interface MeetingUserRepository extends JpaRepository<MeetingUser, Long> 
             "FROM tb_meeting_user " +
             "WHERE meeting_id = ?1 " +
             "AND status IN ('ACCEPTED', 'PENDING')", nativeQuery = true)
+    List<MeetingUser> findAllUsersByMeetingIdAcceptedAndPending(Long meetingId);
+
+    @Query(value = "SELECT * " +
+            "FROM tb_meeting_user " +
+            "WHERE meeting_id = ?1 ", nativeQuery = true)
     List<MeetingUser> findAllUsersByMeetingId(Long meetingId);
 
     @Query(value = "SELECT * FROM tb_meeting_user " +

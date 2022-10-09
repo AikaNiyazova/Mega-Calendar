@@ -21,6 +21,8 @@ public interface MeetingUserService {
 
     List<MeetingDto> findByDates(LocalDate startDate, LocalDate endDate);
 
+    List<MeetingUserDto> findAllUsersByMeetingIdAcceptedAndPending(Long meetingId);
+
     List<MeetingUserDto> findAllUsersByMeetingId(Long meetingId);
 
     MeetingUserDto findByUserIdAndMeetingId(Long userId, Long meetingId); //todo: remove?

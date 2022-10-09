@@ -155,7 +155,7 @@ public class MeetingServiceImpl implements MeetingService {
                         .user(participant)
                         .status(Status.PENDING)
                         .build();
-                MeetingUserDto dto=meetingUserService.save(meetingUserDto);
+                MeetingUserDto dto = meetingUserService.save(meetingUserDto);
                 //todo: send invitation for the meeting to the participants
                 MeetingDateTimeDto meetingDateTimeDto = meetingDateTimeDtoList.get(0);
                 notificationService.sendToParticipant(meetingDateTimeDto, dto);
@@ -349,7 +349,7 @@ public class MeetingServiceImpl implements MeetingService {
                 .roomDto(roomDto)
                 .build();
 
-        List<MeetingUserDto> meetingUserDtoList = meetingUserService.findAllUsersByMeetingId(meetingId);
+        List<MeetingUserDto> meetingUserDtoList = meetingUserService.findAllUsersByMeetingIdAcceptedAndPending(meetingId);
 
         for (MeetingUserDto meetingUserDto : meetingUserDtoList) {
             //todo: send notification here
@@ -465,7 +465,7 @@ public class MeetingServiceImpl implements MeetingService {
         MeetingDto meetingDto = findById(meetingId);
 
         List<MeetingUserDto> meetingUserDtoList = meetingUserService
-                .findAllUsersByMeetingId(meetingId); //todo: optimize
+                .findAllUsersByMeetingIdAcceptedAndPending(meetingId); //todo: optimize
 
         List<Long> oldParticipantIds = meetingUserDtoList
                 .stream().map(MeetingUserDto::getId).collect(Collectors.toList());
